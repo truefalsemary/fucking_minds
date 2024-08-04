@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lms_front/core/app_router/app_router_inh.dart';
 import 'package:lms_front/core/di/di_container.dart';
 
 class DiTreeWidget extends StatelessWidget {
@@ -14,12 +15,18 @@ class DiTreeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return builder(context);
+    return AppRouter(
+      router: _diContainer.routerDelegate.router,
+      child: builder(context),
+    );
     return MultiRepositoryProvider(
       providers: [],
       child: MultiBlocProvider(
         providers: [],
-        child: builder(context),
+        child: AppRouter(
+          router: _diContainer.routerDelegate.router,
+          child: builder(context),
+        ),
       ),
     );
   }
