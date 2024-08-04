@@ -1,0 +1,3 @@
+class ApiHttpClient {
+  const ApiHttpClient();
+}
