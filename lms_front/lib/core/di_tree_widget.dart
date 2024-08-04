@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lms_front/core/di_container.dart';
 
-class DiConfigurationWidget extends StatelessWidget {
-  const DiConfigurationWidget(
+class DiTreeWidget extends StatelessWidget {
+  const DiTreeWidget(
     this._diContainer, {
     required this.builder,
     super.key,

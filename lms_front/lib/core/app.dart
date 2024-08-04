@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lms_front/core/di_configuration_widget.dart';
+import 'package:lms_front/core/di_tree_widget.dart';
 import 'package:lms_front/core/di_container.dart';
 
 class App extends StatelessWidget {
@@ -9,7 +9,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DiConfigurationWidget(
+    return DiTreeWidget(
       _diContainer,
       builder: (context) {
         return const MaterialApp();
