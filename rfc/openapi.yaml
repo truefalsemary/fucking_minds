@@ -354,6 +354,36 @@ paths:
                                             $ref: '#/components/schemas/lesson'
                 '404':
                     description: course is not found
+
+    /v1/course/{id}/lessons_id:
+        get:
+            description: get lessons's id of course by its identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    items:
+                                        type: array
+                                        items:
+                                            type: object
+                                            properties:
+                                                id:
+                                                    description: lesson id
+                                                    type: string
+
+                '404':
+                    description: course is not found
     /v1/course/{id}/materials:
         get:
             description: get materials of course by its identifier
