@@ -402,7 +402,28 @@ paths:
                                             $ref: '#/components/schemas/task'
                 '404':
                     description: course is not found
-    /v1/lesson/create:
+    /v1/course/{course_id}/add_lesson/{lesson_id}:
+        post:
+            description: add element to course by identifiers
+            parameters:
+                -   name: course_id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+                -   name: lesson_id
+                    in: path
+                    description: Lesson id
+                    required: true
+                    schema:
+                        type: string
+            responses:
+                '200':
+                    description: OK
+                '404':
+                    description: course or lesson is not found
+    /v1/lessons/create:
         post: 
             description: creates new lesson
             requestBody:
@@ -568,6 +589,60 @@ paths:
                                             $ref: '#/components/schemas/task'
                 '404':
                     description: lesson is not found
+    /v1/course/{course_id}/lesson/{lesson_id}/add_material/{material_id}:
+        post:
+            description: add element to course by identifiers
+            parameters:
+                -   name: course_id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+                -   name: lesson_id
+                    in: path
+                    description: Lesson id
+                    required: true
+                    schema:
+                        type: string
+                -   name: material_id
+                    in: path
+                    description: Material id
+                    required: true
+                    schema:
+                        type: string
+            responses:
+                '200':
+                    description: OK
+                '404':
+                    description: course or lesson or material is not found
+    /v1/course/{course_id}/lesson/{lesson_id}/add_task/{task_id}:
+        post:
+            description: add element to course by identifiers
+            parameters:
+                -   name: course_id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+                -   name: lesson_id
+                    in: path
+                    description: Lesson id
+                    required: true
+                    schema:
+                        type: string
+                -   name: task_id
+                    in: path
+                    description: Task id
+                    required: true
+                    schema:
+                        type: string
+            responses:
+                '200':
+                    description: OK
+                '404':
+                    description: course or lesson or task is not found
     /v1/material/create:
         post:
             description: creates new material
