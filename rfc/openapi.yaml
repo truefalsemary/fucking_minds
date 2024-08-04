@@ -122,7 +122,7 @@ components:
                 - description
                 - author_id
 paths:
-    /v1/courses/create:
+    /v1/course/create:
         post:
             description: creates new course
             requestBody:
@@ -258,7 +258,7 @@ paths:
                     description: invalid input parameters
                 '404':
                     description: course is not found
-    /v1/courses/{id}/students:
+    /v1/course/{id}/students:
         get:
             description: get students of course by its identifier
             parameters:
@@ -282,7 +282,7 @@ paths:
                                             $ref: '#/components/schemas/student'
                 '404':
                     description: course is not found
-    /v1/courses/{id}/teachers:
+    /v1/course/{id}/teachers:
         get:
             description: get teachers of course by its identifier
             parameters:
@@ -306,7 +306,7 @@ paths:
                                             $ref: '#/components/schemas/teacher'
                 '404':
                     description: course is not found
-    /v1/courses/{id}/admins:
+    /v1/course/{id}/admins:
         get:
             description: get admins of course by its identifier
             parameters:
@@ -330,3 +330,481 @@ paths:
                                             $ref: '#/components/schemas/admin'
                 '404':
                     description: course is not found
+    /v1/course/{id}/lessons:
+        get:
+            description: get lessons of course by its identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    items:
+                                        type: array
+                                        items:
+                                            $ref: '#/components/schemas/lesson'
+                '404':
+                    description: course is not found
+    /v1/course/{id}/materials:
+        get:
+            description: get materials of course by its identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    items:
+                                        type: array
+                                        items:
+                                            $ref: '#/components/schemas/material'
+                '404':
+                    description: course is not found
+    /v1/course/{id}/tasks:
+        get:
+            description: get tasks of course by its identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    items:
+                                        type: array
+                                        items:
+                                            $ref: '#/components/schemas/task'
+                '404':
+                    description: course is not found
+    /v1/lesson/create:
+        post: 
+            description: creates new lesson
+            requestBody:
+                required: true
+                content: 
+                    application/json: 
+                        schema:
+                            type: object
+                            properties:
+                                title: 
+                                    description: lesson title
+                                    type: string
+                                description: 
+                                    description: lesson description
+                                    type: string
+            responses:
+                    '200':
+                        description: OK
+                        content:
+                            application/json:
+                                schema:
+                                    $ref: '#/components/schemas/lesson'
+                    '400':
+                        description: invalid input parameters
+    /v1/lessons:                
+        get:
+            description: list all lessons
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    items:
+                                        type: array
+                                        items:
+                                            $ref: '#/components/schemas/lesson'
+                                            
+    /v1/lesson/{id}:
+        get:
+            description: get lesson by its identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: Lesson id
+                    required: true
+                    schema:
+                        type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/lesson'
+                '404':
+                    description: lesson is not found
+        delete:
+            description: delete lesson by identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: Lesson id
+                    required: true
+                    schema:
+                        type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    id:
+                                        description: identifier of deleted lesson
+                                        type: string
+                                required:
+                                    - id
+                '404':
+                    description: lesson is not found
+        put:
+            description: change lesson by identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: Lesson id
+                    required: true
+                    schema:
+                        type: string
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                title: 
+                                    description: lesson title
+                                    type: string
+                                description: 
+                                    description: lesson description
+                                    type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/course'
+                '400':
+                    description: invalid input parameters
+                '404':
+                    description: lesson is not found
+    /v1/lesson/{id}/materials:
+        get: 
+            description: get materials of lessson by its identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: Lesson id
+                    required: true
+                    schema:
+                        type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    items:
+                                        type: array
+                                        items:
+                                            $ref: '#/components/schemas/material'
+                '404':
+                    description: lesson is not found
+                    
+    /v1/lesson/{id}/tasks:
+        get: 
+            description: get tasks of lessson by its identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: Lesson id
+                    required: true
+                    schema:
+                        type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    items:
+                                        type: array
+                                        items:
+                                            $ref: '#/components/schemas/task'
+                '404':
+                    description: lesson is not found
+    /v1/material/create:
+        post:
+            description: creates new material
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                title:
+                                    description: material title
+                                    type: string
+                                content_link:
+                                    description: material content link
+                                    type: string
+                            required:
+                                - title
+                                - content_link
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/material'
+                '400':
+                    description: invalid input parameters
+    /v1/materials:
+        get:
+            description: list all materials
+            parameters:
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    items:
+                                        type: array
+                                        items:
+                                            $ref: '#/components/schemas/material'
+    /v1/material/{id}:
+        get:
+            description: get material by its identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: Material id
+                    required: true
+                    schema:
+                        type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/course'
+                '404':
+                    description: material is not found
+        delete:
+            description: delete material by identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: Material id
+                    required: true
+                    schema:
+                        type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    id:
+                                        description: identifier of deleted material
+                                        type: string
+                                required:
+                                    - id
+                '404':
+                    description: material is not found
+        put:
+            description: change material by identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: Material id
+                    required: true
+                    schema:
+                        type: string
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                title:
+                                    description: material title
+                                    type: string
+                                content_link:
+                                    description: material content link
+                                    type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/material'
+                '400':
+                    description: invalid input parameters
+                '404':
+                    description: material is not found
+    /v1/task/create:
+        post:
+            description: creates new task
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                title:
+                                    description: task title
+                                    type: string
+                                content_link:
+                                    description: task content link
+                                    type: string
+                            required:
+                                - title
+                                - content_link
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/task'
+                '400':
+                    description: invalid input parameters
+    /v1/tasks:
+        get:
+            description: list all tasks
+            parameters:
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    items:
+                                        type: array
+                                        items:
+                                            $ref: '#/components/schemas/task'
+    /v1/task/{id}:
+        get:
+            description: get task by its identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: Material id
+                    required: true
+                    schema:
+                        type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/task'
+                '404':
+                    description: task is not found
+        delete:
+            description: delete task by identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: Task id
+                    required: true
+                    schema:
+                        type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    id:
+                                        description: identifier of deleted task
+                                        type: string
+                                required:
+                                    - id
+                '404':
+                    description: task is not found
+        put:
+            description: change task by identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: Task id
+                    required: true
+                    schema:
+                        type: string
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                title:
+                                    description: task title
+                                    type: string
+                                content_link:
+                                    description: task content link
+                                    type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/task'
+                '400':
+                    description: invalid input parameters
+                '404':
+                    description: task is not found
