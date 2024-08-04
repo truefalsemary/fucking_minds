@@ -127,6 +127,15 @@ components:
                 - title
                 - description
                 - author_id
+    responses:
+        UnauthorizedError:
+            description: X-Ya-User-Ticket key is missing or invalid
+    securitySchemes:
+        UserTicketAuth:
+            type: apiKey
+            in: header
+            name: X-Ya-User-Ticket
+
 paths:
     /v1/course/create:
         post:
@@ -155,6 +164,8 @@ paths:
                             required:
                                 - title
                                 - description
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -167,6 +178,8 @@ paths:
     /v1/courses:
         get:
             description: list all courses
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -189,6 +202,8 @@ paths:
                     required: true
                     schema:
                         type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -214,6 +229,8 @@ paths:
                     required: true
                     schema:
                         type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -259,6 +276,8 @@ paths:
                                 description:
                                     description: course description
                                     type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -280,6 +299,8 @@ paths:
                     required: true
                     schema:
                         type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -304,6 +325,8 @@ paths:
                     required: true
                     schema:
                         type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -328,6 +351,8 @@ paths:
                     required: true
                     schema:
                         type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -352,6 +377,8 @@ paths:
                     required: true
                     schema:
                         type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -376,6 +403,8 @@ paths:
                     required: true
                     schema:
                         type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -405,6 +434,8 @@ paths:
                     required: true
                     schema:
                         type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -429,6 +460,8 @@ paths:
                     required: true
                     schema:
                         type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -459,6 +492,8 @@ paths:
                     required: true
                     schema:
                         type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -480,6 +515,8 @@ paths:
                     required: true
                     schema:
                         type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -511,6 +548,8 @@ paths:
                                 description: 
                                     description: lesson description
                                     type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                     '200':
                         description: OK
@@ -523,6 +562,8 @@ paths:
     /v1/lessons:                
         get:
             description: list all lessons
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -545,6 +586,8 @@ paths:
                     required: true
                     schema:
                         type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -563,6 +606,8 @@ paths:
                     required: true
                     schema:
                         type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -600,6 +645,8 @@ paths:
                                 description: 
                                     description: lesson description
                                     type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -621,6 +668,8 @@ paths:
                     required: true
                     schema:
                         type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -645,6 +694,8 @@ paths:
                     required: true
                     schema:
                         type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -681,6 +732,8 @@ paths:
                     required: true
                     schema:
                         type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -722,6 +775,8 @@ paths:
                                 max_points:
                                     description: maximum points for task
                                     type: integer
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -765,6 +820,8 @@ paths:
                                 max_points:
                                     description: maximum points for task
                                     type: integer
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -791,6 +848,8 @@ paths:
                             required:
                                 - title
                                 - content_link
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -803,6 +862,8 @@ paths:
     /v1/materials:
         get:
             description: list all materials
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -825,6 +886,8 @@ paths:
                     required: true
                     schema:
                         type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -843,6 +906,8 @@ paths:
                     required: true
                     schema:
                         type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -880,6 +945,8 @@ paths:
                                 content_link:
                                     description: material content link
                                     type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -910,6 +977,8 @@ paths:
                             required:
                                 - title
                                 - content_link
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -922,6 +991,8 @@ paths:
     /v1/tasks:
         get:
             description: list all tasks
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -944,6 +1015,8 @@ paths:
                     required: true
                     schema:
                         type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -962,6 +1035,8 @@ paths:
                     required: true
                     schema:
                         type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
@@ -999,6 +1074,8 @@ paths:
                                 content_link:
                                     description: task content link
                                     type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK
