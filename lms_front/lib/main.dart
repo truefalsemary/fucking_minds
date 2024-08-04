@@ -3,5 +3,5 @@ import 'package:lms_front/core/app.dart';
 import 'package:lms_front/core/di_container.dart';
 
 void main() {
-  runApp(App(DiContainer()));
+  runApp(App(DiContainer()..init()));
 }

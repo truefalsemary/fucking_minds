@@ -4,11 +4,11 @@ class DiContainer {
   DiContainer();
 
   //Здесь лежат data провайдеры и общие классы, например ApiHttpClient
-  
-  final httpClient = const ApiHttpClient();
 
+  late final ApiHttpClient httpClient;
 
   void init() {
     //инициализация data providers
+    httpClient = const ApiHttpClient();
   }
 }
