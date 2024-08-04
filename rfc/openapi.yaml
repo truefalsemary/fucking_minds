@@ -4,6 +4,12 @@ info:
     version: "1.0"
 servers:
     -   url: http://localhost:8080/
+tags:
+    - name: Auth
+    - name: Courses
+    - name: Lessons
+    - name: Materials
+    - name: Tasks
 components:
     schemas:
         role_enum:
@@ -140,6 +146,8 @@ paths:
     /register:
         post:
             description: create new user
+            tags: 
+                - Auth
             requestBody:
                 required: true
                 content:
@@ -167,6 +175,8 @@ paths:
     /login:
         post:
             description: login to system via credentials
+            tags: 
+                - Auth
             requestBody:
                 required: true
                 content:
@@ -194,6 +204,8 @@ paths:
     /v1/course/create:
         post:
             description: creates new course
+            tags: 
+                - Courses
             requestBody:
                 required: true
                 content:
@@ -234,6 +246,8 @@ paths:
     /v1/courses:
         get:
             description: list all courses
+            tags: 
+                - Courses
             security:
                 -   UserTicketAuth: [ ]
             responses:
@@ -253,6 +267,8 @@ paths:
     /v1/course/{id}:
         get:
             description: get course by its identifier
+            tags: 
+                - Courses
             parameters:
                 -   name: id
                     in: path
@@ -282,6 +298,8 @@ paths:
                     description: course is not found
         delete:
             description: delete course by identifier
+            tags: 
+                - Courses
             parameters:
                 -   name: id
                     in: path
@@ -310,6 +328,8 @@ paths:
                     description: course is not found
         put:
             description: change course by identifier
+            tags: 
+                - Courses
             parameters:
                 -   name: id
                     in: path
@@ -356,6 +376,8 @@ paths:
     /v1/course/{id}/students:
         get:
             description: get students of course by its identifier
+            tags: 
+                - Courses
             parameters:
                 -   name: id
                     in: path
@@ -384,6 +406,8 @@ paths:
     /v1/course/{id}/teachers:
         get:
             description: get teachers of course by its identifier
+            tags: 
+                - Courses
             parameters:
                 -   name: id
                     in: path
@@ -412,6 +436,8 @@ paths:
     /v1/course/{id}/admins:
         get:
             description: get admins of course by its identifier
+            tags: 
+                - Courses
             parameters:
                 -   name: id
                     in: path
@@ -440,6 +466,8 @@ paths:
     /v1/course/{id}/lessons:
         get:
             description: get lessons of course by its identifier
+            tags: 
+                - Courses
             parameters:
                 -   name: id
                     in: path
@@ -468,6 +496,8 @@ paths:
     /v1/course/{id}/lessons_id:
         get:
             description: get lessons's id of course by its identifier
+            tags: 
+                - Courses
             parameters:
                 -   name: id
                     in: path
@@ -500,6 +530,8 @@ paths:
     /v1/course/{id}/materials:
         get:
             description: get materials of course by its identifier
+            tags: 
+                - Courses
             parameters:
                 -   name: id
                     in: path
@@ -528,6 +560,8 @@ paths:
     /v1/course/{id}/tasks:
         get:
             description: get tasks of course by its identifier
+            tags: 
+                - Courses
             parameters:
                 -   name: id
                     in: path
@@ -556,6 +590,8 @@ paths:
     /v1/course/{course_id}/add_lesson/{lesson_id}:
         post:
             description: add lesson to course by identifiers
+            tags: 
+                - Courses
             parameters:
                 -   name: course_id
                     in: path
@@ -581,6 +617,8 @@ paths:
     /v1/course/{course_id}/lesson/{lesson_id}:
         delete:
             description: remove lesson from course by identifiers
+            tags: 
+                - Courses
             parameters:
                 -   name: course_id
                     in: path
@@ -616,6 +654,8 @@ paths:
     /v1/lesson/create:
         post: 
             description: creates new lesson
+            tags: 
+                - Lessons
             requestBody:
                 required: true
                 content: 
@@ -645,6 +685,8 @@ paths:
     /v1/lessons:                
         get:
             description: list all lessons
+            tags: 
+                - Lessons
             security:
                 -   UserTicketAuth: [ ]
             responses:
@@ -664,6 +706,8 @@ paths:
     /v1/lesson/{id}:
         get:
             description: get lesson by its identifier
+            tags: 
+                - Lessons
             parameters:
                 -   name: id
                     in: path
@@ -686,6 +730,8 @@ paths:
                     description: lesson is not found
         delete:
             description: delete lesson by identifier
+            tags: 
+                - Lessons
             parameters:
                 -   name: id
                     in: path
@@ -714,6 +760,8 @@ paths:
                     description: lesson is not found
         put:
             description: change lesson by identifier
+            tags: 
+                - Lessons
             parameters:
                 -   name: id
                     in: path
@@ -752,6 +800,8 @@ paths:
     /v1/lesson/{id}/materials:
         get: 
             description: get materials of lessson by its identifier
+            tags: 
+                - Lessons
             parameters:
                 -   name: id
                     in: path
@@ -780,6 +830,8 @@ paths:
     /v1/lesson/{id}/tasks:
         get: 
             description: get tasks of lessson by its identifier
+            tags: 
+                - Lessons
             parameters:
                 -   name: id
                     in: path
@@ -933,6 +985,8 @@ paths:
     /v1/material/create:
         post:
             description: creates new material
+            tags: 
+                - Materials
             requestBody:
                 required: true
                 content:
@@ -965,6 +1019,8 @@ paths:
     /v1/materials:
         get:
             description: list all materials
+            tags: 
+                - Materials
             security:
                 -   UserTicketAuth: [ ]
             responses:
@@ -984,6 +1040,8 @@ paths:
     /v1/material/{id}:
         get:
             description: get material by its identifier
+            tags: 
+                - Materials
             parameters:
                 -   name: id
                     in: path
@@ -1006,6 +1064,8 @@ paths:
                     description: material is not found
         delete:
             description: delete material by identifier
+            tags: 
+                - Materials
             parameters:
                 -   name: id
                     in: path
@@ -1034,6 +1094,8 @@ paths:
                     description: material is not found
         put:
             description: change material by identifier
+            tags: 
+                - Materials
             parameters:
                 -   name: id
                     in: path
@@ -1072,6 +1134,8 @@ paths:
     /v1/task/create:
         post:
             description: creates new task
+            tags: 
+                - Tasks
             requestBody:
                 required: true
                 content:
@@ -1104,6 +1168,8 @@ paths:
     /v1/tasks:
         get:
             description: list all tasks
+            tags: 
+                - Tasks
             security:
                 -   UserTicketAuth: [ ]
             responses:
@@ -1123,6 +1189,8 @@ paths:
     /v1/task/{id}:
         get:
             description: get task by its identifier
+            tags: 
+                - Tasks
             parameters:
                 -   name: id
                     in: path
@@ -1145,6 +1213,8 @@ paths:
                     description: task is not found
         delete:
             description: delete task by identifier
+            tags: 
+                - Tasks
             parameters:
                 -   name: id
                     in: path
@@ -1173,6 +1243,8 @@ paths:
                     description: task is not found
         put:
             description: change task by identifier
+            tags: 
+                - Tasks
             parameters:
                 -   name: id
                     in: path
