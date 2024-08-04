@@ -110,14 +110,6 @@ Courses ||--o{ Course_Task
 Tasks ||--o{ Course_Task
 
 
-entity "Sended_Tasks" {
-  *student_id: foreign_key(User_Course.id)  NOT NULL
-  *task_id: foreign_key(Task.task_id)  NOT NULL
-  *status: status_code NOT NULL
-  *score: int NOT NULL
- -- 
-  *reviewer_id: foreign_key(User_Course.id)  
-}
 
 
 @enduml
