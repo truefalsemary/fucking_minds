@@ -15,6 +15,7 @@ class Course {
 
   final String description;
 
+  @JsonKey(name: "author_id")
   final String authorId;
 
   Course({

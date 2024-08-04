@@ -1,25 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'course.dart';
+part of 'lesson.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Course _$CourseFromJson(Map<String, dynamic> json) => Course(
+Lesson _$LessonFromJson(Map<String, dynamic> json) => Lesson(
       id: json['id'] as String,
       title: json['title'] as String,
-      startDate: DateTime.parse(json['start_ts'] as String),
-      endDate: DateTime.parse(json['end_ts'] as String),
       description: json['description'] as String,
       authorId: json['author_id'] as String,
     );
 
-Map<String, dynamic> _$CourseToJson(Course instance) => <String, dynamic>{
+Map<String, dynamic> _$LessonToJson(Lesson instance) => <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
-      'start_ts': instance.startDate?.toIso8601String(),
-      'end_ts': instance.endDate?.toIso8601String(),
       'description': instance.description,
       'author_id': instance.authorId,
     };
