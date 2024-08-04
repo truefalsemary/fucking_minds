@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lms_front/core/di_container.dart';
+import 'package:lms_front/core/di/di_container.dart';
 
 class DiTreeWidget extends StatelessWidget {
   const DiTreeWidget(
