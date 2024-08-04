@@ -1,0 +1,332 @@
+openapi: "3.0.2"
+info:
+    title: LMS API
+    version: "1.0"
+servers:
+    -   url: http://localhost:8080/
+components:
+    schemas:
+        student:
+            type: object
+            properties:
+                id:
+                    description: student identifier
+                    type: string
+                full_name:
+                    description: student full name
+                    type: string
+        teacher:
+            type: object
+            properties:
+                id:
+                    description: teacher identifier
+                    type: string
+                full_name:
+                    description: student full name
+                    type: string
+        admin:
+            type: object
+            properties:
+                id:
+                    description: admin identifier
+                    type: string
+                full_name:
+                    description: student full name
+                    type: string
+        course:
+            type: object
+            properties:
+                id:
+                    description: course identifier
+                    type: string
+                title:
+                    description: course title
+                    type: string
+                start_ts:
+                    description: course beginning time
+                    type: string
+                    format: date-time
+                end_ts:
+                    description: course ending time
+                    type: string
+                    format: date-time
+                description:
+                    description: course description
+                    type: string
+                author_id:
+                    description: course author identifier
+                    type: string
+            required:
+                - id
+                - title
+                - description
+                - author_id
+        lesson:
+            type: object
+            properties:
+                id:
+                    description: lesson identifier
+                    type: string
+                title:
+                    description: lesson title
+                    type: string
+                description:
+                    description: lesson description
+                    type: string
+                author_id:
+                    description: lesson author identifier
+                    type: string
+            required:
+                - id
+                - title
+                - description
+                - author_id
+        material:
+            type: object
+            properties:
+                id:
+                    description: material identifier
+                    type: string
+                title:
+                    description: material title
+                    type: string
+                content_link:
+                    description: material content link
+                    type: string
+                author_id:
+                    description: material author identifier
+                    type: string
+            required:
+                - id
+                - title
+                - description
+                - author_id
+        task:
+            type: object
+            properties:
+                id:
+                    description: task identifier
+                    type: string
+                title:
+                    description: task title
+                    type: string
+                content_link:
+                    description: task content link
+                    type: string
+                author_id:
+                    description: task author identifier
+                    type: string
+            required:
+                - id
+                - title
+                - description
+                - author_id
+paths:
+    /v1/courses/create:
+        post:
+            description: creates new course
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                title:
+                                    description: course title
+                                    type: string
+                                start_ts:
+                                    description: course beginning time
+                                    type: string
+                                    format: date-time
+                                end_ts:
+                                    description: course ending time
+                                    type: string
+                                    format: date-time
+                                description:
+                                    description: course description
+                                    type: string
+                            required:
+                                - title
+                                - description
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/course'
+                '400':
+                    description: invalid input parameters
+    /v1/courses:
+        get:
+            description: list all courses
+            parameters:
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    items:
+                                        type: array
+                                        items:
+                                            $ref: '#/components/schemas/course'
+    /v1/course/{id}:
+        get:
+            description: get course by its identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/course'
+                '404':
+                    description: course is not found
+        delete:
+            description: delete course by identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    id:
+                                        description: identifier of deleted course
+                                        type: string
+                                required:
+                                    - id
+                '404':
+                    description: course is not found
+        put:
+            description: change course by identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                title:
+                                    description: course title
+                                    type: string
+                                start_ts:
+                                    description: course beginning time
+                                    type: string
+                                    format: date-time
+                                end_ts:
+                                    description: course ending time
+                                    type: string
+                                    format: date-time
+                                description:
+                                    description: course description
+                                    type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/course'
+                '400':
+                    description: invalid input parameters
+                '404':
+                    description: course is not found
+    /v1/courses/{id}/students:
+        get:
+            description: get students of course by its identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    items:
+                                        type: array
+                                        items:
+                                            $ref: '#/components/schemas/student'
+                '404':
+                    description: course is not found
+    /v1/courses/{id}/teachers:
+        get:
+            description: get teachers of course by its identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    items:
+                                        type: array
+                                        items:
+                                            $ref: '#/components/schemas/teacher'
+                '404':
+                    description: course is not found
+    /v1/courses/{id}/admins:
+        get:
+            description: get admins of course by its identifier
+            parameters:
+                -   name: id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    items:
+                                        type: array
+                                        items:
+                                            $ref: '#/components/schemas/admin'
+                '404':
+                    description: course is not found
