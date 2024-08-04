@@ -89,8 +89,17 @@ docker-start-service-debug docker-start-service-release: docker-start-service-%:
 docker-cmake-debug docker-build-debug docker-test-debug docker-clean-debug docker-install-debug docker-cmake-release docker-build-release docker-test-release docker-clean-release docker-install-release: docker-%:
 	$(DOCKER_COMPOSE) run --rm lms_service-container make $*
 
-# Stop docker container and remove PG data
-.PHONY: docker-clean-data
-docker-clean-data:
+# Stop docker container
+.PHONY: docker-stop
+docker-stop:
+	$(DOCKER_COMPOSE) stop
+
+# Remove docker container and PG data
+.PHONY: docker-clean
+docker-clean:
 	$(DOCKER_COMPOSE) down -v
 	rm -rf ./.pgdata
+
+# Combine stop and clean targets if needed
+.PHONY: docker-stop-and-clean
+docker-stop-and-clean: docker-stop docker-clean
