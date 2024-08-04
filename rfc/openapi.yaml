@@ -161,7 +161,6 @@ paths:
     /v1/courses:
         get:
             description: list all courses
-            parameters:
             responses:
                 '200':
                     description: OK
@@ -354,7 +353,6 @@ paths:
                                             $ref: '#/components/schemas/lesson'
                 '404':
                     description: course is not found
-
     /v1/course/{id}/lessons_id:
         get:
             description: get lessons's id of course by its identifier
@@ -434,7 +432,7 @@ paths:
                     description: course is not found
     /v1/course/{course_id}/add_lesson/{lesson_id}:
         post:
-            description: add element to course by identifiers
+            description: add lesson to course by identifiers
             parameters:
                 -   name: course_id
                     in: path
@@ -453,7 +451,6 @@ paths:
                     description: OK
                 '404':
                     description: course or lesson is not found
-
     /v1/course/{course_id}/lesson/{lesson_id}:
         delete:
             description: remove lesson from course by identifiers
@@ -485,7 +482,7 @@ paths:
                                     - id
                 '404':
                     description: course or lesson is not found
-    /v1/lessons/create:
+    /v1/lesson/create:
         post: 
             description: creates new lesson
             requestBody:
@@ -524,8 +521,7 @@ paths:
                                     items:
                                         type: array
                                         items:
-                                            $ref: '#/components/schemas/lesson'
-                                            
+                                            $ref: '#/components/schemas/lesson'                       
     /v1/lesson/{id}:
         get:
             description: get lesson by its identifier
@@ -626,7 +622,6 @@ paths:
                                             $ref: '#/components/schemas/material'
                 '404':
                     description: lesson is not found
-                    
     /v1/lesson/{id}/tasks:
         get: 
             description: get tasks of lessson by its identifier
@@ -653,7 +648,7 @@ paths:
                     description: lesson is not found
     /v1/course/{course_id}/lesson/{lesson_id}/add_material/{material_id}:
         post:
-            description: add element to course by identifiers
+            description: add lesson to course by identifiers
             parameters:
                 -   name: course_id
                     in: path
@@ -680,7 +675,7 @@ paths:
                     description: course or lesson or material is not found
     /v1/course/{course_id}/lesson/{lesson_id}/add_task/{task_id}:
         post:
-            description: add element to course by identifiers
+            description: add lesson to course by identifiers
             parameters:
                 -   name: course_id
                     in: path
@@ -700,9 +695,68 @@ paths:
                     required: true
                     schema:
                         type: string
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                deadline:
+                                    description: task perfomance deadline 
+                                    type: string
+                                    format: date-time
+                                max_points:
+                                    description: maximum points for task
+                                    type: integer
             responses:
                 '200':
                     description: OK
+                '400':
+                    description: invalid input parameters
+                '404':
+                    description: course or lesson or task is not found
+    /v1/course/{course_id}/lesson/{lesson_id}/change_task/{task_id}:
+        put:
+            description: change task parts of course by identifiers
+            parameters:
+                -   name: course_id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+                -   name: lesson_id
+                    in: path
+                    description: Lesson id
+                    required: true
+                    schema:
+                        type: string
+                -   name: task_id
+                    in: path
+                    description: Task id
+                    required: true
+                    schema:
+                        type: string
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                deadline:
+                                    description: task perfomance deadline 
+                                    type: string
+                                    format: date-time
+                                max_points:
+                                    description: maximum points for task
+                                    type: integer
+            responses:
+                '200':
+                    description: OK
+                '400':
+                    description: invalid input parameters
                 '404':
                     description: course or lesson or task is not found
     /v1/material/create:
@@ -736,7 +790,6 @@ paths:
     /v1/materials:
         get:
             description: list all materials
-            parameters:
             responses:
                 '200':
                     description: OK
@@ -856,7 +909,6 @@ paths:
     /v1/tasks:
         get:
             description: list all tasks
-            parameters:
             responses:
                 '200':
                     description: OK
