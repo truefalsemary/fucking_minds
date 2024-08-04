@@ -6,6 +6,12 @@ servers:
     -   url: http://localhost:8080/
 components:
     schemas:
+        role_enum:
+            type: string
+            enum:
+                - student
+                - teacher
+                - admin
         student:
             type: object
             properties:
@@ -189,7 +195,14 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/course'
+                                type: object
+                                properties:
+                                    course:
+                                        $ref: '#/components/schemas/course'
+                                    roles_array:
+                                        type: array
+                                        items:
+                                            $ref: '#/components/schemas/role_enum'
                 '404':
                     description: course is not found
         delete:
