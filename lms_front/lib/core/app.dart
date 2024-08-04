@@ -12,7 +12,9 @@ class App extends StatelessWidget {
     return DiTreeWidget(
       _diContainer,
       builder: (context) {
-        return const MaterialApp();
+        return MaterialApp.router(
+          routerConfig: _diContainer.routerDelegate.router,
+        );
       },
     );
   }
