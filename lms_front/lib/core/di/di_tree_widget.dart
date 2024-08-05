@@ -15,14 +15,14 @@ class DiTreeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
-      providers: [
+      providers: const [
         // RepositoryProvider<RepositoryA>(create: (context) => RepositoryA(_diContainer.httpClient)),
         // RepositoryProvider<RepositoryB>(create: (context) => RepositoryB(_diContainer.cacheDataProvider)),
         // RepositoryProvider<RepositoryC>(create: (context) => RepositoryC(_diContainer.courseDataProvider)),
       ],
       //global blocs
       child: MultiBlocProvider(
-        providers: [
+        providers: const [
           // BlocProvider(
           //   create: (context) => Provider.of<RepositoryA>(context, listen: false),
           // ),
