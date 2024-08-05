@@ -6,10 +6,11 @@ servers:
     -   url: http://localhost:8080/
 tags:
     - name: Auth
-    - name: Courses
-    - name: Lessons
-    - name: Materials
-    - name: Tasks
+    - name: Courses catalog
+    - name: Courses administration
+    - name: Lessons catalog
+    - name: Materials catalog
+    - name: Tasks catalog
 components:
     schemas:
         role_enum:
@@ -205,7 +206,7 @@ paths:
         post:
             description: creates new course
             tags: 
-                - Courses
+                - Courses catalog
             requestBody:
                 required: true
                 content:
@@ -247,7 +248,7 @@ paths:
         get:
             description: list all courses
             tags: 
-                - Courses
+                - Courses catalog
             security:
                 -   UserTicketAuth: [ ]
             responses:
@@ -268,7 +269,7 @@ paths:
         get:
             description: get course by its identifier
             tags: 
-                - Courses
+                - Courses catalog
             parameters:
                 -   name: id
                     in: path
@@ -299,7 +300,7 @@ paths:
         delete:
             description: delete course by identifier
             tags: 
-                - Courses
+                - Courses catalog
             parameters:
                 -   name: id
                     in: path
@@ -329,7 +330,7 @@ paths:
         put:
             description: change course by identifier
             tags: 
-                - Courses
+                - Courses administration
             parameters:
                 -   name: id
                     in: path
@@ -377,7 +378,7 @@ paths:
         get:
             description: get students of course by its identifier
             tags: 
-                - Courses
+                - Courses administration
             parameters:
                 -   name: id
                     in: path
@@ -407,7 +408,7 @@ paths:
         get:
             description: get teachers of course by its identifier
             tags: 
-                - Courses
+                - Courses administration
             parameters:
                 -   name: id
                     in: path
@@ -437,7 +438,7 @@ paths:
         get:
             description: get admins of course by its identifier
             tags: 
-                - Courses
+                - Courses administration
             parameters:
                 -   name: id
                     in: path
@@ -467,7 +468,7 @@ paths:
         get:
             description: get lessons of course by its identifier
             tags: 
-                - Courses
+                - Courses administration
             parameters:
                 -   name: id
                     in: path
@@ -493,11 +494,11 @@ paths:
                     $ref: "#/components/responses/UnauthorizedError"
                 '404':
                     description: course is not found
-    /v1/course/{id}/lessons_id:
+    /v1/course/{id}/lessons_ids:
         get:
-            description: get lessons's id of course by its identifier
+            description: get lessons' id of course by its identifier
             tags: 
-                - Courses
+                - Courses administration
             parameters:
                 -   name: id
                     in: path
@@ -531,7 +532,7 @@ paths:
         get:
             description: get materials of course by its identifier
             tags: 
-                - Courses
+                - Courses administration
             parameters:
                 -   name: id
                     in: path
@@ -561,7 +562,7 @@ paths:
         get:
             description: get tasks of course by its identifier
             tags: 
-                - Courses
+                - Courses administration
             parameters:
                 -   name: id
                     in: path
@@ -591,7 +592,7 @@ paths:
         post:
             description: add lesson to course by identifiers
             tags: 
-                - Courses
+                - Courses administration
             parameters:
                 -   name: course_id
                     in: path
@@ -618,7 +619,7 @@ paths:
         delete:
             description: remove lesson from course by identifiers
             tags: 
-                - Courses
+                - Courses administration
             parameters:
                 -   name: course_id
                     in: path
@@ -655,7 +656,7 @@ paths:
         post: 
             description: creates new lesson
             tags: 
-                - Lessons
+                - Lessons catalog
             requestBody:
                 required: true
                 content: 
@@ -686,7 +687,7 @@ paths:
         get:
             description: list all lessons
             tags: 
-                - Lessons
+                - Lessons catalog
             security:
                 -   UserTicketAuth: [ ]
             responses:
@@ -707,7 +708,7 @@ paths:
         get:
             description: get lesson by its identifier
             tags: 
-                - Lessons
+                - Lessons catalog
             parameters:
                 -   name: id
                     in: path
@@ -731,7 +732,7 @@ paths:
         delete:
             description: delete lesson by identifier
             tags: 
-                - Lessons
+                - Lessons catalog
             parameters:
                 -   name: id
                     in: path
@@ -761,7 +762,7 @@ paths:
         put:
             description: change lesson by identifier
             tags: 
-                - Lessons
+                - Lessons catalog
             parameters:
                 -   name: id
                     in: path
@@ -801,7 +802,7 @@ paths:
         get: 
             description: get materials of lessson by its identifier
             tags: 
-                - Lessons
+                - Lessons catalog
             parameters:
                 -   name: id
                     in: path
@@ -831,7 +832,7 @@ paths:
         get: 
             description: get tasks of lessson by its identifier
             tags: 
-                - Lessons
+                - Lessons catalog
             parameters:
                 -   name: id
                     in: path
@@ -860,6 +861,8 @@ paths:
     /v1/course/{course_id}/lesson/{lesson_id}/add_material/{material_id}:
         post:
             description: add lesson to course by identifiers
+            tags:
+                - Courses administration
             parameters:
                 -   name: course_id
                     in: path
@@ -891,6 +894,8 @@ paths:
     /v1/course/{course_id}/lesson/{lesson_id}/add_task/{task_id}:
         post:
             description: add lesson to course by identifiers
+            tags:
+                - Courses administration
             parameters:
                 -   name: course_id
                     in: path
@@ -938,6 +943,8 @@ paths:
     /v1/course/{course_id}/lesson/{lesson_id}/change_task/{task_id}:
         put:
             description: change task parts of course by identifiers
+            tags:
+                - Courses administration
             parameters:
                 -   name: course_id
                     in: path
@@ -982,11 +989,142 @@ paths:
                     $ref: "#/components/responses/UnauthorizedError"
                 '404':
                     description: course or lesson or task is not found
+    /v1/course/{course_id}/lesson/{lesson_id}/task/{task_id}/student/{student_id}/set_inspector:
+        post:
+            description: sets inspector from teachers to student task solving
+            tags: 
+                - Courses administration
+            parameters:
+                -   name: course_id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+                -   name: lesson_id
+                    in: path
+                    description: Lesson id
+                    required: true
+                    schema:
+                        type: string
+                -   name: task_id
+                    in: path
+                    description: Task id
+                    required: true
+                    schema:
+                        type: string
+                -   name: student_id
+                    in: path
+                    description: Student id
+                    required: true
+                    schema:
+                        type: string
+            security:
+                -   UserTicketAuth: [ ]
+            responses:
+                '200':
+                    description: OK
+                '400':
+                    description: invalid input parameters
+                '401':
+                    $ref: "#/components/responses/UnauthorizedError"
+                '404':
+                    description: course or lesson or task or student is not found
+    /v1/course/{course_id}/lesson/{lesson_id}/task/{task_id}/student/{student_id}/inspector:
+        get:
+            description: gets inspector from teachers of student task solving
+            tags: 
+                - Courses administration
+            parameters:
+                -   name: course_id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+                -   name: lesson_id
+                    in: path
+                    description: Lesson id
+                    required: true
+                    schema:
+                        type: string
+                -   name: task_id
+                    in: path
+                    description: Task id
+                    required: true
+                    schema:
+                        type: string
+                -   name: student_id
+                    in: path
+                    description: Student id
+                    required: true
+                    schema:
+                        type: string
+            security:
+                -   UserTicketAuth: [ ]
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    items:
+                                        type: array
+                                        items:
+                                            $ref: '#/components/schemas/teacher'
+                '400':
+                    description: invalid input parameters
+                '401':
+                    $ref: "#/components/responses/UnauthorizedError"
+                '404':
+                    description: course or lesson or task or student is not found
+        delete:
+            description: deletes inspector from teachers of student task solving
+            tags: 
+                - Courses administration
+            parameters:
+                -   name: course_id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+                -   name: lesson_id
+                    in: path
+                    description: Lesson id
+                    required: true
+                    schema:
+                        type: string
+                -   name: task_id
+                    in: path
+                    description: Task id
+                    required: true
+                    schema:
+                        type: string
+                -   name: student_id
+                    in: path
+                    description: Student id
+                    required: true
+                    schema:
+                        type: string
+            security:
+                -   UserTicketAuth: [ ]
+            responses:
+                '200':
+                    description: OK
+                '400':
+                    description: invalid input parameters
+                '401':
+                    $ref: "#/components/responses/UnauthorizedError"
+                '404':
+                    description: course or lesson or task or student is not found
     /v1/material/create:
         post:
             description: creates new material
             tags: 
-                - Materials
+                - Materials catalog
             requestBody:
                 required: true
                 content:
@@ -1020,7 +1158,7 @@ paths:
         get:
             description: list all materials
             tags: 
-                - Materials
+                - Materials catalog
             security:
                 -   UserTicketAuth: [ ]
             responses:
@@ -1041,7 +1179,7 @@ paths:
         get:
             description: get material by its identifier
             tags: 
-                - Materials
+                - Materials catalog
             parameters:
                 -   name: id
                     in: path
@@ -1065,7 +1203,7 @@ paths:
         delete:
             description: delete material by identifier
             tags: 
-                - Materials
+                - Materials catalog
             parameters:
                 -   name: id
                     in: path
@@ -1095,7 +1233,7 @@ paths:
         put:
             description: change material by identifier
             tags: 
-                - Materials
+                - Materials catalog
             parameters:
                 -   name: id
                     in: path
@@ -1135,7 +1273,7 @@ paths:
         post:
             description: creates new task
             tags: 
-                - Tasks
+                - Tasks catalog
             requestBody:
                 required: true
                 content:
@@ -1169,7 +1307,7 @@ paths:
         get:
             description: list all tasks
             tags: 
-                - Tasks
+                - Tasks catalog
             security:
                 -   UserTicketAuth: [ ]
             responses:
@@ -1190,7 +1328,7 @@ paths:
         get:
             description: get task by its identifier
             tags: 
-                - Tasks
+                - Tasks catalog
             parameters:
                 -   name: id
                     in: path
@@ -1214,7 +1352,7 @@ paths:
         delete:
             description: delete task by identifier
             tags: 
-                - Tasks
+                - Tasks catalog
             parameters:
                 -   name: id
                     in: path
@@ -1244,7 +1382,7 @@ paths:
         put:
             description: change task by identifier
             tags: 
-                - Tasks
+                - Tasks catalog
             parameters:
                 -   name: id
                     in: path
