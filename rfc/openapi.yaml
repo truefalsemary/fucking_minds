@@ -11,6 +11,7 @@ tags:
     - name: Lessons catalog
     - name: Materials catalog
     - name: Tasks catalog
+    - name: Submissions
 components:
     schemas:
         role_enum:
@@ -134,6 +135,31 @@ components:
                 - title
                 - description
                 - author_id
+        sent_submission:
+            type: object
+            properties:
+                content_link:
+                    description: submission content link
+                    type: string
+            required:
+                - content_link
+        accepted_submission:
+            type: object
+            properties:
+                id:
+                    description: task identifier
+                    type: string
+                content_link:
+                    description: submission content link
+                    type: string
+                sent_ts:
+                    description: submission acceptance time
+                    type: string
+                    format: date-time
+            required:
+                - id
+                - content_link
+                - sent_ts
     responses:
         UnauthorizedError:
             description: X-Ya-User-Ticket key is missing or invalid
@@ -588,7 +614,7 @@ paths:
                     $ref: "#/components/responses/UnauthorizedError"
                 '404':
                     description: course is not found
-    /v1/course/{course_id}/add_lesson/{lesson_id}:
+    /v1/course/{course_id}/add_lesson:
         post:
             description: add lesson to course by identifiers
             tags: 
@@ -600,12 +626,18 @@ paths:
                     required: true
                     schema:
                         type: string
-                -   name: lesson_id
-                    in: path
-                    description: Lesson id
-                    required: true
-                    schema:
-                        type: string
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                lesson_id:
+                                    description: lesson id
+                                    type: string
+                            required:
+                                - lesson_id
             security:
                 -   UserTicketAuth: [ ]
             responses:
@@ -670,6 +702,9 @@ paths:
                                 description: 
                                     description: lesson description
                                     type: string
+                            required:
+                                - title
+                                - description
             security:
                 -   UserTicketAuth: [ ]
             responses:
@@ -858,7 +893,7 @@ paths:
                     $ref: "#/components/responses/UnauthorizedError"
                 '404':
                     description: lesson is not found
-    /v1/course/{course_id}/lesson/{lesson_id}/add_material/{material_id}:
+    /v1/course/{course_id}/add_material:
         post:
             description: add lesson to course by identifiers
             tags:
@@ -867,51 +902,6 @@ paths:
                 -   name: course_id
                     in: path
                     description: Course id
-                    required: true
-                    schema:
-                        type: string
-                -   name: lesson_id
-                    in: path
-                    description: Lesson id
-                    required: true
-                    schema:
-                        type: string
-                -   name: material_id
-                    in: path
-                    description: Material id
-                    required: true
-                    schema:
-                        type: string
-            security:
-                -   UserTicketAuth: [ ]
-            responses:
-                '200':
-                    description: OK
-                '401':
-                    $ref: "#/components/responses/UnauthorizedError"
-                '404':
-                    description: course or lesson or material is not found
-    /v1/course/{course_id}/lesson/{lesson_id}/add_task/{task_id}:
-        post:
-            description: add lesson to course by identifiers
-            tags:
-                - Courses administration
-            parameters:
-                -   name: course_id
-                    in: path
-                    description: Course id
-                    required: true
-                    schema:
-                        type: string
-                -   name: lesson_id
-                    in: path
-                    description: Lesson id
-                    required: true
-                    schema:
-                        type: string
-                -   name: task_id
-                    in: path
-                    description: Task id
                     required: true
                     schema:
                         type: string
@@ -922,6 +912,49 @@ paths:
                         schema:
                             type: object
                             properties:
+                                lesson_id:
+                                    description: lesson id
+                                    type: string
+                                material_id:
+                                    description: material id
+                                    type: string
+                            required:
+                                - lesson_id
+                                - material_id
+            security:
+                -   UserTicketAuth: [ ]
+            responses:
+                '200':
+                    description: OK
+                '401':
+                    $ref: "#/components/responses/UnauthorizedError"
+                '404':
+                    description: course or lesson or material is not found
+    /v1/course/{course_id}/add_task:
+        post:
+            description: add lesson to course by identifiers
+            tags:
+                - Courses administration
+            parameters:
+                -   name: course_id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                lesson_id:
+                                    description: lesson id
+                                    type: string
+                                task_id:
+                                    description: task id
+                                    type: string
                                 deadline:
                                     description: task perfomance deadline 
                                     type: string
@@ -929,6 +962,9 @@ paths:
                                 max_points:
                                     description: maximum points for task
                                     type: integer
+                            required:
+                                - lesson_id
+                                - task_id
             security:
                 -   UserTicketAuth: [ ]
             responses:
@@ -940,7 +976,7 @@ paths:
                     $ref: "#/components/responses/UnauthorizedError"
                 '404':
                     description: course or lesson or task is not found
-    /v1/course/{course_id}/lesson/{lesson_id}/change_task/{task_id}:
+    /v1/course/{course_id}/change_task:
         put:
             description: change task parts of course by identifiers
             tags:
@@ -952,18 +988,6 @@ paths:
                     required: true
                     schema:
                         type: string
-                -   name: lesson_id
-                    in: path
-                    description: Lesson id
-                    required: true
-                    schema:
-                        type: string
-                -   name: task_id
-                    in: path
-                    description: Task id
-                    required: true
-                    schema:
-                        type: string
             requestBody:
                 required: true
                 content:
@@ -971,6 +995,12 @@ paths:
                         schema:
                             type: object
                             properties:
+                                lesson_id:
+                                    description: lesson id
+                                    type: string
+                                task_id:
+                                    description: task id
+                                    type: string
                                 deadline:
                                     description: task perfomance deadline 
                                     type: string
@@ -978,6 +1008,9 @@ paths:
                                 max_points:
                                     description: maximum points for task
                                     type: integer
+                            required:
+                                - lesson_id
+                                - task_id
             security:
                 -   UserTicketAuth: [ ]
             responses:
@@ -989,11 +1022,11 @@ paths:
                     $ref: "#/components/responses/UnauthorizedError"
                 '404':
                     description: course or lesson or task is not found
-    /v1/course/{course_id}/lesson/{lesson_id}/task/{task_id}/student/{student_id}/set_inspector:
+    /v1/course/{course_id}/set_inspectors:
         post:
-            description: sets inspector from teachers to student task solving
+            description: sets inspectors from teachers to student task solvings
             tags: 
-                - Courses administration
+                - Submissions
             parameters:
                 -   name: course_id
                     in: path
@@ -1001,24 +1034,87 @@ paths:
                     required: true
                     schema:
                         type: string
-                -   name: lesson_id
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                lesson_id:
+                                    description: lesson id
+                                    type: string
+                                task_id:
+                                    description: task id
+                                    type: string
+                                students:
+                                    type: array
+                                    items:
+                                        type: object
+                                        properties:
+                                            id:
+                                                description: student id
+                                                type: string
+                                teachers:
+                                    type: array
+                                    items:
+                                        type: object
+                                        properties:
+                                            id:
+                                                description: student id
+                                                type: string
+                            required:
+                                - lesson_id
+                                - task_id
+                                - students
+                                - teachers
+            security:
+                -   UserTicketAuth: [ ]
+            responses:
+                '200':
+                    description: OK
+                '400':
+                    description: invalid input parameters
+                '401':
+                    $ref: "#/components/responses/UnauthorizedError"
+                '404':
+                    description: course or lesson or task is not found
+    /v1/course/{course_id}/set_inspector:
+        post:
+            description: sets inspector from teachers to student task solving
+            tags: 
+                - Submissions
+            parameters:
+                -   name: course_id
                     in: path
-                    description: Lesson id
+                    description: Course id
                     required: true
                     schema:
                         type: string
-                -   name: task_id
-                    in: path
-                    description: Task id
-                    required: true
-                    schema:
-                        type: string
-                -   name: student_id
-                    in: path
-                    description: Student id
-                    required: true
-                    schema:
-                        type: string
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                lesson_id:
+                                    description: lesson id
+                                    type: string
+                                task_id:
+                                    description: task id
+                                    type: string
+                                student_id:
+                                    description: student id
+                                    type: string
+                                teacher_id:
+                                    description: teacher id
+                                    type: string
+                            required:
+                                - lesson_id
+                                - task_id
+                                - student_id
+                                - teacher_id
             security:
                 -   UserTicketAuth: [ ]
             responses:
@@ -1034,7 +1130,7 @@ paths:
         get:
             description: gets inspector from teachers of student task solving
             tags: 
-                - Courses administration
+                - Submissions
             parameters:
                 -   name: course_id
                     in: path
@@ -1109,6 +1205,53 @@ paths:
                     required: true
                     schema:
                         type: string
+            security:
+                -   UserTicketAuth: [ ]
+            responses:
+                '200':
+                    description: OK
+                '400':
+                    description: invalid input parameters
+                '401':
+                    $ref: "#/components/responses/UnauthorizedError"
+                '404':
+                    description: course or lesson or task or student is not found
+    /v1/course/{course_id}/send_solution:
+        post:
+            description: sents student's submission
+            tags:
+                - Submissions
+            parameters:
+                -   name: course_id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                lesson_id:
+                                    description: lesson id
+                                    type: string
+                                task_id:
+                                    description: task id
+                                    type: string
+                                student_id:
+                                    description: student id
+                                    type: string
+                                submission:
+                                    description: sent submission
+                                    $ref: '#/components/schemas/sent_submission'
+                            required:
+                                - lesson_id
+                                - task_id
+                                - student_id
+                                - submission
             security:
                 -   UserTicketAuth: [ ]
             responses:
