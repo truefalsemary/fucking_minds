@@ -19,7 +19,7 @@ flutter_analyze:
   interruptible: true
 
   before_script:
-    - cd team-36
+    - cd lms_front
     - flutter clean
     - flutter pub get
   script:
