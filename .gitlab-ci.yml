@@ -1,0 +1,12 @@
+include:
+  # Frontend CI handler 
+  - local: lms_front/.gitlab-ci.yml
+    rules:
+      - changes:
+          - lms_front/*
+
+  # Backend CI handler 
+  # - local: yourbackend_entry_dir/.gitlab-ci.yml
+  #   rules:
+  #     - changes:
+  #         - yourbackend_entry_dir/*

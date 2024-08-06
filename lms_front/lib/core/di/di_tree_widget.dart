@@ -10,6 +10,8 @@ class DiTreeWidget extends StatelessWidget {
     super.key,
   });
 
+  // Temp ignore for the time being
+  // ignore: unused_field
   final DiContainer _diContainer;
   final Widget Function(BuildContext) builder;
 
@@ -20,13 +22,19 @@ class DiTreeWidget extends StatelessWidget {
       child: builder(context),
     );
     return MultiRepositoryProvider(
-      providers: [],
+      providers: const [
+        // RepositoryProvider<RepositoryA>(create: (context) => RepositoryA(_diContainer.httpClient)),
+        // RepositoryProvider<RepositoryB>(create: (context) => RepositoryB(_diContainer.cacheDataProvider)),
+        // RepositoryProvider<RepositoryC>(create: (context) => RepositoryC(_diContainer.courseDataProvider)),
+      ],
+      //global blocs
       child: MultiBlocProvider(
-        providers: [],
-        child: AppRouter(
-          router: _diContainer.routerDelegate.router,
-          child: builder(context),
-        ),
+        providers: const [
+          // BlocProvider(
+          //   create: (context) => Provider.of<RepositoryA>(context, listen: false),
+          // ),
+        ],
+        child: builder(context),
       ),
     );
   }
