@@ -1,4 +1,5 @@
-image: ghcr.io/cirruslabs/flutter
+default:
+  image: ghcr.io/cirruslabs/flutter
 
 stages:
   - analyze # Health check
