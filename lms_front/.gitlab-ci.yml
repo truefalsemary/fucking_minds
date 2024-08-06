@@ -30,3 +30,4 @@ flutter_analyze:
 
   tags:
     - flutter_analyze
+    - ci
