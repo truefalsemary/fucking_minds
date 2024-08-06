@@ -31,7 +31,7 @@ class AppRouter extends InheritedWidget {
     router.pop();
   }
 
-  void home() {
+  void goHome() {
     router.go('/');
   }
 }
