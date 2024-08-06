@@ -8,16 +8,19 @@ skinparam linetype ortho
 entity "Users"  
 {
   *user_id: TEXT(uuid) <<primary>> 
-  *current_user_type user_type NOT NULL
-  *user_email varchar(255) NOT NULL
-  *user_password <<hashed>> NOT NULL
+  *current_user_type: user_type NOT NULL
+  *user_email: varchar(255) NOT NULL
+  *user_password: BINARY(32) <<hashed>> NOT NULL
+  *user_name: varchar(255) NOT NULL
+  *user_surname: varchar(255) NOT NULL
+  *user_middle_name: varchar(255) default NULL
 }
 
 entity "Auth_sessions"  
 {
   *id: TEXT(uuid) <<primary>> 
-  --
   *user_id:  foreign_key(Users.user_id)  NOT NULL
+  *updated TIMESTAMPTZ NOT NULL DEFAULT NOW()
 }
 
 entity "Courses" {
@@ -27,8 +30,8 @@ entity "Courses" {
   --
   *author_id: foreign_key(Users.user_id) NOT NULL
   --
-  start_ts: timestamp NOT NULL
-  end_ts: timestamp NOT NULL
+  *start_ts: TIMESTAMPTZ 
+  *end_ts: TIMESTAMPTZ 
 }
 
 entity "Lessons" {
@@ -66,7 +69,7 @@ entity "User_Course" {
   *user_id: foreign_key(Users.user_id) NOT NULL
   *course_id: foreign_key(Courses.course_id) NOT NULL
   *user_role: user_role NOT NULL
-  *id: unique(user_id, course_id, user_role)
+  *id: primary_key(user_id, course_id, user_role)
 }
 
 entity "Course_Lesson" {
@@ -82,7 +85,7 @@ entity "Lesson_Material" {
 }
 
 entity "Lesson_Task" {
-  *lesson_id: foreign_key(Lesson.lesson_id)  NOT NULL
+  *lesson_id: foreign_key(Lessons.lesson_id)  NOT NULL
   *task_id: foreign_key(Tasks.task_id)  NOT NULL
   *id: primary_key(lesson_id, task_id)
 }
@@ -96,20 +99,39 @@ Materials ||--o{ Lesson_Material
 Lessons ||--o{ Lesson_Task
 Tasks ||--o{ Lesson_Task
 
-entity "Course_Task" {
-  *course_id: foreign_key(Courses.course_id)  NOT NULL
-  *task_id: foreign_key(Tasks.task_id)  NOT NULL
---
-  *present_time: timestamp NOT NULL default current_timestamp
-  *student_deadline: timestamp 
-  *reviewer_deadline: timestamp 
+entity "Course_Lesson_Task" {
+  *course_lesson_id: foreign_key(Course_Lesson.id)  NOT NULL
+  *lesson_task_id: foreign_key(Lesson_Task.id) NOT NULL
+  *id: primary_key(course_id, task_id)
+  *present_time: TIMESTAMPTZ NOT NULL default NOW()
+  *submission_deadline: TIMESTAMPTZ 
+  *review_deadline: TIMESTAMPTZ 
   *score: int 
 }
 
-Courses ||--o{ Course_Task
-Tasks ||--o{ Course_Task
+Course_Lesson ||--o{ Course_Lesson_Task
+Lesson_Task ||--o{ Course_Lesson_Task
 
+entity Sended_Tasks{
+  *student_id: foreign_key(User_Course.id)  NOT NULL
+  *task_id: foreign_key(Course_Task.id)  NOT NULL
+  *lesson_id: foreign_key(Course_Lesson.id) NOT NULL
+  *id: primary_key(student_id, task_id, lesson_id)
+  *status: status_code NOT NULL
+  *score: int NOT NULL
+  -- 
+  *reviewer_id: foreign_key(User_Course.id)
+}
 
+Sended_Tasks }o--|| User_Course
+Sended_Tasks }o--|| Course_Task
 
+entity TaskSubmissions{
+  *sended_task_id: foreign_key(Sended_Tasks.id)  NOT NULL
+  *send_ts: TIMESTAMPTZ NOT NULL default NOW()
+  *content_link: TEXT NOT NULL
+  
+}
 
+TaskSubmissions}o--|| Sended_Tasks
 @enduml
