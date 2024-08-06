@@ -9,13 +9,15 @@ class DiTreeWidget extends StatelessWidget {
     super.key,
   });
 
+  // Temp ignore for the time being
+  // ignore: unused_field
   final DiContainer _diContainer;
   final Widget Function(BuildContext) builder;
 
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
-      providers: const [
+      providers: [
         // RepositoryProvider<RepositoryA>(create: (context) => RepositoryA(_diContainer.httpClient)),
         // RepositoryProvider<RepositoryB>(create: (context) => RepositoryB(_diContainer.cacheDataProvider)),
         // RepositoryProvider<RepositoryC>(create: (context) => RepositoryC(_diContainer.courseDataProvider)),
