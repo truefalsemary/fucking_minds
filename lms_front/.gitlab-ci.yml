@@ -19,6 +19,7 @@ flutter_analyze:
   interruptible: true
 
   before_script:
+    - cd team-36
     - flutter clean
     - flutter pub get
   script:
