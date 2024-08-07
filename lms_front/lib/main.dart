@@ -1,7 +1,27 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:lms_front/core/app.dart';
 import 'package:lms_front/core/di/di_container.dart';
+import 'package:lms_front/core/logger/logger.dart';
 
 void main() {
-  runApp(App(DiContainer()..init()));
+  FlutterError.onError = (details) {
+    Log.error(details.exceptionAsString(), trace: details.stack);
+  };
+
+  PlatformDispatcher.instance.onError = (error, stack) {
+    Log.error(error, trace: stack);
+    return true;
+  };
+
+  runZonedGuarded(
+    () => runApp(App(DiContainer()..init())),
+    (error, stackTrace) => Log.error(
+      error,
+      trace: stackTrace,
+    ),
+  );
 }

@@ -1,0 +1,35 @@
+default:
+  image: ghcr.io/cirruslabs/flutter
+
+stages:
+  - analyze # Health check
+
+  # These should appear in the future PRs
+  # - test    # Unit tests and integration tests
+  # - build   # Build the artifacts for web (and maybe upload it to the prod server)
+
+# Rules for merge requests only
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+      when: always
+
+flutter_analyze:
+  stage: analyze
+  interruptible: true
+
+  before_script:
+    - cd lms_front
+    - flutter clean
+    - flutter pub get
+  script:
+    - dart fix --dry-run
+    - dart fix --apply
+    - flutter analyze --fatal-warnings --no-fatal-infos
+  only:
+    refs:
+      - merge_requests
+
+  tags:
+    - flutter_analyze
+    - ci

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lms_front/core/app_router/app_router_inh.dart';
 import 'package:lms_front/core/di/di_container.dart';
 
 class DiTreeWidget extends StatelessWidget {
@@ -9,28 +9,16 @@ class DiTreeWidget extends StatelessWidget {
     super.key,
   });
 
+  // Temp ignore for the time being
+  // ignore: unused_field
   final DiContainer _diContainer;
   final Widget Function(BuildContext) builder;
 
   @override
   Widget build(BuildContext context) {
-
-    return builder(context);
-    // return MultiRepositoryProvider(
-    //   providers: [
-    //     // RepositoryProvider<RepositoryA>(create: (context) => RepositoryA(_diContainer.httpClient)),
-    //     // RepositoryProvider<RepositoryB>(create: (context) => RepositoryB(_diContainer.cacheDataProvider)),
-    //     // RepositoryProvider<RepositoryC>(create: (context) => RepositoryC(_diContainer.courseDataProvider)),
-    //   ],
-    //   //global blocs
-    //   child: MultiBlocProvider(
-    //     providers: [
-    //       // BlocProvider(
-    //       //   create: (context) => Provider.of<RepositoryA>(context, listen: false),
-    //       // ),
-    //     ],
-    //     child: builder(context),
-    //   ),
-    // );
+    return AppRouter(
+      router: _diContainer.routerDelegate.router,
+      child: builder(context),
+    );
   }
 }
