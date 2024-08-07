@@ -8,7 +8,7 @@ class Material {
   final String title;
 
   @JsonKey(name: 'content_link')
-  final String contentLink;
+  final String? contentLink;
 
   @JsonKey(name: 'author_id')
   final String authorId;
