@@ -1,17 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import 'user_role.dart';
+
 part 'user.g.dart';
 
-enum UserRole {
-  @JsonValue('student')
-  student,
-
-  @JsonValue('teacher')
-  teacher,
-
-  @JsonValue('admin')
-  admin,
-}
 
 /// [User] with specific [UserRole]
 /// which can be admin/teacher/student
