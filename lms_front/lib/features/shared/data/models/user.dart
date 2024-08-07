@@ -13,6 +13,11 @@ enum UserRole {
   admin,
 }
 
+
+/// [User] with specific [UserRole]
+/// which can be admin/teacher/student
+/// 
+/// Each role has its own permissions
 @JsonSerializable()
 class User {
   final String id;
