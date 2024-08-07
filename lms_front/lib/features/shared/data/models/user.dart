@@ -13,10 +13,9 @@ enum UserRole {
   admin,
 }
 
-
 /// [User] with specific [UserRole]
 /// which can be admin/teacher/student
-/// 
+///
 /// Each role has its own permissions
 @JsonSerializable()
 class User {
@@ -32,4 +31,7 @@ class User {
     required this.fullname,
     this.role,
   });
+
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 }

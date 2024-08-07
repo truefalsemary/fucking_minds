@@ -17,4 +17,7 @@ class Task {
     required this.title,
     required this.contentLink,
   });
+
+  factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
+  Map<String, dynamic> toJson() => _$TaskToJson(this);
 }

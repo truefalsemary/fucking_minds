@@ -21,4 +21,8 @@ class Material {
     required this.contentLink,
     required this.authorId,
   });
+
+  factory Material.fromJson(Map<String, dynamic> json) =>
+      _$MaterialFromJson(json);
+  Map<String, dynamic> toJson() => _$MaterialToJson(this);
 }
