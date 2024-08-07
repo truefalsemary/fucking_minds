@@ -4,8 +4,6 @@ class Log {
   static final _logger = Logger(
     printer: PrettyPrinter(
       methodCount: 1,
-      colors: true,
-      printEmojis: true,
     ),
   );
 
