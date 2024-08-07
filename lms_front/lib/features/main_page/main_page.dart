@@ -20,7 +20,6 @@ class MainPage extends StatelessWidget {
             const SizedBox(height: 40),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   'КУРСЫ',
@@ -164,7 +163,6 @@ class _CourseTicket extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset(

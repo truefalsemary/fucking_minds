@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'user_role.dart';
+import 'package:lms_front/features/shared/data/models/user/user_role.dart';
 
 part 'user.g.dart';
 

@@ -35,5 +35,5 @@ class DecoratedContainer extends StatelessWidget {
     );
   }
 
-  Border? get _border => color == null ? Border.all(width: 1, color: AppColors.black) : null;
+  Border? get _border => color == null ? Border.all(color: AppColors.black) : null;
 }

@@ -1,4 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:lms_front/features/shared/data/models/course_related/task.dart';
+import 'package:lms_front/features/shared/data/models/user/user.dart';
 
 part 'lesson.g.dart';
 
@@ -7,7 +9,7 @@ part 'lesson.g.dart';
 ///
 /// Course should have [title] and [description]
 ///
-/// Also course have its [Material]s and [Task]s
+/// Also course have its Materials and [Task]s
 /// Which can be added by [User]s with specific role
 @JsonSerializable()
 class Lesson {

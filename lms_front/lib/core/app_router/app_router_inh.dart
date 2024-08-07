@@ -5,13 +5,13 @@ class AppRouter extends InheritedWidget {
   final GoRouter router;
 
   const AppRouter({
-    super.key,
     required this.router,
     required super.child,
+    super.key,
   });
 
   static AppRouter of(BuildContext context) {
-    final AppRouter? result = context.dependOnInheritedWidgetOfExactType<AppRouter>();
+    final result = context.dependOnInheritedWidgetOfExactType<AppRouter>();
     assert(result != null, 'No AppRouter found in context');
     return result!;
   }

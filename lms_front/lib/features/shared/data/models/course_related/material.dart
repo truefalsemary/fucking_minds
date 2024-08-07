@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:lms_front/features/shared/data/models/course_related/course.dart';
 
 part 'material.g.dart';
 

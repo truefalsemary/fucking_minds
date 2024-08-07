@@ -8,16 +8,16 @@ class Course {
   final String title;
 
   /// Optional start date of the course
-  @JsonKey(name: "start_ts", fromJson: DateTime.parse)
+  @JsonKey(name: 'start_ts', fromJson: DateTime.parse)
   final DateTime? startDate;
 
   /// Optional end date of the course
-  @JsonKey(name: "end_ts", fromJson: DateTime.parse)
+  @JsonKey(name: 'end_ts', fromJson: DateTime.parse)
   final DateTime? endDate;
 
   final String description;
 
-  @JsonKey(name: "author_id")
+  @JsonKey(name: 'author_id')
   final String authorId;
 
   Course({
