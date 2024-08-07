@@ -21,6 +21,5 @@ class AcceptedSubmission {
 
   factory AcceptedSubmission.fromJson(Map<String, dynamic> json) =>
       _$AcceptedSubmissionFromJson(json);
-
   Map<String, dynamic> toJson() => _$AcceptedSubmissionToJson(this);
 }

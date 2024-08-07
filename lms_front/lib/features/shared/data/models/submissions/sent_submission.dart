@@ -13,6 +13,5 @@ class SentSubmission {
 
   factory SentSubmission.fromJson(Map<String, dynamic> json) =>
       _$SentSubmissionFromJson(json);
-
   Map<String, dynamic> toJson() => _$SentSubmissionToJson(this);
 }
