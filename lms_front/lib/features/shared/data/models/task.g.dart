@@ -9,7 +9,7 @@ part of 'task.dart';
 Task _$TaskFromJson(Map<String, dynamic> json) => Task(
       id: json['id'] as String,
       title: json['title'] as String,
-      contentLink: json['content_link'] as String,
+      contentLink: json['content_link'] as String?,
     );
 
 Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{

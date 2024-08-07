@@ -9,7 +9,7 @@ part of 'material.dart';
 Material _$MaterialFromJson(Map<String, dynamic> json) => Material(
       id: json['id'] as String,
       title: json['title'] as String,
-      contentLink: json['content_link'] as String,
+      contentLink: json['content_link'] as String?,
       authorId: json['author_id'] as String,
     );
 
