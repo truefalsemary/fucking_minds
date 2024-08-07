@@ -7,9 +7,11 @@ class Course {
   final String id;
   final String title;
 
+  /// Optional start date of the course
   @JsonKey(name: "start_ts", fromJson: DateTime.parse)
   final DateTime? startDate;
 
+  /// Optional end date of the course
   @JsonKey(name: "end_ts", fromJson: DateTime.parse)
   final DateTime? endDate;
 
