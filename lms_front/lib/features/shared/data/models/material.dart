@@ -2,6 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'material.g.dart';
 
+/// Material of some specific [Course]
+/// Can have [contentLink] for documents to download
 @JsonSerializable()
 class Material {
   final String id;
