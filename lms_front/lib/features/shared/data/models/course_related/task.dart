@@ -13,10 +13,14 @@ class Task {
   @JsonKey(name: 'content_link')
   final String? contentLink;
 
+  @JsonKey(name: 'author_id')
+  final String authorId;
+
   Task({
     required this.id,
     required this.title,
     required this.contentLink,
+    required this.authorId,
   });
 
   factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
