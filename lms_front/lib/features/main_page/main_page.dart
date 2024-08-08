@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lms_front/ui_kit/app_colors.dart';
-import 'package:lms_front/ui_kit/card/decorated_container.dart';
+import 'package:lms_front/ui_kit/components/card/decorated_container.dart';
 
 //Верстка для демо
 
