@@ -2,7 +2,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 
 CREATE TYPE user_role AS ENUM ('student', 'teacher', 'admin');
-CREATE TYPE user_type AS ENUM ('anonymous ', 'general', 'super');
+CREATE TYPE user_type AS ENUM ('anonymous', 'general', 'super');
 CREATE TYPE status_code AS ENUM (
     'not_sent',    
     'submitted',  
