@@ -1,0 +1,29 @@
+import 'package:json_annotation/json_annotation.dart';
+import 'package:lms_front/features/shared/data/models/course_related/course.dart';
+
+part 'material.g.dart';
+
+/// Material of some specific [Course]
+/// Can have [contentLink] for documents to download
+@JsonSerializable()
+class Material {
+  final String id;
+  final String title;
+
+  @JsonKey(name: 'content_link')
+  final String? contentLink;
+
+  @JsonKey(name: 'author_id')
+  final String authorId;
+
+  Material({
+    required this.id,
+    required this.title,
+    required this.contentLink,
+    required this.authorId,
+  });
+
+  factory Material.fromJson(Map<String, dynamic> json) =>
+      _$MaterialFromJson(json);
+  Map<String, dynamic> toJson() => _$MaterialToJson(this);
+}
