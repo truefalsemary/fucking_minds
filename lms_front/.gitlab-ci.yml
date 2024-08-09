@@ -9,10 +9,10 @@ stages:
   # - build   # Build the artifacts for web (and maybe upload it to the prod server)
 
 # Rules for merge requests only
-workflow:
-  rules:
-    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
-      when: always
+# workflow:
+#   rules:
+#     - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+#       when: always
 
 flutter_analyze:
   stage: analyze
