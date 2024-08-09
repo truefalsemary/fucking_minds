@@ -1,8 +1,16 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AppIcons {
   static final SvgPicture editPencil = SvgPicture.asset(
-    'assets/icons/edit_pencil.svg',
+    'assets/icons/pencil-to-line.svg',
+  );
+
+  static final SvgPicture calendar = SvgPicture.asset(
+    'assets/icons/calendar.svg',
+    colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
+    height: 16,
+    width: 16,
   );
 
   static final SvgPicture databaseImg = SvgPicture.asset(
