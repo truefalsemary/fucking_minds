@@ -14,7 +14,7 @@ class App extends StatelessWidget {
       _diContainer,
       builder: (context) {
         return MaterialApp.router(
-          theme: AppThemeData.theme,
+          theme: lightTheme,
           routerConfig: _diContainer.routerDelegate.router,
         );
       },
