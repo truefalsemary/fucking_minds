@@ -4,7 +4,10 @@ import 'package:lms_front/core/di/di_tree_widget.dart';
 import 'package:lms_front/ui_kit/ui_kit.dart';
 
 class App extends StatelessWidget {
-  const App(this._diContainer, {super.key});
+  const App(
+    this._diContainer, {
+    super.key,
+  });
 
   final DiContainer _diContainer;
 
@@ -15,6 +18,7 @@ class App extends StatelessWidget {
       builder: (context) {
         return MaterialApp.router(
           theme: lightTheme,
+          debugShowCheckedModeBanner: false,
           routerConfig: _diContainer.routerDelegate.router,
         );
       },
