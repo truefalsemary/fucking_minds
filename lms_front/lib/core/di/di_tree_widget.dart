@@ -9,8 +9,6 @@ class DiTreeWidget extends StatelessWidget {
     super.key,
   });
 
-  // Temp ignore for the time being
-  // ignore: unused_field
   final DiContainer _diContainer;
   final Widget Function(BuildContext) builder;
 
