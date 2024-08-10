@@ -23,13 +23,15 @@ class TextInputField extends StatelessWidget {
               title,
               style: context.appTextTheme.header1,
             ),
+            const SizedBox(width: 4),
             AppIcons.editPencil,
           ],
         ),
         const SizedBox(height: 20),
         TextField(
           decoration: InputDecoration(
-            border: const OutlineInputBorder(),
+            enabledBorder: context.textInputFieldTheme.border,
+            border: context.textInputFieldTheme.border,
             hintText: hint,
             hintStyle: context.appTextTheme.code3Inline,
           ),
