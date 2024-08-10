@@ -8,6 +8,16 @@ final ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   fontFamily: 'Inter',
   scaffoldBackgroundColor: ColorPalette.backgroundColor,
+  appBarTheme: const AppBarTheme(
+    backgroundColor: ColorPalette.backgroundColor,
+  ),
+  tabBarTheme: const TabBarTheme(
+    indicatorColor: Colors.black,
+    labelColor: Color(0xFF348BDC),
+    unselectedLabelColor: Color.fromRGBO(0, 0, 0, 0.85),
+    dividerColor: Colors.black,
+    dividerHeight: 0.5,
+  ),
   extensions: [
     AppTextTheme.light(),
     TextInputFieldTheme.light(),
