@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lms_front/ui_kit/app_colors.dart';
 
 class TextInputFieldTheme extends ThemeExtension<TextInputFieldTheme> {
-  final ShapeBorder? border;
+  final InputBorder? border;
   final int? minLines;
   final int? maxLines;
 
@@ -13,13 +14,17 @@ class TextInputFieldTheme extends ThemeExtension<TextInputFieldTheme> {
 
   factory TextInputFieldTheme.light() {
     return const TextInputFieldTheme(
-      border: OutlineInputBorder(),
+      border: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: AppColors.borderColor,
+        ),
+      ),
       minLines: 3,
     );
   }
 
   @override
-  TextInputFieldTheme copyWith({ShapeBorder? border}) {
+  TextInputFieldTheme copyWith({InputBorder? border}) {
     return TextInputFieldTheme(
       border: border ?? this.border,
       minLines: minLines,
@@ -34,7 +39,7 @@ class TextInputFieldTheme extends ThemeExtension<TextInputFieldTheme> {
       return this;
     }
     return TextInputFieldTheme(
-      border: ShapeBorder.lerp(border, other.border, t),
+      border: other.border,
       minLines: other.minLines,
       maxLines: other.maxLines,
     );
