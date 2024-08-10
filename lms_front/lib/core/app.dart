@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lms_front/core/di/di_container.dart';
 import 'package:lms_front/core/di/repository_scope.dart';
 import 'package:lms_front/ui_kit/ui_kit.dart';
@@ -17,14 +17,10 @@ class App extends StatelessWidget {
     return RepositoryScope(
       _diContainer,
       child: MaterialApp.router(
-        locale: const Locale('ru'),
         theme: lightTheme,
-        localizationsDelegates: const [
-          // AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
+        locale: const Locale('ru'),
+        localizationsDelegates: S.localizationsDelegates,
+        supportedLocales: S.supportedLocales,
         debugShowCheckedModeBanner: false,
         routerConfig: _diContainer.routerDelegate.router,
       ),
