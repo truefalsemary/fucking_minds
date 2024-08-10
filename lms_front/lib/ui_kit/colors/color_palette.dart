@@ -1,6 +1,6 @@
-import 'dart:ui';
+import 'package:flutter/material.dart';
 
-class AppColors {
+abstract class ColorPalette {
   // Background colors
   static const backgroundColor = Color(0xffFFFBF5);
 
