@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lms_front/core/logger/logger.dart';
+import 'package:lms_front/core/utils/date_formatters.dart';
 import 'package:lms_front/ui_kit/app_icons.dart';
-import 'package:lms_front/ui_kit/colors/app_colors.dart';
 import 'package:lms_front/ui_kit/components/date_picker_input_field/date_picker_input_field_theme.dart';
 import 'package:lms_front/ui_kit/typography/app_text_theme.dart';
 
@@ -15,6 +15,8 @@ class DatePickerInputField extends StatefulWidget {
 class _DatePickerInputFieldState extends State<DatePickerInputField> {
   DateTime? startCourseDate;
   DateTime? endCourseDate;
+
+  bool get _isDateSelected => startCourseDate != null && endCourseDate != null;
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +54,13 @@ class _DatePickerInputFieldState extends State<DatePickerInputField> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _CourseDateRangePreview(
-                startCourseDate: startCourseDate,
-                endCourseDate: endCourseDate,
+              Text(
+                _isDateSelected
+                    ? '${DateFormatters.courseDateToString(startCourseDate!)} - ${DateFormatters.courseDateToString(endCourseDate!)}'
+                    : 'Даты курса',
+                style: context.appTextTheme.code3Inline.copyWith(
+                  color: Theme.of(context).hintColor,
+                ),
               ),
               AppIcons.calendar,
             ],
@@ -69,6 +75,7 @@ class _DatePickerInputFieldState extends State<DatePickerInputField> {
 
     final courseDateRange = await showDateRangePicker(
       context: context,
+      locale: const Locale('ru'),
       firstDate: DateTime.now(),
       lastDate: DateUtils.addMonthsToMonthDate(currentDate, 12 * 100),
     );
@@ -86,28 +93,28 @@ class _DatePickerInputFieldState extends State<DatePickerInputField> {
   }
 }
 
-class _CourseDateRangePreview extends StatelessWidget {
-  const _CourseDateRangePreview({
-    required this.startCourseDate,
-    required this.endCourseDate,
-  });
+// class _CourseDateRangePreview extends StatelessWidget {
+//   const _CourseDateRangePreview({
+//     required this.startCourseDate,
+//     required this.endCourseDate,
+//   });
 
-  final DateTime? startCourseDate;
-  final DateTime? endCourseDate;
+//   final DateTime? startCourseDate;
+//   final DateTime? endCourseDate;
 
-  bool get _isDateSelected => startCourseDate != null && endCourseDate != null;
+//   bool get _isDateSelected => startCourseDate != null && endCourseDate != null;
 
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      _isDateSelected
-          ? 'Даты курса: $startCourseDate - $endCourseDate'
-          : 'Даты курса',
-      style: context.appTextTheme.code3Inline.copyWith(
-        color: _isDateSelected
-            ? context.appColorScheme.borderColor
-            : context.appColorScheme.disabledBorderColor,
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Text(
+//       _isDateSelected
+//           ? 'Даты курса: ${DateFormatters.courseDateToString(startCourseDate!)} - ${DateFormatters.courseDateToString(endCourseDate!)}'
+//           : 'Даты курса',
+//       style: context.appTextTheme.code3Inline.copyWith(
+//         color: _isDateSelected
+//             ? context.appColorScheme.borderColor
+//             : context.appColorScheme.disabledBorderColor,
+//       ),
+//     );
+//   }
+// }
