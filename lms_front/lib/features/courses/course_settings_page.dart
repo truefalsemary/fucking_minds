@@ -50,13 +50,15 @@ class CourseSettingsPage extends StatelessWidget {
               ),
             ];
           },
-          body: const TabBarView(children: [
-            SettingsTab(),
-            Icon(Icons.directions_transit, size: 350),
-            Icon(Icons.directions_car, size: 350),
-            Icon(Icons.directions_bike, size: 350),
-            Icon(Icons.directions_boat, size: 350),
-          ]),
+          body: const TabBarView(
+              physics:  NeverScrollableScrollPhysics(),
+              children: [
+                SettingsTab(),
+                Icon(Icons.directions_transit, size: 350),
+                Icon(Icons.directions_car, size: 350),
+                Icon(Icons.directions_bike, size: 350),
+                Icon(Icons.directions_boat, size: 350),
+              ]),
         ),
       ),
     );
