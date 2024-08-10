@@ -4,6 +4,7 @@ import 'package:lms_front/core/di/di_container.dart';
 import 'package:lms_front/core/di/repository_scope.dart';
 import 'package:lms_front/ui_kit/ui_kit.dart';
 
+/// Main app entry point with DI and RepositoryScope
 class App extends StatelessWidget {
   const App(
     this._diContainer, {
