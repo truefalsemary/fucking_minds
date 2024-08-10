@@ -33,9 +33,7 @@ class MainPage extends StatelessWidget {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
-                          borderSide: const BorderSide(
-                            color: AppColors.black,
-                          ),
+                          borderSide: const BorderSide(color: AppColors.black),
                         ),
                         // Префиксная иконка с текстом
                         prefixIcon: const Icon(Icons.search),
