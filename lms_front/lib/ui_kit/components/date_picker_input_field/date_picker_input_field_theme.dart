@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lms_front/ui_kit/app_colors.dart';
 
 class DatePickerInputFieldTheme
     extends ThemeExtension<DatePickerInputFieldTheme> {
@@ -7,7 +8,7 @@ class DatePickerInputFieldTheme
   });
 
   factory DatePickerInputFieldTheme.light() => const DatePickerInputFieldTheme(
-        borderColor: Color(0xFFE0E0E0),
+        borderColor: AppColors.borderColor,
       );
 
   final Color borderColor;
