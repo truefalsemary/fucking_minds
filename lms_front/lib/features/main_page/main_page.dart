@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lms_front/ui_kit/app_colors.dart';
 import 'package:lms_front/ui_kit/app_icons.dart';
+import 'package:lms_front/ui_kit/colors/color_palette.dart';
 import 'package:lms_front/ui_kit/components/card/decorated_container.dart';
 
 //Верстка для демо
@@ -34,7 +34,7 @@ class MainPage extends StatelessWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           borderSide: const BorderSide(
-                            color: AppColors.black,
+                            color: ColorPalette.black,
                           ),
                         ),
                         // Префиксная иконка с текстом

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lms_front/ui_kit/app_colors.dart';
+import 'package:lms_front/ui_kit/colors/color_palette.dart';
 
 class DatePickerInputFieldTheme
     extends ThemeExtension<DatePickerInputFieldTheme> {
@@ -8,7 +8,7 @@ class DatePickerInputFieldTheme
   });
 
   factory DatePickerInputFieldTheme.light() => const DatePickerInputFieldTheme(
-        borderColor: AppColors.borderColor,
+        borderColor: ColorPalette.borderColor,
       );
 
   final Color borderColor;
@@ -30,4 +30,9 @@ class DatePickerInputFieldTheme
       borderColor: borderColor ?? this.borderColor,
     );
   }
+}
+
+extension DatePickerInputFieldThemeCtx on BuildContext {
+  DatePickerInputFieldTheme get datePickerInputFieldTheme =>
+      Theme.of(this).extension<DatePickerInputFieldTheme>()!;
 }
