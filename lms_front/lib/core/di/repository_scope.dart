@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:lms_front/core/app_router/app_router_inh.dart';
 import 'package:lms_front/core/di/di_container.dart';
 
-class DiTreeWidget extends StatelessWidget {
-  const DiTreeWidget(
+/// This widget is used to create and provide repositories
+/// it has [_diContainer] as a dependency to create repositories
+class RepositoryScope extends StatelessWidget {
+  const RepositoryScope(
     this._diContainer, {
     required this.builder,
     super.key,
