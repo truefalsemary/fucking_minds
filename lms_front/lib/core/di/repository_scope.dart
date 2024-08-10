@@ -7,18 +7,18 @@ import 'package:lms_front/core/di/di_container.dart';
 class RepositoryScope extends StatelessWidget {
   const RepositoryScope(
     this._diContainer, {
-    required this.builder,
+    required this.child,
     super.key,
   });
 
   final DiContainer _diContainer;
-  final Widget Function(BuildContext) builder;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return AppRouter(
       router: _diContainer.routerDelegate.router,
-      child: builder(context),
+      child: child,
     );
   }
 }

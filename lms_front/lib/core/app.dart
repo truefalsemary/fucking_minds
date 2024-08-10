@@ -16,20 +16,18 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepositoryScope(
       _diContainer,
-      builder: (context) {
-        return MaterialApp.router(
-          locale: const Locale('ru'),
-          theme: lightTheme,
-          localizationsDelegates: const [
-            // AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          debugShowCheckedModeBanner: false,
-          routerConfig: _diContainer.routerDelegate.router,
-        );
-      },
+      child: MaterialApp.router(
+        locale: const Locale('ru'),
+        theme: lightTheme,
+        localizationsDelegates: const [
+          // AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        debugShowCheckedModeBanner: false,
+        routerConfig: _diContainer.routerDelegate.router,
+      ),
     );
   }
 }
