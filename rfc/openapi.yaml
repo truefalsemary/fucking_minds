@@ -826,7 +826,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/course'
+                                $ref: '#/components/schemas/lesson'
                 '400':
                     description: invalid input parameters
                 '401':
