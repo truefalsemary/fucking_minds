@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lms_front/ui_kit/app_colors.dart';
+import 'package:lms_front/ui_kit/colors/color_palette.dart';
 
 class TextInputFieldTheme extends ThemeExtension<TextInputFieldTheme> {
   final InputBorder? border;
@@ -16,7 +16,7 @@ class TextInputFieldTheme extends ThemeExtension<TextInputFieldTheme> {
     return const TextInputFieldTheme(
       border: OutlineInputBorder(
         borderSide: BorderSide(
-          color: AppColors.borderColor,
+          color: ColorPalette.borderColor,
         ),
       ),
       minLines: 3,
@@ -44,4 +44,9 @@ class TextInputFieldTheme extends ThemeExtension<TextInputFieldTheme> {
       maxLines: other.maxLines,
     );
   }
+}
+
+extension TextInputFieldExt on BuildContext {
+  TextInputFieldTheme get textInputFieldTheme =>
+      Theme.of(this).extension<TextInputFieldTheme>()!;
 }

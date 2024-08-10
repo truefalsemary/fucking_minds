@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lms_front/ui_kit/ui_kit.dart';
+import 'package:lms_front/ui_kit/colors/color_palette.dart';
 
 class DecoratedContainer extends StatelessWidget {
   const DecoratedContainer({
@@ -35,5 +35,6 @@ class DecoratedContainer extends StatelessWidget {
     );
   }
 
-  Border? get _border => color == null ? Border.all(color: AppColors.black) : null;
+  Border? get _border =>
+      color == null ? Border.all(color: ColorPalette.black) : null;
 }

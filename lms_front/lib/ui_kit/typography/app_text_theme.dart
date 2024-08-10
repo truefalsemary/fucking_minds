@@ -172,3 +172,7 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
 
   factory AppTextTheme.dark() => AppTextTheme.light();
 }
+
+extension Fonts on BuildContext {
+  AppTextTheme get appTextTheme => Theme.of(this).extension<AppTextTheme>()!;
+}
