@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class AppIcons {
+abstract class AppIcons {
   static final SvgPicture editPencil = SvgPicture.asset(
     'assets/icons/pencil-to-line.svg',
   );
