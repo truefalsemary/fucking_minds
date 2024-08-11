@@ -28,23 +28,23 @@ class CourseCatalogView final : public userver::server::handlers::HttpHandlerBas
       const userver::server::http::HttpRequest& request,
       userver::server::request::RequestContext&) const override {
     const auto& name = request.GetArg("name");
+    return "123";
+    // auto user_type = UserType::kFirstTime;
+    // if (!name.empty()) {
+    //   auto result = pg_cluster_->Execute(
+    //       userver::storages::postgres::ClusterHostType::kMaster,
+    //       "INSERT INTO hello_schema.users(name, count) VALUES($1, 1) "
+    //       "ON CONFLICT (name) "
+    //       "DO UPDATE SET count = users.count + 1 "
+    //       "RETURNING users.count",
+    //       name);
 
-    auto user_type = UserType::kFirstTime;
-    if (!name.empty()) {
-      auto result = pg_cluster_->Execute(
-          userver::storages::postgres::ClusterHostType::kMaster,
-          "INSERT INTO hello_schema.users(name, count) VALUES($1, 1) "
-          "ON CONFLICT (name) "
-          "DO UPDATE SET count = users.count + 1 "
-          "RETURNING users.count",
-          name);
+    //   if (result.AsSingleRow<int>() > 1) {
+    //     user_type = UserType::kKnown;
+    //   }
+    // }
 
-      if (result.AsSingleRow<int>() > 1) {
-        user_type = UserType::kKnown;
-      }
-    }
-
-    return lms_service::SayHelloTo(name, user_type);
+    // return lms_service::SayHelloTo(name, user_type);
   }
 
   userver::storages::postgres::ClusterPtr pg_cluster_;

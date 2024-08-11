@@ -1,5 +1,6 @@
 #include <userver/clients/dns/component.hpp>
 #include <userver/components/component.hpp>
+#include <userver/storages/postgres/component.hpp>
 #include <userver/clients/http/component.hpp>
 #include <userver/storages/postgres/cluster.hpp>
 #include <userver/components/minimal_server_component_list.hpp>
@@ -19,7 +20,8 @@ int main(int argc, char* argv[]) {
 
   component_list.Append<userver::components::Postgres>("postgres-db-1");
   component_list.Append<userver::clients::dns::Component>();
-  lms_service::AppendCourseCatalogView(component_list);
+
+  lms_service::AppendLessonCatalogView(component_list);
 
   return userver::utils::DaemonMain(argc, argv, component_list);
 }
