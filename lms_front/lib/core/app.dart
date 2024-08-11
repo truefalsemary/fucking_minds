@@ -22,6 +22,7 @@ class App extends StatelessWidget {
         locale: const Locale('ru'),
         localizationsDelegates: S.localizationsDelegates,
         supportedLocales: S.supportedLocales,
+        localeResolutionCallback: (locale, supportedLocales) => locale,
         debugShowCheckedModeBanner: false,
         routerConfig: _diContainer.routerDelegate.router,
       ),
