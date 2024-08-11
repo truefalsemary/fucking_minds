@@ -1,12 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:lms_front/features/shared/data/models/course_related/course.dart';
+import 'package:lms_front/features/shared/data/models/course_related/cource/course.dart';
 
 part 'material.g.dart';
 
 /// Material of some specific [Course]
 /// Can have [contentLink] for documents to download
 @JsonSerializable()
-class Material {
+class Resource {
   final String id;
   final String title;
 
@@ -16,14 +16,14 @@ class Material {
   @JsonKey(name: 'author_id')
   final String authorId;
 
-  Material({
+  Resource({
     required this.id,
     required this.title,
     required this.contentLink,
     required this.authorId,
   });
 
-  factory Material.fromJson(Map<String, dynamic> json) =>
-      _$MaterialFromJson(json);
-  Map<String, dynamic> toJson() => _$MaterialToJson(this);
+  factory Resource.fromJson(Map<String, dynamic> json) =>
+      _$ResourceFromJson(json);
+  Map<String, dynamic> toJson() => _$ResourceToJson(this);
 }

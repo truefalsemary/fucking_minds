@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lms_front/core/app_router/app_router_inh.dart';
 import 'package:lms_front/ui_kit/app_icons.dart';
 import 'package:lms_front/ui_kit/colors/color_palette.dart';
 import 'package:lms_front/ui_kit/components/card/decorated_container.dart';
@@ -157,52 +159,57 @@ class _CourseTicket extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedContainer(
-      width: MediaQuery.sizeOf(context).width,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              leading,
-              const SizedBox(width: 30),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleLarge
-                          ?.copyWith(fontSize: 32),
-                    ),
-                    if (description != null)
+    return CupertinoButton(
+      padding: EdgeInsets.zero,
+      onPressed: () => context.appRouter.go('/course/'),
+      child: DecoratedContainer(
+        width: MediaQuery.sizeOf(context).width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                leading,
+                const SizedBox(width: 30),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       Text(
-                        description!,
-                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w400,
-                            ),
+                        title,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleLarge
+                            ?.copyWith(fontSize: 32),
                       ),
-                  ],
+                      if (description != null)
+                        Text(
+                          description!,
+                          style:
+                              Theme.of(context).textTheme.titleSmall?.copyWith(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                        ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 40),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Text(
-              date,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium
-                  ?.copyWith(fontWeight: FontWeight.w600),
+              ],
             ),
-          )
-        ],
+            const SizedBox(height: 40),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Text(
+                date,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(fontWeight: FontWeight.w600),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
