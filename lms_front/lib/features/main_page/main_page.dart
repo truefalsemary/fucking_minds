@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lms_front/ui_kit/app_colors.dart';
+import 'package:lms_front/ui_kit/app_icons.dart';
+import 'package:lms_front/ui_kit/colors/color_palette.dart';
 import 'package:lms_front/ui_kit/components/card/decorated_container.dart';
 
 //Верстка для демо
@@ -34,7 +34,7 @@ class MainPage extends StatelessWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           borderSide: const BorderSide(
-                            color: AppColors.black,
+                            color: ColorPalette.black,
                           ),
                         ),
                         // Префиксная иконка с текстом
@@ -49,11 +49,11 @@ class MainPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 40),
-            const Row(
+            Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _SideNavigationBar(),
-                SizedBox(width: 20),
+                const _SideNavigationBar(),
+                const SizedBox(width: 20),
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
@@ -64,20 +64,20 @@ class MainPage extends StatelessWidget {
                           description:
                               'Вы научитесь создавать современные кроссплатформенные приложения с помощью Flutter',
                           date: 'Дедлайн: 05.04.2025',
-                          picture: 'assets/database.svg',
+                          leading: AppIcons.databaseImg,
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         _CourseTicket(
                           title: 'Курс по Машинному обучению',
                           description: null,
-                          picture: 'assets/project.svg',
+                          leading: AppIcons.projectImg,
                           date: 'Дедлайн: 05.04.2025',
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         _CourseTicket(
                           title: 'Курс по Математической статистике',
                           description: null,
-                          picture: 'assets/snapshot.svg',
+                          leading: AppIcons.projectImg,
                           date: 'Дедлайн: 05.04.2025',
                         ),
                       ],
@@ -147,13 +147,13 @@ class _CourseTicket extends StatelessWidget {
     required this.title,
     required this.description,
     required this.date,
-    required this.picture,
+    required this.leading,
   });
 
   final String title;
   final String? description;
   final String date;
-  final String picture;
+  final Widget leading;
 
   @override
   Widget build(BuildContext context) {
@@ -165,11 +165,7 @@ class _CourseTicket extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset(
-                picture,
-                height: 50,
-                width: 50,
-              ),
+              leading,
               const SizedBox(width: 30),
               Expanded(
                 child: Column(
