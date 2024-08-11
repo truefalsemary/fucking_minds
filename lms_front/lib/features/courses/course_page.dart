@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lms_front/features/courses/course_program_tab.dart';
-import 'package:lms_front/features/courses/course_settings_page.dart';
+import 'package:lms_front/features/courses/edit_course_tabs/course_program_tab.dart';
+import 'package:lms_front/features/courses/edit_course_tabs/course_settings_page.dart';
 import 'package:lms_front/ui_kit/typography/app_text_theme.dart';
 
 class CourseSettingsPage extends StatelessWidget {
