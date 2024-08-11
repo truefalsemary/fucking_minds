@@ -356,7 +356,7 @@ paths:
         put:
             description: change course by identifier
             tags: 
-                - Courses administration
+                - Courses catalog
             parameters:
                 -   name: id
                     in: path
@@ -1338,7 +1338,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/course'
+                                $ref: '#/components/schemas/material'
                 '401':
                     $ref: "#/components/responses/UnauthorizedError"
                 '404':
