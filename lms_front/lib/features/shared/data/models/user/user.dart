@@ -4,7 +4,6 @@ import 'package:lms_front/features/shared/data/models/user/user_role.dart';
 
 part 'user.g.dart';
 
-
 /// [User] with specific [UserRole]
 /// which can be admin/teacher/student
 ///
