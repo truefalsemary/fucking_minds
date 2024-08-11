@@ -26,19 +26,26 @@ userver_setup_environment()
 
 # Common sources
 add_library(${PROJECT_NAME}_objs OBJECT
-    src/hello.hpp
-    src/hello.cpp
+    src/components/postgres_components/postgres_components.hpp
+    src/components/postgres_components/postgres_components.cpp
+
+    src/components/views.hpp
+    src/models/auth/token_model.hpp
+    src/controllers/authentification/auth_controller.hpp
+    src/controllers/authentification/auth_controller.cpp
+    src/controllers/catalogs/course_catalog_controller.hpp
+    src/controllers/catalogs/course_catalog_controller.cpp
+    src/views/v1/catalogs/courses/create_course.hpp
+    src/views/v1/catalogs/courses/create_course.cpp
+
     src/models/lesson/lesson.hpp
     src/models/lesson/lesson.cpp
     src/models/lesson/lesson_data.hpp
     src/models/lesson/lesson_data.cpp
     src/controllers/catalogs/lesson_catalog_controller.hpp
     src/controllers/catalogs/lesson_catalog_controller.cpp
-    src/views/v1/catalogs/courses/create_course.hpp
-    src/views/v1/catalogs/courses/create_course.cpp
     src/views/v1/catalogs/lessons/create_lesson.hpp
     src/views/v1/catalogs/lessons/create_lesson.cpp
-
 )
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver::postgresql)
 
@@ -49,19 +56,19 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}_objs)
 
 
 # Unit Tests
-add_executable(${PROJECT_NAME}_unittest
-    src/hello_test.cpp
-)
-target_link_libraries(${PROJECT_NAME}_unittest PRIVATE ${PROJECT_NAME}_objs userver::utest)
-add_google_tests(${PROJECT_NAME}_unittest)
+# add_executable(${PROJECT_NAME}_unittest
+#     src/hello_test.cpp
+# )
+# target_link_libraries(${PROJECT_NAME}_unittest PRIVATE ${PROJECT_NAME}_objs userver::utest)
+# add_google_tests(${PROJECT_NAME}_unittest)
 
 
 # Benchmarks
-add_executable(${PROJECT_NAME}_benchmark
-    src/hello_benchmark.cpp
-)
-target_link_libraries(${PROJECT_NAME}_benchmark PRIVATE ${PROJECT_NAME}_objs userver::ubench)
-add_google_benchmark_tests(${PROJECT_NAME}_benchmark)
+# add_executable(${PROJECT_NAME}_benchmark
+#     src/hello_benchmark.cpp
+# )
+# target_link_libraries(${PROJECT_NAME}_benchmark PRIVATE ${PROJECT_NAME}_objs userver::ubench)
+# add_google_benchmark_tests(${PROJECT_NAME}_benchmark)
 
 
 # Functional Tests
