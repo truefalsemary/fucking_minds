@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CoursePage extends StatefulWidget {
-  const CoursePage({super.key});
+  final String courseId;
+  const CoursePage({required this.courseId, super.key});
 
   @override
   State<CoursePage> createState() => _CoursePageState();
@@ -10,6 +11,10 @@ class CoursePage extends StatefulWidget {
 class _CoursePageState extends State<CoursePage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Course'),
+      ),
+    );
   }
 }

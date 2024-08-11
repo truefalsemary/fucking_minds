@@ -13,7 +13,7 @@ class _ApiHttpClient implements ApiHttpClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://localhost:8080/';
+    baseUrl ??= 'http://51.250.41.66:8080/';
   }
 
   final Dio _dio;
