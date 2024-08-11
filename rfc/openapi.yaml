@@ -113,7 +113,7 @@ components:
             required:
                 - id
                 - title
-                - description
+                - content_link
                 - author_id
         task:
             type: object
@@ -133,7 +133,7 @@ components:
             required:
                 - id
                 - title
-                - description
+                - content_link
                 - author_id
         sent_submission:
             type: object
