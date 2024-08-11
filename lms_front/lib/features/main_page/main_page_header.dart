@@ -89,12 +89,17 @@ class MainPageHeader extends SliverPersistentHeaderDelegate {
             ),
             Align(
               alignment: Alignment.topRight,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: lerpDouble(20, 10, collapsePercent)!,
-                  horizontal: lerpDouble(20, 10, collapsePercent)!,
+              child: AnimatedScale(
+                duration: Durations.medium1,
+                scale: collapsePercent > 0.5 ? 0.7 : 1,
+                curve: Curves.easeOut,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: 5,
+                    right: 5,
+                  ),
+                  child: SvgPicture.asset('assets/icons/account_circle.svg'),
                 ),
-                child: SvgPicture.asset('assets/icons/account_circle.svg'),
               ),
             ),
           ],
