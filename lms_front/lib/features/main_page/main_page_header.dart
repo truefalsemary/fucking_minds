@@ -1,6 +1,8 @@
 import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lms_front/features/shared/presentation/user_profile_button.dart';
 import 'package:lms_front/ui_kit/colors/color_palette.dart';
 
 class MainPageHeader extends SliverPersistentHeaderDelegate {
@@ -93,12 +95,12 @@ class MainPageHeader extends SliverPersistentHeaderDelegate {
                 duration: Durations.medium1,
                 scale: collapsePercent > 0.5 ? 0.7 : 1,
                 curve: Curves.easeOut,
-                child: Padding(
-                  padding: const EdgeInsets.only(
+                child: const Padding(
+                  padding: EdgeInsets.only(
                     top: 5,
                     right: 5,
                   ),
-                  child: SvgPicture.asset('assets/icons/account_circle.svg'),
+                  child: UserProfileButton(),
                 ),
               ),
             ),
