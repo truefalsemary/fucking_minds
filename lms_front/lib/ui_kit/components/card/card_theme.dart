@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:lms_front/ui_kit/app_colors.dart';
+import 'package:lms_front/ui_kit/colors/color_palette.dart';
 
 class CardTheme extends ThemeExtension<CardTheme> {
   const CardTheme({
@@ -8,11 +8,11 @@ class CardTheme extends ThemeExtension<CardTheme> {
   });
 
   factory CardTheme.light() {
-    return const CardTheme(color: AppColors.backgroundColor);
+    return const CardTheme(color: ColorPalette.backgroundColor);
   }
 
   factory CardTheme.dark() {
-    return const CardTheme(color: AppColors.backgroundColor);
+    return const CardTheme(color: ColorPalette.backgroundColor);
   }
 
   final Color color;

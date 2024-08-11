@@ -11,7 +11,7 @@ class Log {
     _logger.e(message, stackTrace: trace ?? StackTrace.current);
   }
 
-  static void warnng(dynamic message, {StackTrace? trace}) {
+  static void warning(dynamic message, {StackTrace? trace}) {
     _logger.w(message, stackTrace: trace);
   }
 
