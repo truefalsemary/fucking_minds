@@ -8,13 +8,18 @@
 #include <userver/storages/postgres/component.hpp>
 #include <userver/utils/assert.hpp>
 
+#include "../../../../models/auth/token_model.hpp"
+#include "../../../../controllers/authentification/auth_controller.hpp"
+#include "../../../../models/courses/course_data.hpp"
+#include "../../../../controllers/catalogs/course_catalog_controller.hpp"
+
 namespace lms_service {
 
 namespace {
 
 class CourseCatalogView final : public userver::server::handlers::HttpHandlerBase {
  public:
-  static constexpr std::string_view kName = "handler-course-create";
+  static constexpr std::string_view kName = "handler-v1-course-create";
 
   CourseCatalogView(const userver::components::ComponentConfig& config,
         const userver::components::ComponentContext& component_context)
@@ -27,24 +32,15 @@ class CourseCatalogView final : public userver::server::handlers::HttpHandlerBas
   std::string HandleRequestThrow(
       const userver::server::http::HttpRequest& request,
       userver::server::request::RequestContext&) const override {
-    const auto& name = request.GetArg("name");
+    const auto& title = request.GetArg("title");
+    const auto& start_ts = request.GetArg("start_ts");
+    const auto& end_ts = request.GetArg("end_ts");
+    const auto& description = request.GetArg("description");
 
-    auto user_type = UserType::kFirstTime;
-    if (!name.empty()) {
-      auto result = pg_cluster_->Execute(
-          userver::storages::postgres::ClusterHostType::kMaster,
-          "INSERT INTO hello_schema.users(name, count) VALUES($1, 1) "
-          "ON CONFLICT (name) "
-          "DO UPDATE SET count = users.count + 1 "
-          "RETURNING users.count",
-          name);
+    lms_service::CourseData course_data{title, start_ts, end_ts, description};
 
-      if (result.AsSingleRow<int>() > 1) {
-        user_type = UserType::kKnown;
-      }
-    }
-
-    return lms_service::SayHelloTo(name, user_type);
+    auto course_model = lms_service::CourseCatalogController::CreateCourse(course_data, pg_cluster_);
+    return "123";
   }
 
   userver::storages::postgres::ClusterPtr pg_cluster_;

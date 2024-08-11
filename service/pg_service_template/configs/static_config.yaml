@@ -49,171 +49,166 @@ components_manager:
             task_processor: main-task-processor
             throttling_enabled: false
             url_trailing_slash: strict-match
-
-        handler-hello:                    # Finally! Our handler.
-            path: /v1/hello               # Registering handler by URL '/v1/hello'.
-            method: POST                  # It will only reply to POST requests.
-            task_processor: main-task-processor  # Run it on CPU bound task processor
         
-        handler-register-user:
-            path: /register
-            method: POST
-            task_processor: main-task-processor
+        # handler-register-user:
+        #     path: /register
+        #     method: POST
+        #     task_processor: main-task-processor
 
-        handler-login-user:
-            path: /login
-            method: POST
-            task_processor: main-task-processor
+        # handler-login-user:
+        #     path: /login
+        #     method: POST
+        #     task_processor: main-task-processor
 
         handler-v1-course-create:
             path: /v1/course/create
             method: POST
             task_processor: main-task-processor   
 
-        handler-v1-get-courses:
-            path: /v1/courses
-            method: GET
-            task_processor: main-task-processor
+        # handler-v1-get-courses:
+        #     path: /v1/courses
+        #     method: GET
+        #     task_processor: main-task-processor
 
-        handler-v1-course:
-            path: /v1/course/{id}
-            method: GET,PUT,DELETE
-            task_processor: main-task-processor
+        # handler-v1-course:
+        #     path: /v1/course/{id}
+        #     method: GET,PUT,DELETE
+        #     task_processor: main-task-processor
 
-        handler-v1-course-get-students:
-            path: /v1/course/{id}/students
-            method: GET
-            task_processor: main-task-processor
+        # handler-v1-course-get-students:
+        #     path: /v1/course/{id}/students
+        #     method: GET
+        #     task_processor: main-task-processor
 
-        handler-v1-course-get-teachers:
-            path: /v1/course/{id}/teachers
-            method: GET
-            task_processor: main-task-processor
+        # handler-v1-course-get-teachers:
+        #     path: /v1/course/{id}/teachers
+        #     method: GET
+        #     task_processor: main-task-processor
 
-        handler-v1-course-get-admins:
-            path: /v1/course/{id}/admins
-            method: GET
-            task_processor: main-task-processor
+        # handler-v1-course-get-admins:
+        #     path: /v1/course/{id}/admins
+        #     method: GET
+        #     task_processor: main-task-processor
 
-        handler-v1-course-get-lessons:
-            path: /v1/course/{id}/lessons
-            method: GET
-            task_processor: main-task-processor
+        # handler-v1-course-get-lessons:
+        #     path: /v1/course/{id}/lessons
+        #     method: GET
+        #     task_processor: main-task-processor
         
-        handler-v1-course-get-lessons-ids:
-            path: /v1/course/{id}/lessons_ids
-            method: GET
-            task_processor: main-task-processor    
+        # handler-v1-course-get-lessons-ids:
+        #     path: /v1/course/{id}/lessons_ids
+        #     method: GET
+        #     task_processor: main-task-processor    
 
-        handler-v1-course-get-materials:
-            path: /v1/course/{id}/materials
-            method: GET
-            task_processor: main-task-processor    
+        # handler-v1-course-get-materials:
+        #     path: /v1/course/{id}/materials
+        #     method: GET
+        #     task_processor: main-task-processor    
 
-        handler-v1-course-get-tasks:
-            path: /v1/course/{id}/tasks
-            method: GET
-            task_processor: main-task-processor
+        # handler-v1-course-get-tasks:
+        #     path: /v1/course/{id}/tasks
+        #     method: GET
+        #     task_processor: main-task-processor
 
-        handler-v1-course-add-lesseon:
-            path: /v1/course/{course_id}/add_lesson
-            method: POST
-            task_processor: main-task-processor  
+        # handler-v1-course-add-lesseon:
+        #     path: /v1/course/{course_id}/add_lesson
+        #     method: POST
+        #     task_processor: main-task-processor  
 
-        handler-v1-course-add-material:
-            path: /v1/course/{course_id}/add_material
-            method: POST
-            task_processor: main-task-processor    
+        # handler-v1-course-add-material:
+        #     path: /v1/course/{course_id}/add_material
+        #     method: POST
+        #     task_processor: main-task-processor    
 
-        handler-v1-course-add-task:
-            path: /v1/course/{course_id}/add_task
-            method: POST
-            task_processor: main-task-processor    
+        # handler-v1-course-add-task:
+        #     path: /v1/course/{course_id}/add_task
+        #     method: POST
+        #     task_processor: main-task-processor    
 
-        handler-v1-course-delete-lesson:
-            path: /v1/course/{course_id}/lesson/{lesson_id}
-            method: DELETE
-            task_processor: main-task-processor
+        # handler-v1-course-delete-lesson:
+        #     path: /v1/course/{course_id}/lesson/{lesson_id}
+        #     method: DELETE
+        #     task_processor: main-task-processor
 
-        handler-v1-course-change-task:
-            path: /v1/course/{course_id}/change_task
-            method: PUT 
-            task_processor: main-task-processor
+        # handler-v1-course-change-task:
+        #     path: /v1/course/{course_id}/change_task
+        #     method: PUT 
+        #     task_processor: main-task-processor
 
-        handler-v1-course-inspector:
-            path: /v1/course/{course_id}/lesson/{lesson_id}/task/{task_id}/student/{student_id}/inspector
-            method: GET,DELETE
-            task_processor: main-task-processor
+        # handler-v1-course-inspector:
+        #     path: /v1/course/{course_id}/lesson/{lesson_id}/task/{task_id}/student/{student_id}/inspector
+        #     method: GET,DELETE
+        #     task_processor: main-task-processor
 
-        handler-v1-lesson-create:
-            path: /v1/lesson/create
-            method: POST
-            task_processor: main-task-processor
+        # handler-v1-lesson-create:
+        #     path: /v1/lesson/create
+        #     method: POST
+        #     task_processor: main-task-processor
 
-        handler-v1-get-lessons:
-            path: /v1/lessons
-            method: GET
-            task_processor: main-task-processor
+        # handler-v1-get-lessons:
+        #     path: /v1/lessons
+        #     method: GET
+        #     task_processor: main-task-processor
 
-        handler-v1-lesson:
-            path: /v1/lesson/{id}
-            method: GET,PUT,DELETE
-            task_processor: main-task-processor
+        # handler-v1-lesson:
+        #     path: /v1/lesson/{id}
+        #     method: GET,PUT,DELETE
+        #     task_processor: main-task-processor
 
-        handler-v1-lesson-get-materials:
-            path: /v1/lesson/{id}/materials
-            method: GET
-            task_processor: main-task-processor
+        # handler-v1-lesson-get-materials:
+        #     path: /v1/lesson/{id}/materials
+        #     method: GET
+        #     task_processor: main-task-processor
 
-        handler-v1-lesson-get-tasks:
-            path: /v1/lesson/{id}/tasks
-            method: GET
-            task_processor: main-task-processor
+        # handler-v1-lesson-get-tasks:
+        #     path: /v1/lesson/{id}/tasks
+        #     method: GET
+        #     task_processor: main-task-processor
 
-        handler-v1-material-create:
-            path: /v1/material/create
-            method: POST
-            task_processor: main-task-processor
+        # handler-v1-material-create:
+        #     path: /v1/material/create
+        #     method: POST
+        #     task_processor: main-task-processor
 
-        handler-v1-get-materials:
-            path: /v1/materials
-            method: GET
-            task_processor: main-task-processor
+        # handler-v1-get-materials:
+        #     path: /v1/materials
+        #     method: GET
+        #     task_processor: main-task-processor
 
-        handler-v1-material:
-            path: /v1/material/{id}
-            method: GET,PUT,DELETE
-            task_processor: main-task-processor
+        # handler-v1-material:
+        #     path: /v1/material/{id}
+        #     method: GET,PUT,DELETE
+        #     task_processor: main-task-processor
 
-        handler-v1-task-create:
-            path: /v1/task/create
-            method: POST
-            task_processor: main-task-processor
+        # handler-v1-task-create:
+        #     path: /v1/task/create
+        #     method: POST
+        #     task_processor: main-task-processor
 
-        handler-v1-get-tasks:        
-            path: /v1/tasks
-            method: GET
-            task_processor: main-task-processor
+        # handler-v1-get-tasks:        
+        #     path: /v1/tasks
+        #     method: GET
+        #     task_processor: main-task-processor
 
-        handler-v1-task: 
-            path: /v1/task/{id}
-            method: GET,PUT,DELETE
-            task_processor: main-task-processor
+        # handler-v1-task: 
+        #     path: /v1/task/{id}
+        #     method: GET,PUT,DELETE
+        #     task_processor: main-task-processor
 
-        handler-v1-set-inspectors:
-            path: /v1/course/{course_id}/set_inspectors
-            method: POST
-            task_processor: main-task-processor
+        # handler-v1-set-inspectors:
+        #     path: /v1/course/{course_id}/set_inspectors
+        #     method: POST
+        #     task_processor: main-task-processor
 
-        handler-v1-set-inspector:
-            path: /v1/course/{course_id}/set_inspector
-            method: POST
-            task_processor: main-task-processor
+        # handler-v1-set-inspector:
+        #     path: /v1/course/{course_id}/set_inspector
+        #     method: POST
+        #     task_processor: main-task-processor
 
-        handler-v1-send-solution:
-            path: /v1/course/{course_id}/send_solution
-            method: POST
-            task_processor: main-task-processor    
+        # handler-v1-send-solution:
+        #     path: /v1/course/{course_id}/send_solution
+        #     method: POST
+        #     task_processor: main-task-processor    
 
         postgres-db-1:
             dbconnection: $dbconnection
