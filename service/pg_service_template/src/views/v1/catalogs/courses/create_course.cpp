@@ -39,7 +39,7 @@ class CourseCatalogView final : public userver::server::handlers::HttpHandlerBas
 
     lms_service::CourseData course_data{title, start_ts, end_ts, description};
 
-    auto course_model = lms_service::CourseCatalogController::CreateCourse(course_data, pg_cluster_);
+    // auto course_model = lms_service::CourseCatalogController::CreateCourse(course_data, pg_cluster_);
     return "123";
   }
 
