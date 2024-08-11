@@ -7,9 +7,12 @@ class TextInputField extends StatelessWidget {
   final String title;
   final String hint;
 
+  final int? minLines;
+
   const TextInputField({
     required this.title,
     required this.hint,
+    this.minLines,
     super.key,
   });
 
@@ -35,7 +38,7 @@ class TextInputField extends StatelessWidget {
             hintText: hint,
             hintStyle: context.appTextTheme.code3Inline,
           ),
-          minLines: context.textInputFieldTheme.minLines,
+          minLines: minLines ?? context.textInputFieldTheme.minLines,
           maxLines: context.textInputFieldTheme.maxLines,
         ),
       ],

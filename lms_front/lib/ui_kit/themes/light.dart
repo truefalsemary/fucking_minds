@@ -11,12 +11,27 @@ final ThemeData lightTheme = ThemeData(
   appBarTheme: const AppBarTheme(
     backgroundColor: ColorPalette.backgroundColor,
   ),
-  tabBarTheme: const TabBarTheme(
+  tabBarTheme: TabBarTheme(
+    tabAlignment: TabAlignment.start,
+    labelPadding: EdgeInsets.zero,
     indicatorColor: Colors.black,
-    labelColor: Color(0xFF348BDC),
-    unselectedLabelColor: Color.fromRGBO(0, 0, 0, 0.85),
+    labelColor: const Color(0xFF348BDC),
+    unselectedLabelColor: const Color.fromRGBO(0, 0, 0, 0.85),
+    indicatorSize: TabBarIndicatorSize.label,
+    indicator: const BoxDecoration(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(10),
+        topRight: Radius.circular(10),
+      ),
+      border: Border(
+        top: BorderSide(),
+        left: BorderSide(),
+        right: BorderSide(),
+      ),
+    ),
     dividerColor: Colors.black,
-    dividerHeight: 0.5,
+    dividerHeight: 0.000000001,
+    overlayColor: WidgetStateProperty.all(Colors.transparent),
   ),
   extensions: [
     AppTextTheme.light(),

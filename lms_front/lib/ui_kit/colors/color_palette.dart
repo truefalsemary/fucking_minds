@@ -10,4 +10,6 @@ abstract class ColorPalette {
 
   // Border colors
   static const borderColor = Color(0xFFB4BFC6);
+
+  static const plusIconColor = Color(0xFF221d22);
 }
