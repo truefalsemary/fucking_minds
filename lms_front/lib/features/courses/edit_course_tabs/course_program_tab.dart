@@ -11,9 +11,10 @@ class ProgramTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 115,
-        vertical: 64,
+      padding: EdgeInsets.only(
+        left: 115,
+        right: 115,
+        top: 64,
       ),
       child: SingleChildScrollView(
         child: Column(
