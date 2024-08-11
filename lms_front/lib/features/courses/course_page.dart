@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lms_front/core/app_router/app_router.dart';
 import 'package:lms_front/features/shared/data/models/course_related/lesson/lesson.dart';
 import 'package:lms_front/features/shared/presentation/user_profile_button.dart';
 
@@ -73,6 +74,7 @@ final lessons = [
 
 class CoursePage extends StatefulWidget {
   final String courseId;
+
   const CoursePage({required this.courseId, super.key});
 
   @override
@@ -84,28 +86,49 @@ class _CoursePageState extends State<CoursePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Курс ...'),
-        actions: const [
-          UserProfileButton(),
+        title: Text('Курс ${widget.courseId}'),
+        actions: [
+          SettingsCourseButton(widget: widget),
+          const UserProfileButton(),
         ],
       ),
       body: CustomScrollView(
         slivers: [
           const SliverToBoxAdapter(
-            child: Text('Уроки'),
+            child: Row(
+              children: [
+                Text('Уроки'),
+              ],
+            ),
           ),
           SliverList.separated(
             itemCount: lessons.length,
             itemBuilder: (context, index) {
               final lesson = lessons[index];
-              return Container(
-                child: Text(lesson.title),
-              );
+              return Text(lesson.title);
             },
             separatorBuilder: (context, index) => const SizedBox(height: 20),
           ),
         ],
       ),
+    );
+  }
+}
+
+class SettingsCourseButton extends StatelessWidget {
+  const SettingsCourseButton({
+    required this.widget,
+    super.key,
+  });
+
+  final CoursePage widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: () =>
+          context.appRouter.go('/courses/${widget.courseId}/settings'),
+      icon: const Icon(Icons.edit, color: Colors.black, size: 30),
     );
   }
 }
