@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:lms_front/features/shared/data/models/course_related/task.dart';
+import 'package:lms_front/features/shared/data/models/course_related/task/task.dart';
 import 'package:lms_front/features/shared/data/models/user/user.dart';
 
 part 'lesson.g.dart';

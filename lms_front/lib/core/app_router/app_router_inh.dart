@@ -35,3 +35,7 @@ class AppRouter extends InheritedWidget {
     router.go('/');
   }
 }
+
+extension AppRouterExtension on BuildContext {
+  AppRouter get appRouter => AppRouter.of(this);
+}

@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:lms_front/core/app_router/app_router_delegate.dart';
-import 'package:lms_front/core/http_client/api_http_client.dart';
+import 'package:lms_front/core/networking/http_client/api_http_client.dart';
+import 'package:lms_front/core/networking/interceptors/auth_interceptor.dart';
 
 class DiContainer {
   DiContainer();
@@ -11,7 +13,11 @@ class DiContainer {
 
   void init() {
     //инициализация data providers и других классов
-    httpClient = const ApiHttpClient();
+
+    const token = '';
+    final dio = Dio();
+    dio.interceptors.add(AuthInterceptor(token));
+    httpClient = ApiHttpClient(dio);
     routerDelegate = AppRouterDelegate();
   }
 }

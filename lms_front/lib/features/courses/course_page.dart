@@ -1,70 +1,110 @@
 import 'package:flutter/material.dart';
-import 'package:lms_front/features/courses/edit_course_tabs/course_settings_page.dart';
-import 'package:lms_front/ui_kit/typography/app_text_theme.dart';
-import 'package:lms_front/ui_kit/ui_kit.dart';
+import 'package:lms_front/features/shared/data/models/course_related/lesson/lesson.dart';
+import 'package:lms_front/features/shared/presentation/user_profile_button.dart';
 
-class CourseSettingsPage extends StatelessWidget {
-  const CourseSettingsPage({
-    required this.courseId,
-    super.key,
-  });
+final lessons = [
+  Lesson(
+    id: '1',
+    title: 'Знакомство с  основами языка Dart',
+    description: '''
+На уроке мы изучим язык Dart, научимся его использовать для построения консольных проектов для Flutter. 
+Узнаем больше про Flutter, какие в нем есть компоненты, виджеты и события.
+На основе Flutter мы за урок создадим приложение текст элементом приложения на Flutter являются виджеты. Фактически это те визуальные компоненты,из которых состоит
+графический интерфейс
+''',
+    authorId: '1',
+  ),
+  Lesson(
+    id: '1',
+    title: 'Знакомство с  основами языка Dart',
+    description: '''
+На уроке мы изучим язык Dart, научимся его использовать для построения консольных проектов для Flutter. 
+Узнаем больше про Flutter, какие в нем есть компоненты, виджеты и события.
+На основе Flutter мы за урок создадим приложение текст элементом приложения на Flutter являются виджеты. Фактически это те визуальные компоненты,из которых состоит
+графический интерфейс
+''',
+    authorId: '1',
+  ),
+  Lesson(
+    id: '1',
+    title: 'Знакомство с  основами языка Dart',
+    description: '''
+На уроке мы изучим язык Dart, научимся его использовать для построения консольных проектов для Flutter. 
+Узнаем больше про Flutter, какие в нем есть компоненты, виджеты и события.
+На основе Flutter мы за урок создадим приложение текст элементом приложения на Flutter являются виджеты. Фактически это те визуальные компоненты,из которых состоит
+графический интерфейс
+''',
+    authorId: '1',
+  ),
+  Lesson(
+    id: '1',
+    title: 'Знакомство с  основами языка Dart',
+    description: '''
+На уроке мы изучим язык Dart, научимся его использовать для построения консольных проектов для Flutter. 
+Узнаем больше про Flutter, какие в нем есть компоненты, виджеты и события.
+На основе Flutter мы за урок создадим приложение текст элементом приложения на Flutter являются виджеты. Фактически это те визуальные компоненты,из которых состоит
+графический интерфейс
+''',
+    authorId: '1',
+  ),
+  Lesson(
+    id: '1',
+    title: 'Знакомство с  основами языка Dart',
+    description: '''
+На уроке мы изучим язык Dart, научимся его использовать для построения консольных проектов для Flutter. 
+Узнаем больше про Flutter, какие в нем есть компоненты, виджеты и события.
+На основе Flutter мы за урок создадим приложение текст элементом приложения на Flutter являются виджеты. Фактически это те визуальные компоненты,из которых состоит
+графический интерфейс
+''',
+    authorId: '1',
+  ),
+  Lesson(
+    id: '1',
+    title: 'Знакомство с  основами языка Dart',
+    description: '''
+На уроке мы изучим язык Dart, научимся его использовать для построения консольных проектов для Flutter. 
+Узнаем больше про Flutter, какие в нем есть компоненты, виджеты и события.
+На основе Flutter мы за урок создадим приложение текст элементом приложения на Flutter являются виджеты. Фактически это те визуальные компоненты,из которых состоит
+графический интерфейс
+''',
+    authorId: '1',
+  ),
+];
 
-  static const tabsCount = 5;
+class CoursePage extends StatefulWidget {
   final String courseId;
+  const CoursePage({required this.courseId, super.key});
 
   @override
+  State<CoursePage> createState() => _CoursePageState();
+}
+
+class _CoursePageState extends State<CoursePage> {
+  @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      animationDuration: Duration.zero,
-      length: tabsCount,
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: NestedScrollView(
-            headerSliverBuilder: (context, innerBoxIsScrolled) {
-              return <Widget>[
-                SliverAppBar(
-                  centerTitle: false,
-                  title: Padding(
-                    padding: const EdgeInsets.only(left: 25),
-                    child: Text(
-                      'Курс по Flutter',
-                      style: context.appTextTheme.display2,
-                    ),
-                  ),
-                  pinned: true,
-                  floating: true,
-                  // TODO(any): сделать адаптивные таббары, чтобы при сужении экрана, таббары переходили на вторую строку
-                  bottom: const TabBar(
-                    enableFeedback: false,
-                    isScrollable: true,
-                    tabs: [
-                      TabWrapper(child: Text('Настройки')),
-                      TabWrapper(child: Text('Программа')),
-                      TabWrapper(child: Text('Участники')),
-                      TabWrapper(child: Text('Проверка заданий')),
-                      TabWrapper(child: Text('Отчеты')),
-                    ],
-                  ),
-                ),
-              ];
-            },
-            body: const TabBarView(
-                physics: NeverScrollableScrollPhysics(),
-                clipBehavior: Clip.none,
-                children: [
-                  TabContentWrapper(child: SettingsTab()),
-                  TabContentWrapper(
-                      child: Icon(Icons.directions_transit, size: 350)),
-                  TabContentWrapper(
-                      child: Icon(Icons.directions_car, size: 350)),
-                  TabContentWrapper(
-                      child: Icon(Icons.directions_bike, size: 350)),
-                  TabContentWrapper(
-                      child: Icon(Icons.directions_boat, size: 350)),
-                ]),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Курс ...'),
+        actions: const [
+          UserProfileButton(),
+        ],
+      ),
+      body: CustomScrollView(
+        slivers: [
+          const SliverToBoxAdapter(
+            child: Text('Уроки'),
           ),
-        ),
+          SliverList.separated(
+            itemCount: lessons.length,
+            itemBuilder: (context, index) {
+              final lesson = lessons[index];
+              return Container(
+                child: Text(lesson.title),
+              );
+            },
+            separatorBuilder: (context, index) => const SizedBox(height: 20),
+          ),
+        ],
       ),
     );
   }

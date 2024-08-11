@@ -6,14 +6,14 @@ part of 'material.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Material _$MaterialFromJson(Map<String, dynamic> json) => Material(
+Resource _$ResourceFromJson(Map<String, dynamic> json) => Resource(
       id: json['id'] as String,
       title: json['title'] as String,
       contentLink: json['content_link'] as String?,
       authorId: json['author_id'] as String,
     );
 
-Map<String, dynamic> _$MaterialToJson(Material instance) => <String, dynamic>{
+Map<String, dynamic> _$ResourceToJson(Resource instance) => <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
       'content_link': instance.contentLink,
