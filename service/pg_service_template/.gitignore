@@ -11,6 +11,7 @@ compile_commands.json
 .cores/
 .pgdata/
 cmake_build/
+third_party/userver/
 Testing/
 .DS_Store
 Makefile.local
