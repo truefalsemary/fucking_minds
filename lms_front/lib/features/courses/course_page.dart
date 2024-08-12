@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:lms_front/core/app_router/app_router.dart';
 import 'package:lms_front/core/networking/mock.dart';
 import 'package:lms_front/features/shared/presentation/user_profile_button.dart';
 
 class CoursePage extends StatefulWidget {
   final String courseId;
+
   const CoursePage({required this.courseId, super.key});
 
   @override
@@ -16,8 +18,9 @@ class _CoursePageState extends State<CoursePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Курс ...'),
-        actions: const [
-          UserProfileButton(),
+        actions: [
+          _SettingsCourseButton(widget: CoursePage(courseId: widget.courseId)),
+          const UserProfileButton(),
         ],
       ),
       body: CustomScrollView(
@@ -35,6 +38,21 @@ class _CoursePageState extends State<CoursePage> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _SettingsCourseButton extends StatelessWidget {
+  const _SettingsCourseButton({required this.widget});
+
+  final CoursePage widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: () =>
+          context.appRouter.go('/courses/${widget.courseId}/settings'),
+      icon: const Icon(Icons.edit, color: Colors.black, size: 30),
     );
   }
 }
