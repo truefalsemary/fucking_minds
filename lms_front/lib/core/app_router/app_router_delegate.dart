@@ -18,67 +18,61 @@ class AppRouterDelegate {
     initialLocation: '/',
     routes: [
       GoRoute(
-        path: '/',
-        builder: (context, state) => MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (context) {
-                final apiClient = context.read<ApiClient>();
-                final repository = CourseRepositoryImpl(apiClient);
-                return CourseListBloc(repository: repository)
-                  ..add(CourseListFetched());
+          path: '/',
+          builder: (context, state) => MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create: (context) {
+                      final apiClient = context.read<ApiClient>();
+                      final repository = CourseRepositoryImpl(apiClient);
+                      return CourseListBloc(repository: repository)
+                        ..add(CourseListFetched());
+                    },
+                  ),
+                  BlocProvider(
+                    create: (context) => CourseListSortCubit(),
+                  ),
+                ],
+                child: const MainPage(),
+              ),
+          routes: [
+            GoRoute(
+              path: 'courses',
+              builder: (context, state) => const ListCoursesPage(),
+            ),
+            GoRoute(
+              path: 'courses/:filter',
+              builder: (context, state) {
+                Log.info('$_logTag : ${state.path}');
+                final filterParameter = state.pathParameters['filter'];
+                final filter = ListCoursesFilter.fromString(filterParameter);
+                Log.info('$_logTag : ${state.path}');
+
+                return ListCoursesPage(filter: filter);
               },
             ),
-            BlocProvider(
-              create: (context) => CourseListSortCubit(),
+            GoRoute(
+              path: 'course/:courseId',
+              builder: (context, state) {
+                Log.info('$_logTag : ${state.path}');
+                final courseId = state.pathParameters['courseId']!;
+                Log.info('$_logTag : ${state.path}');
+
+                return CoursePage(courseId: courseId);
+              },
+              routes: [
+                GoRoute(
+                  path: 'settings',
+                  builder: (context, state) {
+                    final courseId = state.pathParameters['courseId']!;
+                    return CourseSettingsPage(
+                      courseId: courseId,
+                    );
+                  },
+                ),
+              ],
             ),
-          ],
-          child: const MainPage(),
-        ),
-      ),
-      GoRoute(
-        path: '/courses',
-        builder: (context, state) => const ListCoursesPage(),
-      ),
-      GoRoute(
-        path: '/courses/:filter',
-        builder: (context, state) {
-          Log.info('$_logTag : ${state.path}');
-          final filterParameter = state.pathParameters['filter'];
-          final filter = ListCoursesFilter.fromString(filterParameter);
-          Log.info('$_logTag : ${state.path}');
-
-          return ListCoursesPage(filter: filter);
-        },
-      ),
-      GoRoute(
-        path: '/course/:courseId',
-        builder: (context, state) {
-          Log.info('$_logTag : ${state.path}');
-          final courseId = state.pathParameters['courseId']!;
-          Log.info('$_logTag : ${state.path}');
-
-          return CoursePage(courseId: courseId);
-        },
-      ),
-      GoRoute(
-        path: '/courses/:courseId/settings',
-        builder: (context, state) {
-          final courseId = state.pathParameters['courseId']!;
-          return CourseSettingsPage(
-            courseId: courseId,
-          );
-        },
-      ),
-      GoRoute(
-        path: '/courses/:courseId/settings',
-        builder: (context, state) {
-          final courseId = state.pathParameters['courseId']!;
-          return CourseSettingsPage(
-            courseId: courseId,
-          );
-        },
-      ),
+          ]),
     ],
   );
 }
