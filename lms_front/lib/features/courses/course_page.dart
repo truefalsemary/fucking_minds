@@ -51,7 +51,7 @@ class _SettingsCourseButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () =>
-          context.appRouter.go('/courses/${widget.courseId}/settings'),
+          context.appRouter.go('/course/${widget.courseId}/settings'),
       icon: const Icon(Icons.edit, color: Colors.black, size: 30),
     );
   }

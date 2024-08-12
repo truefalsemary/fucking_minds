@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lms_front/core/app_router/routes.dart';
 import 'package:lms_front/core/logger/logger.dart';
 import 'package:lms_front/core/networking/api_client/api_client.dart';
 import 'package:lms_front/features/courses/course_page.dart';
@@ -19,7 +18,7 @@ class AppRouterDelegate {
     initialLocation: '/',
     routes: [
       GoRoute(
-          path: Routes.home,
+          path: '/',
           builder: (context, state) => MultiBlocProvider(
                 providers: [
                   BlocProvider(
@@ -38,11 +37,11 @@ class AppRouterDelegate {
               ),
           routes: [
             GoRoute(
-              path: Routes.courses,
+              path: 'courses',
               builder: (context, state) => const ListCoursesPage(),
             ),
             GoRoute(
-              path: Routes.filteredCourses,
+              path: 'courses/:filter',
               builder: (context, state) {
                 Log.info('$_logTag : ${state.path}');
                 final filterParameter = state.pathParameters['filter'];
@@ -53,7 +52,7 @@ class AppRouterDelegate {
               },
             ),
             GoRoute(
-              path: Routes.course,
+              path: 'course/:courseId',
               builder: (context, state) {
                 Log.info('$_logTag : ${state.path}');
                 final courseId = state.pathParameters['courseId']!;
@@ -61,15 +60,17 @@ class AppRouterDelegate {
 
                 return CoursePage(courseId: courseId);
               },
-            ),
-            GoRoute(
-              path: Routes.courseSettings,
-              builder: (context, state) {
-                final courseId = state.pathParameters['courseId']!;
-                return CourseSettingsPage(
-                  courseId: courseId,
-                );
-              },
+              routes: [
+                GoRoute(
+                  path: 'settings',
+                  builder: (context, state) {
+                    final courseId = state.pathParameters['courseId']!;
+                    return CourseSettingsPage(
+                      courseId: courseId,
+                    );
+                  },
+                ),
+              ],
             ),
           ]),
     ],
