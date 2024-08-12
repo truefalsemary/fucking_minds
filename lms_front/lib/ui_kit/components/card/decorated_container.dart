@@ -25,7 +25,6 @@ class DecoratedContainer extends StatelessWidget {
       height: height,
       width: width,
       padding: padding,
-      alignment: Alignment.center,
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(_borderRadius),
