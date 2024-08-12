@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:lms_front/features/shared/data/models/course_related/cource/course.dart';
 
-part 'material.g.dart';
+part 'resource.g.dart';
 
-/// Material of some specific [Course]
+/// Resource (material) of some specific [Course]
 /// Can have [contentLink] for documents to download
 @JsonSerializable()
 class Resource {
