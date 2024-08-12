@@ -8,10 +8,11 @@ services:
           POSTGRES_DB: lms_service_db_1
           POSTGRES_USER: user
           POSTGRES_PASSWORD: password
+          POSTGRES_EXTENSIONS: uuid-ossp
         ports:
           - 5432:5432
         volumes:
-          - ./postgresql/schemas:/docker-entrypoint-initdb.d
+          - ./postgres:/docker-entrypoint-initdb.d
           - ./.pgdata:/var/lib/postgresql/data
         networks:
           - postgres

@@ -8,21 +8,23 @@
 #include <userver/storages/postgres/component.hpp>
 #include <userver/utils/assert.hpp>
 
-#include "../../../../models/auth/token_model.hpp"
 #include "../../../../controllers/authentification/auth_controller.hpp"
-#include "../../../../models/courses/course_data.hpp"
 #include "../../../../controllers/catalogs/course_catalog_controller.hpp"
+#include "../../../../models/auth/token_model.hpp"
+#include "../../../../models/courses/course_data.hpp"
 
 namespace lms_service {
 
 namespace {
 
-class CourseCatalogView final : public userver::server::handlers::HttpHandlerBase {
+class CourseCatalogView final
+    : public userver::server::handlers::HttpHandlerBase {
  public:
   static constexpr std::string_view kName = "handler-v1-course-create";
 
-  CourseCatalogView(const userver::components::ComponentConfig& config,
-        const userver::components::ComponentContext& component_context)
+  CourseCatalogView(
+      const userver::components::ComponentConfig& config,
+      const userver::components::ComponentContext& component_context)
       : HttpHandlerBase(config, component_context),
         pg_cluster_(
             component_context
@@ -39,7 +41,9 @@ class CourseCatalogView final : public userver::server::handlers::HttpHandlerBas
 
     lms_service::CourseData course_data{title, start_ts, end_ts, description};
 
-    // auto course_model = lms_service::CourseCatalogController::CreateCourse(course_data, pg_cluster_);
+    // auto course_model =
+    // lms_service::CourseCatalogController::CreateCourse(course_data,
+    // pg_cluster_);
     return "123";
   }
 
@@ -48,7 +52,8 @@ class CourseCatalogView final : public userver::server::handlers::HttpHandlerBas
 
 }  // namespace
 
-void AppendCourseCatalogView(userver::components::ComponentList& component_list) {
+void AppendCourseCatalogView(
+    userver::components::ComponentList& component_list) {
   component_list.Append<CourseCatalogView>();
 }
 

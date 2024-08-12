@@ -3,7 +3,7 @@
 #include <string>
 
 namespace lms_service {
-    struct Token {
-        std::string data;
-    };
-}
+struct Token {
+  std::string data;
+};
+}  // namespace lms_service

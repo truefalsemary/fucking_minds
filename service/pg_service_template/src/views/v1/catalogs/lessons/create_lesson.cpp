@@ -7,9 +7,9 @@
 #include <userver/storages/postgres/cluster.hpp>
 #include <userver/storages/postgres/component.hpp>
 #include <userver/utils/assert.hpp>
+#include "../../../../controllers/catalogs/lesson_catalog_controller.hpp"
 #include "../../../../models/lesson/lesson.hpp"
 #include "../../../../models/lesson/lesson_data.hpp"
-#include "../../../../controllers/catalogs/lesson_catalog_controller.hpp"
 
 namespace lms_service {
 
@@ -31,21 +31,21 @@ class LessonCatalogView final
 
   std::string HandleRequestThrow(
       const userver::server::http::HttpRequest& request,
-      userver::server::request::RequestContext&) const override 
-    {
+      userver::server::request::RequestContext&) const override {
     lms_service::LessonData data;
     data.title = request.GetArg("title");
     data.description = request.GetArg("description");
     data.author_id = "12";
-    Lesson response;
-    if (!data.empty()) 
-    {
-      //auto result = lesson_catalog_controller::createLesson(data,pg_cluster_);
-      // response =
-      //     result.AsSingleRow<Lesson>(userver::storages::postgres::kRowTag);
-      return data.title + data.description;
+    if (!data.empty()) {
+      // auto result =
+      // lesson_catalog_controller::createLesson(data,pg_cluster_);
+      // return ToString(
+      //   userver::formats::json::ValueBuilder{result}.ExtractValue());
+      return "123";
     }
-    return "23";
+    auto &response = request.GetHttpResponse();
+      response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
+      return {};
   }
 
   userver::storages::postgres::ClusterPtr pg_cluster_;

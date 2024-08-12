@@ -110,7 +110,7 @@ components_manager:
         #     method: GET
         #     task_processor: main-task-processor
 
-        # handler-v1-course-add-lesseon:
+        # handler-v1-course-add-lesson:
         #     path: /v1/course/{course_id}/add_lesson
         #     method: POST
         #     task_processor: main-task-processor  
@@ -140,10 +140,10 @@ components_manager:
         #     method: GET,DELETE
         #     task_processor: main-task-processor
 
-        # handler-v1-lesson-create:
-        #     path: /v1/lesson/create
-        #     method: POST
-        #     task_processor: main-task-processor
+        handler-v1-lesson-create:
+            path: /v1/lesson/create
+            method: POST
+            task_processor: main-task-processor
 
         # handler-v1-get-lessons:
         #     path: /v1/lessons

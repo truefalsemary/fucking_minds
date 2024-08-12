@@ -15,4 +15,9 @@ elif [ "$DIR_UID" != "0" ]; then
     usermod -u $DIR_UID user
 fi
 
+echo "Running command as user with UID: $(id -u user)"
+echo "Command: $@"
+
 HOME=/home/user sudo -E -u user "$@"
+
+echo "done"
