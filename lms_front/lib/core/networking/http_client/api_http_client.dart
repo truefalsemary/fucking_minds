@@ -2,17 +2,17 @@ import 'package:dio/dio.dart';
 import 'package:lms_front/core/networking/const/base_url.dart';
 import 'package:lms_front/features/shared/data/models/course_related/cource/course.dart';
 import 'package:lms_front/features/shared/data/models/course_related/lesson/lesson.dart';
-import 'package:lms_front/features/shared/data/models/course_related/resource/resource.dart';
+import 'package:lms_front/features/shared/data/models/course_related/material/material.dart';
 import 'package:lms_front/features/shared/data/models/course_related/task/task.dart';
 import 'package:lms_front/features/shared/data/models/submissions/sent/sent_submission.dart';
 import 'package:lms_front/features/shared/data/models/user/user.dart';
 import 'package:retrofit/retrofit.dart';
 
-part 'api_client.g.dart';
+part 'api_http_client.g.dart';
 
 @RestApi(baseUrl: baseUrl)
-abstract class ApiClient {
-  factory ApiClient(Dio dio, {String baseUrl}) = _ApiClient;
+abstract class ApiHttpClient {
+  factory ApiHttpClient(Dio dio, {String baseUrl}) = _ApiHttpClient;
 
   // Course catalog
   @POST('/course/create')

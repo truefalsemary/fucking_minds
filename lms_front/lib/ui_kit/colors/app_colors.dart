@@ -10,15 +10,8 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
   // Borders
   final Color borderColor;
   final Color disabledBorderColor;
-  final Color backgroundColor;
 
-  factory AppColorScheme.light() {
-    return AppColorScheme(
-      borderColor: Colors.grey.shade300,
-      disabledBorderColor: Colors.grey.shade400,
-      backgroundColor: Colors.white,
-    );
-  }
+  final Color backgroundColor;
 
   @override
   AppColorScheme lerp(ThemeExtension<AppColorScheme>? other, double t) {
