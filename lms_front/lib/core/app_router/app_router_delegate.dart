@@ -1,9 +1,15 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lms_front/core/logger/logger.dart';
+import 'package:lms_front/core/networking/api_client/api_client.dart';
 import 'package:lms_front/features/courses/course_page.dart';
-import 'package:lms_front/features/courses/course_settings_page.dart';
+import 'package:lms_front/features/courses/edit_course_tabs/course_settings_page.dart';
 import 'package:lms_front/features/courses/list_courses_page.dart';
-import 'package:lms_front/features/main_page/main_page.dart';
+import 'package:lms_front/features/main_page/course_list/course_list_sort_cubit/course_list_sort_cubit.dart';
+import 'package:lms_front/features/main_page/page/main_page.dart';
+import 'package:lms_front/features/shared/data/repository_impl/course_repository_impl.dart';
+import 'package:lms_front/features/shared/domain/course_list_bloc/course_list_bloc.dart';
+import 'package:lms_front/features/shared/domain/course_list_bloc/course_list_event.dart';
 
 const _logTag = '[AppRouterDelegate]';
 
@@ -13,7 +19,22 @@ class AppRouterDelegate {
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => const MainPage(),
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) {
+                final apiClient = context.read<ApiClient>();
+                final repository = CourseRepositoryImpl(apiClient);
+                return CourseListBloc(repository: repository)
+                  ..add(CourseListFetched());
+              },
+            ),
+            BlocProvider(
+              create: (context) => CourseListSortCubit(),
+            ),
+          ],
+          child: const MainPage(),
+        ),
       ),
       GoRoute(
         path: '/courses',
