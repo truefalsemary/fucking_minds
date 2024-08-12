@@ -124,7 +124,7 @@ entity Sended_Tasks{
 }
 
 Sended_Tasks }o--|| User_Course
-Sended_Tasks }o--|| Course_Task
+Sended_Tasks }o--|| Course_Lesson_Task
 
 entity TaskSubmissions{
   *sended_task_id: foreign_key(Sended_Tasks.id)  NOT NULL
