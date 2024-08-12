@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lms_front/core/app_router/app_router_inh.dart';
 import 'package:lms_front/core/di/di_container.dart';
 
@@ -16,9 +17,12 @@ class RepositoryScope extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppRouter(
-      router: _diContainer.routerDelegate.router,
-      child: child,
+    return RepositoryProvider(
+      create: (context) => _diContainer.httpClient,
+      child: AppRouter(
+        router: _diContainer.routerDelegate.router,
+        child: child,
+      ),
     );
   }
 }
