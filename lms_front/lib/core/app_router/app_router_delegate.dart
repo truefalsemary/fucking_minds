@@ -8,6 +8,9 @@ import 'package:lms_front/features/courses/edit_course_tabs/course_settings_page
 import 'package:lms_front/features/courses/list_courses_page.dart';
 import 'package:lms_front/features/main_page/course_list/course_list_sort_cubit/course_list_sort_cubit.dart';
 import 'package:lms_front/features/main_page/page/main_page.dart';
+import 'package:lms_front/features/shared/data/repository_impl/course_repository_impl.dart';
+import 'package:lms_front/features/shared/domain/course_list_bloc/course_list_bloc.dart';
+import 'package:lms_front/features/shared/domain/course_list_bloc/course_list_event.dart';
 
 const _logTag = '[AppRouterDelegate]';
 
@@ -18,21 +21,21 @@ class AppRouterDelegate {
       GoRoute(
           path: Routes.home,
           builder: (context, state) => MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (context) {
-                final apiClient = context.read<ApiClient>();
-                final repository = CourseRepositoryImpl(apiClient);
-                return CourseListBloc(repository: repository)
-                  ..add(CourseListFetched());
-              },
-            ),
-            BlocProvider(
-              create: (context) => CourseListSortCubit(),
-            ),
-          ],
-          child: const MainPage(),
-        ),
+                providers: [
+                  BlocProvider(
+                    create: (context) {
+                      final apiClient = context.read<ApiClient>();
+                      final repository = CourseRepositoryImpl(apiClient);
+                      return CourseListBloc(repository: repository)
+                        ..add(CourseListFetched());
+                    },
+                  ),
+                  BlocProvider(
+                    create: (context) => CourseListSortCubit(),
+                  ),
+                ],
+                child: const MainPage(),
+              ),
           routes: [
             GoRoute(
               path: Routes.courses,
