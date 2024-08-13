@@ -1,3 +1,6 @@
+#include <userver/storages/postgres/component.hpp>
+#include <userver/storages/postgres/result_set.hpp>
+
 #include "lesson_catalog_controller.hpp"
 
 namespace lms_service {

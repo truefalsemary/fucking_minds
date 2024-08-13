@@ -10,8 +10,7 @@
 #include <userver/storages/postgres/component.hpp>
 #include <userver/utils/assert.hpp>
 
-#include "../../../../models/user/user_session.hpp"
-#include "../../../../models/auth/session.hpp"
+#include "../../../../controllers/authentication/sign_controller.hpp"
 
 namespace lms_service {
 
@@ -32,41 +31,30 @@ class LoginUser final : public userver::server::handlers::HttpHandlerBase {
   std::string HandleRequestThrow(
       const userver::server::http::HttpRequest& request,
       userver::server::request::RequestContext&) const override {
-    auto email = request.GetFormDataArg("email").value;
-    auto password =
-        userver::crypto::hash::Sha256(request.GetFormDataArg("password").value);
+    
 
-    auto userResult = pg_cluster_->Execute(
-        userver::storages::postgres::ClusterHostType::kMaster,
-        "SELECT (id, email, password) FROM Users "
-        "WHERE email = $1 ",
-        email);
+    SignData session;
+    //check GetFormDataArg in docs _______________________________
+    session.email = request.GetArg("email");
+    session.password =
+        userver::crypto::hash::Sha256(request.GetArg("password"));
+    //____________________________________________________________
+    if (session.empty()) 
+    {
+      auto& response = request.GetHttpResponse();
+      response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
+      return "empty fields";
+    }
+    auto token = sign_controller::login_user(session, pg_cluster_);
 
-    if (userResult.IsEmpty()) {
+    if (!token.has_value()) 
+    {
       auto& response = request.GetHttpResponse();
       response.SetStatus(userver::server::http::HttpStatus::kNotFound);
-      return {};
+      return "login is bad";
     }
 
-    auto user =
-        userResult.AsSingleRow<UserSession>(userver::storages::postgres::kRowTag);
-    if (password != user.password) {
-      auto& response = request.GetHttpResponse();
-      response.SetStatus(userver::server::http::HttpStatus::kNotFound);
-      return {};
-    }
-
-    auto result = pg_cluster_->Execute(
-        userver::storages::postgres::ClusterHostType::kMaster,
-        "INSERT INTO auth_sessions(user_id) VALUES($1) "
-        "ON CONFLICT DO NOTHING "
-        "RETURNING auth_sessions.id",
-        user.id);
-
-    userver::formats::json::ValueBuilder response;
-    response["id"] = result.AsSingleRow<std::string>();
-
-    return userver::formats::json::ToString(response.ExtractValue());
+    return ToString(userver::formats::json::ValueBuilder{token.value()}.ExtractValue());
   }
 
  private:
