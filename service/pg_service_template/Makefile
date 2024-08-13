@@ -72,6 +72,12 @@ format:
 # Set environment for --in-docker-start
 export DB_CONNECTION := postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@service-postgres:5432/${POSTGRES_DB}
 
+.PHONY: migrate
+
+# Run migrations using custom script
+migrate:
+	$(DOCKER_COMPOSE) run --rm lms_service-container bash /lms_service/postgres/init.sh
+
 # Internal hidden targets that are used only in docker environment
 --in-docker-start-debug --in-docker-start-release: --in-docker-start-%: install-%
 	# psql ${DB_CONNECTION} -f ./postgresql/data/initial_data.sql
@@ -82,6 +88,7 @@ export DB_CONNECTION := postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@servi
 # Build and run service in docker environment
 .PHONY: docker-start-service-debug docker-start-service-release
 docker-start-service-debug docker-start-service-release: docker-start-service-%:
+	$(MAKE) migrate
 	$(DOCKER_COMPOSE) run -p 8080:8080 --rm lms_service-container make -- --in-docker-start-$*
 
 # Start targets makefile in docker environment
