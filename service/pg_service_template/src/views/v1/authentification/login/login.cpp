@@ -10,7 +10,8 @@
 #include <userver/storages/postgres/component.hpp>
 #include <userver/utils/assert.hpp>
 
-#include "../../../models/user.hpp"
+#include "../../../../models/user/user_session.hpp"
+#include "../../../../models/auth/session.hpp"
 
 namespace lms_service {
 
@@ -37,7 +38,7 @@ class LoginUser final : public userver::server::handlers::HttpHandlerBase {
 
     auto userResult = pg_cluster_->Execute(
         userver::storages::postgres::ClusterHostType::kMaster,
-        "SELECT * FROM bookmarker.users "
+        "SELECT (id, email, password) FROM Users "
         "WHERE email = $1 ",
         email);
 
@@ -48,7 +49,7 @@ class LoginUser final : public userver::server::handlers::HttpHandlerBase {
     }
 
     auto user =
-        userResult.AsSingleRow<TUser>(userver::storages::postgres::kRowTag);
+        userResult.AsSingleRow<UserSession>(userver::storages::postgres::kRowTag);
     if (password != user.password) {
       auto& response = request.GetHttpResponse();
       response.SetStatus(userver::server::http::HttpStatus::kNotFound);
@@ -57,7 +58,7 @@ class LoginUser final : public userver::server::handlers::HttpHandlerBase {
 
     auto result = pg_cluster_->Execute(
         userver::storages::postgres::ClusterHostType::kMaster,
-        "INSERT INTO bookmarker.auth_sessions(user_id) VALUES($1) "
+        "INSERT INTO auth_sessions(user_id) VALUES($1) "
         "ON CONFLICT DO NOTHING "
         "RETURNING auth_sessions.id",
         user.id);
