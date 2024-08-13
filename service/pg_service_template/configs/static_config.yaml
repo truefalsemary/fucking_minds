@@ -50,15 +50,15 @@ components_manager:
             throttling_enabled: false
             url_trailing_slash: strict-match
         
-        # handler-register-user:
-        #     path: /register
-        #     method: POST
-        #     task_processor: main-task-processor
+        handler-register-user:
+            path: /register
+            method: POST
+            task_processor: main-task-processor
 
-        # handler-login-user:
-        #     path: /login
-        #     method: POST
-        #     task_processor: main-task-processor
+        handler-login-user:
+            path: /login
+            method: POST
+            task_processor: main-task-processor
 
         handler-v1-course-create:
             path: /v1/course/create
