@@ -17,11 +17,9 @@ std::optional<std::string> GetSessionInfo(
   return authentication::GetUserIdByToken(token, pg_cluster);
 }
 
-
 std::optional<std::string> GetUserIdByToken(
     const lms_service::Token& token,
-    userver::storages::postgres::ClusterPtr pg_cluster_) 
-  {
+    userver::storages::postgres::ClusterPtr pg_cluster_) {
   auto result = pg_cluster_->Execute(
       userver::storages::postgres::ClusterHostType::kMaster,
       "SELECT user_id from Auth_sessions "
@@ -29,5 +27,5 @@ std::optional<std::string> GetUserIdByToken(
       token.data);
   return result.AsSingleRow<std::optional<std::string>>();
 }
-}
+}  // namespace authentication
 }  // namespace lms_service

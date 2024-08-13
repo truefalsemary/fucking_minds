@@ -31,30 +31,27 @@ class LoginUser final : public userver::server::handlers::HttpHandlerBase {
   std::string HandleRequestThrow(
       const userver::server::http::HttpRequest& request,
       userver::server::request::RequestContext&) const override {
-    
-
     SignData session;
-    //check GetFormDataArg in docs _______________________________
+    // check GetFormDataArg in docs _______________________________
     session.email = request.GetArg("email");
     session.password =
         userver::crypto::hash::Sha256(request.GetArg("password"));
     //____________________________________________________________
-    if (session.empty()) 
-    {
+    if (session.empty()) {
       auto& response = request.GetHttpResponse();
       response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
       return "empty fields";
     }
     auto token = sign_controller::login_user(session, pg_cluster_);
 
-    if (!token.has_value()) 
-    {
+    if (!token.has_value()) {
       auto& response = request.GetHttpResponse();
       response.SetStatus(userver::server::http::HttpStatus::kNotFound);
       return "login is bad";
     }
 
-    return ToString(userver::formats::json::ValueBuilder{token.value()}.ExtractValue());
+    return ToString(
+        userver::formats::json::ValueBuilder{token.value()}.ExtractValue());
   }
 
  private:

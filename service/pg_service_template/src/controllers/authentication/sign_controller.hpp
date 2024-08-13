@@ -8,8 +8,9 @@
 
 namespace lms_service {
 namespace sign_controller {
-std::optional<Token> login_user(const SignData& sign_data,
-                           userver::storages::postgres::ClusterPtr pg_cluster_);
+std::optional<Token> login_user(
+    const SignData& sign_data,
+    userver::storages::postgres::ClusterPtr pg_cluster_);
 
 std::optional<Token> register_user(
     const SignData& sign_data,

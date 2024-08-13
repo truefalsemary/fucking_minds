@@ -1,10 +1,8 @@
 #include "sign_controller.hpp"
 #include <regex>
 namespace lms_service {
-namespace sign_controller 
-{
-bool isValidEmail(const std::string& raw_email) 
-{
+namespace sign_controller {
+bool isValidEmail(const std::string& raw_email) {
   size_t pos = raw_email.find('=');
   std::string encoded_email = raw_email;
   if (pos != std::string::npos)
@@ -23,15 +21,11 @@ std::optional<Token> login_user(
       "WHERE user_email = $1 ",
       sign_data.email);
 
-  if (userResult.IsEmpty()) 
-    return std::nullopt;
+  if (userResult.IsEmpty()) return std::nullopt;
 
-  auto user =
-      userResult.AsSingleRow<UserSession>();
+  auto user = userResult.AsSingleRow<UserSession>();
 
-  if (sign_data.password != user.password) 
-    return std::nullopt;
-
+  if (sign_data.password != user.password) return std::nullopt;
 
   auto result = pg_cluster_->Execute(
       userver::storages::postgres::ClusterHostType::kMaster,
@@ -41,13 +35,13 @@ std::optional<Token> login_user(
       user.id);
 
   Token token;
-  token.data =  result.AsSingleRow<std::string>();
+  token.data = result.AsSingleRow<std::string>();
   return token;
 }
 
-std::optional<Token> register_user(const SignData& sign_data,
-               userver::storages::postgres::ClusterPtr pg_cluster_)
-{
+std::optional<Token> register_user(
+    const SignData& sign_data,
+    userver::storages::postgres::ClusterPtr pg_cluster_) {
   auto result = pg_cluster_->Execute(
       userver::storages::postgres::ClusterHostType::kMaster,
       "INSERT INTO Users(user_email, user_password) VALUES($1, $2) "
@@ -55,9 +49,7 @@ std::optional<Token> register_user(const SignData& sign_data,
       "RETURNING user_id",
       sign_data.email, sign_data.password);
 
-  if (result.IsEmpty())
-    return std::nullopt;
-
+  if (result.IsEmpty()) return std::nullopt;
 
   Token token;
   token.data = result.AsSingleRow<std::string>();

@@ -13,9 +13,8 @@ std::optional<std::string> GetSessionInfo(
     userver::storages::postgres::ClusterPtr pg_cluster,
     const userver::server::http::HttpRequest& request);
 
-
 std::optional<std::string> GetUserIdByToken(
     const lms_service::Token& token,
     userver::storages::postgres::ClusterPtr pg_cluster_);
-}
+}  // namespace authentication
 }  // namespace lms_service

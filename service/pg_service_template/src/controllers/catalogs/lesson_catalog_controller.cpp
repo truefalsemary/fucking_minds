@@ -6,9 +6,8 @@
 namespace lms_service {
 namespace lesson_catalog_controller {
 Lesson createLesson(const lms_service::LessonData& lesson_data,
-                    userver::storages::postgres::ClusterPtr pg_cluster_)
-{
-  auto result =  pg_cluster_->Execute(
+                    userver::storages::postgres::ClusterPtr pg_cluster_) {
+  auto result = pg_cluster_->Execute(
       userver::storages::postgres::ClusterHostType::kMaster,
       "INSERT INTO Lessons(lesson_title, lesson_description, author_id) "
       "VALUES($1, $2, "

@@ -14,7 +14,6 @@
 
 namespace lms_service {
 
-
 namespace {
 
 class RegisterUser final : public userver::server::handlers::HttpHandlerBase {
@@ -31,8 +30,7 @@ class RegisterUser final : public userver::server::handlers::HttpHandlerBase {
 
   std::string HandleRequestThrow(
       const userver::server::http::HttpRequest& request,
-      userver::server::request::RequestContext&) const override 
-    {
+      userver::server::request::RequestContext&) const override {
     SignData session;
     // check GetFormDataArg in docs _______________________________
     session.email = request.GetArg("email");
@@ -48,8 +46,7 @@ class RegisterUser final : public userver::server::handlers::HttpHandlerBase {
 
     auto token = sign_controller::register_user(session, pg_cluster_);
 
-    if (!token.has_value()) 
-    {
+    if (!token.has_value()) {
       auto& response = request.GetHttpResponse();
       response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
       return "register is bad";
