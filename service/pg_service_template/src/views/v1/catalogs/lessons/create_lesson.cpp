@@ -14,25 +14,7 @@
 #include "../../../../models/lesson/lesson_data.hpp"
 
 namespace lms_service {
-
-const std::string USER_TICKET_HEADER_NAME = "X-Ya-User-Ticket";
-
 namespace {
-
-std::optional<std::string> GetSessionInfo(
-    userver::storages::postgres::ClusterPtr pg_cluster,
-    const userver::server::http::HttpRequest& request) 
-    {
-
-  if (!request.HasHeader(USER_TICKET_HEADER_NAME)) {
-    return std::nullopt;
-  }
-
-  Token token;
-  token.data = request.GetHeader(USER_TICKET_HEADER_NAME);
-  return authentication::GetUserIdByToken(token, pg_cluster);
-}
-
 class LessonCatalogView final
     : public userver::server::handlers::HttpHandlerBase {
  public:
@@ -53,8 +35,8 @@ class LessonCatalogView final
     lms_service::LessonData data;
     data.title = request.GetArg("title");
     data.description = request.GetArg("description");
-    auto token_id = GetSessionInfo(pg_cluster_, request);
-
+    auto token_id = authentication::GetSessionInfo(pg_cluster_, request);
+    //TODO: replace std::optional to std::exception structure
     if (!token_id.has_value()) 
     {
       auto& response = request.GetHttpResponse();
