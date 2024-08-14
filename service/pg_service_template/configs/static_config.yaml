@@ -150,10 +150,10 @@ components_manager:
             method: GET
             task_processor: main-task-processor
 
-        # handler-v1-lesson:
-        #     path: /v1/lesson/{id}
-        #     method: GET,PUT,DELETE
-        #     task_processor: main-task-processor
+        handler-v1-lesson:
+            path: /v1/lesson/{id}
+            method: GET,PUT,DELETE
+            task_processor: main-task-processor
 
         # handler-v1-lesson-get-materials:
         #     path: /v1/lesson/{id}/materials
