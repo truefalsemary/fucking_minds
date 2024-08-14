@@ -26,6 +26,10 @@ userver_setup_environment()
 
 # Common sources
 add_library(${PROJECT_NAME}_objs OBJECT
+    src/models/enums/user_type.hpp
+    src/models/enums/user_role.hpp
+    src/models/enums/status_code.hpp
+
     src/components/postgres_components/postgres_components.hpp
     src/components/postgres_components/postgres_components.cpp
 
@@ -61,6 +65,9 @@ add_library(${PROJECT_NAME}_objs OBJECT
     src/views/v1/authentication/login/login.cpp
     src/views/v1/authentication/register/register.hpp
     src/views/v1/authentication/register/register.cpp
+
+    src/views/v1/catalogs/lessons/get_lessons.hpp
+    src/views/v1/catalogs/lessons/get_lessons.cpp
 )
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver::postgresql)
 

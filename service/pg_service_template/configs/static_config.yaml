@@ -145,10 +145,10 @@ components_manager:
             method: POST
             task_processor: main-task-processor
 
-        # handler-v1-get-lessons:
-        #     path: /v1/lessons
-        #     method: GET
-        #     task_processor: main-task-processor
+        handler-v1-get-lessons:
+            path: /v1/lessons
+            method: GET
+            task_processor: main-task-processor
 
         # handler-v1-lesson:
         #     path: /v1/lesson/{id}
