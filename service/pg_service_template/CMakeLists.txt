@@ -32,6 +32,12 @@ add_library(${PROJECT_NAME}_objs OBJECT
     src/components/views.hpp
     src/models/auth/token_model.hpp
     src/models/auth/token_model.cpp
+    src/models/user/user_session.hpp
+    src/models/user/user_session.cpp
+    src/models/user/user_data.hpp
+    src/models/user/user_data.cpp
+    src/models/user/user.hpp
+    src/models/user/user.cpp
     src/controllers/authentication/auth_controller.hpp
     src/controllers/authentication/auth_controller.cpp
     src/controllers/catalogs/course_catalog_controller.hpp
