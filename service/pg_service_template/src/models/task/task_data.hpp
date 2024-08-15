@@ -2,7 +2,7 @@
 
 #include <string>
 #include <userver/formats/json/value_builder.hpp>
-
+#include <userver/formats/serialize/common_containers.hpp>
 namespace lms_service {
 
 struct TaskData {

@@ -195,10 +195,10 @@ components_manager:
             method: POST
             task_processor: main-task-processor
 
-        # handler-v1-get-tasks:        
-        #     path: /v1/tasks
-        #     method: GET
-        #     task_processor: main-task-processor
+        handler-v1-get-tasks:        
+            path: /v1/tasks
+            method: GET
+            task_processor: main-task-processor
 
         # handler-v1-task: 
         #     path: /v1/task/{id}

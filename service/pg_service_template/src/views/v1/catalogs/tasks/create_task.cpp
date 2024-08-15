@@ -13,7 +13,7 @@
 #include "../../../../models/auth/token_model.hpp"
 #include "../../../../models/task/task.hpp"
 #include "../../../../models/task/task_data.hpp"
-
+#include "../../../../models/serialization/serialization.hpp"
 namespace lms_service {
 
 namespace {
@@ -42,7 +42,7 @@ class CreateTaskView final : public userver::server::handlers::HttpHandlerBase {
                 if(!token_id.has_value()) {
                     auto& response = request.GetHttpResponse();
                     response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
-                    return {};
+                    return std::string("Bad auth token");
                 }
                 data.author_id = token_id.value();
                 if(!data.empty()) {
