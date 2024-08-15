@@ -6,7 +6,6 @@
 #include <userver/server/handlers/http_handler_base.hpp>
 #include <userver/storages/postgres/cluster.hpp>
 #include <userver/storages/postgres/component.hpp>
-#include <userver/utils/assert.hpp>
 
 #include "../../../../controllers/authentification/auth_controller.hpp"
 #include "../../../../controllers/catalogs/course_catalog_controller.hpp"
