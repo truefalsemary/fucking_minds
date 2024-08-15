@@ -145,15 +145,15 @@ components_manager:
             method: POST
             task_processor: main-task-processor
 
-        # handler-v1-get-lessons:
-        #     path: /v1/lessons
-        #     method: GET
-        #     task_processor: main-task-processor
+        handler-v1-get-lessons:
+            path: /v1/lessons
+            method: GET
+            task_processor: main-task-processor
 
-        # handler-v1-lesson:
-        #     path: /v1/lesson/{id}
-        #     method: GET,PUT,DELETE
-        #     task_processor: main-task-processor
+        handler-v1-lesson:
+            path: /v1/lesson/{id}
+            method: GET,PUT,DELETE
+            task_processor: main-task-processor
 
         # handler-v1-lesson-get-materials:
         #     path: /v1/lesson/{id}/materials
@@ -210,7 +210,7 @@ components_manager:
         #     method: POST
         #     task_processor: main-task-processor    
 
-        postgres-db-1:
+        lms_service_db_1:
             dbconnection: $dbconnection
             dbconnection#env: DB_CONNECTION
             blocking_task_processor: fs-task-processor

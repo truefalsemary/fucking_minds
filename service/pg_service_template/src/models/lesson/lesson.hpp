@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 #include <userver/formats/json/value_builder.hpp>
 
 namespace lms_service {
@@ -17,6 +18,10 @@ struct Lesson {
 };
 userver::formats::json::Value Serialize(
     const Lesson& lesson,
+    userver::formats::serialize::To<userver::formats::json::Value>);
+
+userver::formats::json::Value Serialize(
+    const std::vector<Lesson>& lesson,
     userver::formats::serialize::To<userver::formats::json::Value>);
 
 }  // namespace lms_service

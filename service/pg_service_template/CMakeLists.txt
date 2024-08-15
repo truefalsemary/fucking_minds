@@ -26,12 +26,24 @@ userver_setup_environment()
 
 # Common sources
 add_library(${PROJECT_NAME}_objs OBJECT
+
+    src/utils/utils.hpp
+    src/models/enums/user_type.hpp
+    src/models/enums/user_role.hpp
+    src/models/enums/status_code.hpp
+
     src/components/postgres_components/postgres_components.hpp
     src/components/postgres_components/postgres_components.cpp
 
     src/components/views.hpp
     src/models/auth/token_model.hpp
     src/models/auth/token_model.cpp
+    src/models/user/user_session.hpp
+    src/models/user/user_session.cpp
+    src/models/user/user_data.hpp
+    src/models/user/user_data.cpp
+    src/models/user/user.hpp
+    src/models/user/user.cpp
     src/controllers/authentication/auth_controller.hpp
     src/controllers/authentication/auth_controller.cpp
     src/controllers/catalogs/course_catalog_controller.hpp
@@ -55,6 +67,11 @@ add_library(${PROJECT_NAME}_objs OBJECT
     src/views/v1/authentication/login/login.cpp
     src/views/v1/authentication/register/register.hpp
     src/views/v1/authentication/register/register.cpp
+
+    src/views/v1/catalogs/lessons/get_lessons.hpp
+    src/views/v1/catalogs/lessons/get_lessons.cpp
+    src/views/v1/catalogs/lessons/lesson_by_id_view.hpp
+    src/views/v1/catalogs/lessons/lesson_by_id_view.cpp
 )
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver::postgresql)
 

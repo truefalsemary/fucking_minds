@@ -5,6 +5,7 @@ info:
 servers:
     -   url: http://localhost:8080/
 tags:
+    - name: User administration
     - name: Auth
     - name: Courses catalog
     - name: Courses administration
@@ -14,39 +15,79 @@ tags:
     - name: Submissions
 components:
     schemas:
-        role_enum:
+        user_role:
             type: string
             enum:
                 - student
                 - teacher
                 - admin
+        user_type:
+            type: string
+            enum:
+                - anonymous
+                - general
+                - super
+        status_code:
+            type: string
+            enum:
+                - not_sent
+                - submitted
+                - in_review
+                - reviewed
+                - completed
+        user_data:
+            type: object
+            properties:
+                type:
+                    description: user type
+                    $ref: '#/components/schemas/user_role'
+                name:
+                    description: user name
+                    type: string
+                surname:
+                    description: user surname
+                    type: string
+                middle_name:
+                    description: user middle_name
+                    type: string
+            required:
+                - type 
+                - name
+                - surname
+                - middle_name
+        user:
+            type: object
+            properties:
+                id: 
+                    description: user id
+                    type: string
+                type:
+                    description: user type
+                    $ref: '#/components/schemas/user_role'
+                name:
+                    description: user name
+                    type: string
+                surname:
+                    description: user surname
+                    type: string
+                middle_name:
+                    description: user middle_name
+                    type: string
+            required:
+                - id
+                - type
+                - name
+                - surname
+                - middle_name
         student:
-            type: object
-            properties:
-                id:
-                    description: student identifier
-                    type: string
-                full_name:
-                    description: student full name
-                    type: string
+            allOf:
+                - $ref: '#/components/schemas/user'
         teacher:
-            type: object
-            properties:
-                id:
-                    description: teacher identifier
-                    type: string
-                full_name:
-                    description: student full name
-                    type: string
+            allOf:
+                - $ref: '#/components/schemas/user'
         admin:
-            type: object
-            properties:
-                id:
-                    description: admin identifier
-                    type: string
-                full_name:
-                    description: student full name
-                    type: string
+            allOf:
+                - $ref: '#/components/schemas/user'
         course:
             type: object
             properties:
@@ -228,6 +269,30 @@ paths:
                                 properties:
                                     id:
                                         type: string
+    /v1/users:
+        put:
+            description: update already existed user
+            tags: 
+                - User administration
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/user_data'
+            security:
+                -   UserTicketAuth: [ ]
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/user'
+                '400':
+                    description: invalid input parameters
+                '401':
+                    $ref: "#/components/responses/UnauthorizedError"
     /v1/course/create:
         post:
             description: creates new course
@@ -318,7 +383,7 @@ paths:
                                     roles_array:
                                         type: array
                                         items:
-                                            $ref: '#/components/schemas/role_enum'
+                                            $ref: '#/components/schemas/user_role'
                 '401':
                     $ref: "#/components/responses/UnauthorizedError"                                            
                 '404':
