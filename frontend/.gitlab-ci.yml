@@ -46,6 +46,8 @@ deploy_web:
     # Copy actual docker-compose.yaml to prod server
     - scp ./docker-compose.yaml $PROD_USERNAME@$PROD_HOST:/home/$PROD_USERNAME
 
+    - scp -r ./nginx $PROD_USERNAME@$PROD_HOST:/home/$PROD_USERNAME
+
     # and run docker compose up for new image (sent deploy signal to prod server)
     - ssh $PROD_USERNAME@$PROD_HOST 'docker compose up'
 
