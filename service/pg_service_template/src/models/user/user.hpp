@@ -11,7 +11,4 @@ struct User {
   std::string surname;
   std::string middle_name;
 };
-userver::formats::json::Value Serialize(
-    const User& user_data,
-    userver::formats::serialize::To<userver::formats::json::Value>);
 }  // namespace lms_service

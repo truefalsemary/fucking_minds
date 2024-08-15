@@ -13,8 +13,4 @@ struct LessonData {
     return title.empty() || description.empty() || author_id.empty();
   }
 };
-userver::formats::json::Value Serialize(
-    const LessonData& lesson_data,
-    userver::formats::serialize::To<userver::formats::json::Value>);
-
 }  // namespace lms_service

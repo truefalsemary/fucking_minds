@@ -11,6 +11,7 @@
 #include "../../../../controllers/catalogs/course_catalog_controller.hpp"
 #include "../../../../models/auth/token_model.hpp"
 #include "../../../../models/courses/course_data.hpp"
+#include "../../../../models/serialization/serialization.hpp"
 
 namespace lms_service {
 
@@ -33,17 +34,25 @@ class CourseCatalogView final
   std::string HandleRequestThrow(
       const userver::server::http::HttpRequest& request,
       userver::server::request::RequestContext&) const override {
-    const auto& title = request.GetArg("title");
-    const auto& start_ts = request.GetArg("start_ts");
-    const auto& end_ts = request.GetArg("end_ts");
-    const auto& description = request.GetArg("description");
-
-    lms_service::CourseData course_data{title, start_ts, end_ts, description};
-
-    // auto course_model =
-    // lms_service::CourseCatalogController::CreateCourse(course_data,
-    // pg_cluster_);
-    return "123";
+    lms_service::CourseData data;
+    data.title = request.GetArg("title");
+    data.description = request.GetArg("description");
+    auto token_id = authentication::GetSessionInfo(pg_cluster_, request);
+    // TODO: replace std::optional to std::exception structure
+    if (!token_id.has_value()) {
+      auto& response = request.GetHttpResponse();
+      response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
+      return {};
+    }
+    data.author_id = token_id.value();
+    if (!data.empty()) {
+      auto result = lms_service::course_catalog_controller::CreateCourse(data, pg_cluster_);
+      return ToString(
+          userver::formats::json::ValueBuilder{result}.ExtractValue());
+    }
+    auto& response = request.GetHttpResponse();
+    response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
+    return {};
   }
 
   userver::storages::postgres::ClusterPtr pg_cluster_;

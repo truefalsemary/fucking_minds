@@ -1,13 +1,7 @@
-#pragma once
+#include "course_data.hpp"
 
 #include <string>
 #include <userver/formats/json/value_builder.hpp>
 
 namespace lms_service {
-
-struct UserData {
-  std::string name;
-  std::string surname;
-  std::string middle_name;
-};
 }  // namespace lms_service
