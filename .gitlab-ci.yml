@@ -3,7 +3,7 @@ include:
   - local: lms_front/.gitlab-ci.yml
     rules:
       - changes:
-        - lms_front/*
+          - lms_front/*
 
   # Backend CI handler
   # - local: yourbackend_entry_dir/.gitlab-ci.yml
@@ -16,6 +16,7 @@ include:
 #
 # This error occured when includes .gitlab-ci.yml without runnable jobs
 dummy_job:
+  stage: .post
   rules:
     - when: never
   script:
