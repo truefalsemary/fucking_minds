@@ -13,4 +13,16 @@ std::string parseToString(const UserType& user) {
       return "";
   }
 }
+
+UserType parseTypeFromString(const std::string& user_role) {
+  if (user_role == "anonymous")
+    return UserType::kAnonymous;
+  else if (user_role == "general")
+    return UserType::kGeneral;
+  else if (user_role == "super")
+    return UserType::kSuper;
+  else
+    return UserType::kAnonymous;
+}
+
 }  // namespace lms_service

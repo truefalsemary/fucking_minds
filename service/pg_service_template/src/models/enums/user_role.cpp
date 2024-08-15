@@ -15,5 +15,15 @@ std::string parseToString(const UserRole& user) {
       return "";
   }
 }
+UserRole parseRoleFromString(const std::string& user_role) {
+  if(user_role == "student")
+    return UserRole::kStudent;
+  else if(user_role == "teacher")
+    return UserRole::kStudent;
+  else if(user_role == "admin")
+    return UserRole::kAdmin;
+  else
+    return UserRole::kStudent;
+}
 } // namespace lms_service
 

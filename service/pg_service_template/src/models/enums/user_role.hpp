@@ -7,7 +7,8 @@
 namespace lms_service{
 enum class UserRole { kStudent, kTeacher, kAdmin };
 
-std::string parseToString(const UserRole& user);
+std::string parseToString(const UserRole& user_role);
+UserRole parseRoleFromString(const std::string& user_role);
 }
 template <>
 struct userver::storages::postgres::io::CppToUserPg<lms_service::UserRole> {
@@ -15,8 +16,8 @@ struct userver::storages::postgres::io::CppToUserPg<lms_service::UserRole> {
   static constexpr USERVER_NAMESPACE::utils::TrivialBiMap enumerators =
       [](auto selector) {
         return selector()
-            .Case("student", lms_service::UserType::kStudent)
-            .Case("teacher", lms_service::UserType::kTeacher)
-            .Case("admin", lms_service::UserType::kAdmin);
+            .Case("student", lms_service::UserRole::kStudent)
+            .Case("teacher", lms_service::UserRole::kTeacher)
+            .Case("admin", lms_service::UserRole::kAdmin);
       };
 };

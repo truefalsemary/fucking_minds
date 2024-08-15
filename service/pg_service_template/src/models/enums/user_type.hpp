@@ -7,6 +7,8 @@ namespace lms_service
 {
 enum class UserType { kAnonymous, kGeneral, kSuper };
 std::string parseToString(const UserType& user);
+UserType parseTypeFromString(const std::string& user_role);
+
 }
 template <>
 struct userver::storages::postgres::io::CppToUserPg<lms_service::UserType> {

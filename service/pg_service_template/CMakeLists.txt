@@ -31,7 +31,7 @@ add_library(${PROJECT_NAME}_objs OBJECT
     src/models/enums/user_type.hpp
     src/models/enums/user_type.cpp
     src/models/enums/user_role.hpp
-    src/models/enums/user_type.cpp
+    src/models/enums/user_role.cpp
     src/models/enums/status_code.hpp
 
     src/components/postgres_components/postgres_components.hpp
@@ -80,6 +80,8 @@ add_library(${PROJECT_NAME}_objs OBJECT
 
     src/views/v1/users/user_view.hpp
     src/views/v1/users/user_view.cpp
+    src/views/v1/users/user_type_change_view.hpp
+    src/views/v1/users/user_type_change_view.cpp
 )
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver::postgresql)
 
