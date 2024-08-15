@@ -1,8 +1,9 @@
 services:
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+    image: cr.yandex/crp08k5ngpk2phfn7dum/frontend
+    # build:
+    #   context: ./frontend
+    #   dockerfile: Dockerfile
     volumes:
       # Frontend MUST build static files and put them here
       - frontend_static:/usr/share/nginx/html
