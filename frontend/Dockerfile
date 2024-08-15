@@ -12,12 +12,12 @@ RUN make generate
 # start flutter build for web release
 RUN flutter build web --release
 
+# switch to lightweight image which will contain only release files
+FROM alpine
+
 # copy artifact to nginx specific folder
 RUN mkdir -p /usr/share/nginx/html
-COPY build/web /usr/share/nginx/html
-
-# cleanup (remove sources) for minimal image size
-RUN rm -rf /app
+COPY --from=build /app/build/web /usr/share/nginx/html
 
 # mark resulted path as volume 
 # (
