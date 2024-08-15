@@ -38,9 +38,6 @@ components:
         user_data:
             type: object
             properties:
-                type:
-                    description: user type
-                    $ref: '#/components/schemas/user_role'
                 name:
                     description: user name
                     type: string
