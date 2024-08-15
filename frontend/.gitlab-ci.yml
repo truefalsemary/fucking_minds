@@ -33,6 +33,7 @@ flutter_analyze:
 # - PROD_HOST
 
 deploy_web:
+  image: docker
   stage: deploy
   when: manual
   interruptible: false
