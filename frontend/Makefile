@@ -20,3 +20,9 @@ all:
 	make fix
 	make build_models
 	make l10n
+
+build_web:
+	make deps
+	make build_models
+	make l10n
+	flutter build web --release
