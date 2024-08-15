@@ -3,12 +3,13 @@
 #include <string>
 #include <vector>
 #include <userver/formats/json/value_builder.hpp>
+#include <userver/formats/serialize/common_containers.hpp>
 
-namespace lms_service {
-
-template <class T>
-userver::formats::json::Value Serialize(
-  const T& obj, userver::formats::serialize::To<userver::formats::json::Value>) {
+    namespace lms_service {
+  template <class T>
+  userver::formats::json::Value Serialize(
+      const T& obj,
+      userver::formats::serialize::To<userver::formats::json::Value>) {
     userver::formats::json::ValueBuilder item;
     data_pending(item, obj);
 
