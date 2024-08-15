@@ -1,11 +1,12 @@
 include:
-  # Frontend CI handler 
+  # Frontend CI handler
   - local: lms_front/.gitlab-ci.yml
     rules:
+      - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       - changes:
           - lms_front/*
 
-  # Backend CI handler 
+  # Backend CI handler
   # - local: yourbackend_entry_dir/.gitlab-ci.yml
   #   rules:
   #     - changes:
