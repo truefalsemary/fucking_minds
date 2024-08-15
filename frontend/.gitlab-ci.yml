@@ -1,0 +1,66 @@
+default:
+  image: ghcr.io/cirruslabs/flutter
+
+# All the CI stages
+stages:
+  - analyze # Health check
+  - deploy # Upload to prod server
+
+flutter_analyze:
+  stage: analyze
+  interruptible: true
+
+  before_script:
+    - cd frontend 
+    - flutter clean
+    - flutter pub get
+  script:
+    - dart fix --dry-run
+    - dart fix --apply
+    - flutter analyze --fatal-warnings --no-fatal-infos
+  only:
+    refs:
+      - merge_requests
+
+  tags:
+    - flutter_analyze
+    - ci
+
+# To run this job you should define the following variables:
+# - PROD_USERNAME
+# - PROD_HOST
+# - SSH_PRIVATE_KEY
+deploy_web:
+  stage: deploy
+  when: manual
+  interruptible: false
+
+  before_script:
+    # Make sure that ssh client is configured
+    # and the private key is available
+    - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+
+    # Add production server to known hosts
+    # todo: try this later to no bypassing known hosts check
+    # - ssh-keyscan -H $PROD_HOST >> ~/.ssh/known_hosts
+
+  script:
+    - cd frontend 
+    - flutter build web --release
+
+    # Bypassing known hosts upload
+    - scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./build/web/* $PROD_USERNAME@$PROD_HOST:/var/www/lms-front/web
+
+    # Copy the web build to production server
+    # If known hosts check is bypassed, this will fail?
+    # - scp -r ./build/web/* $PROD_USERNAME@$PROD_HOST:/var/www/lms-front/web
+
+    # Restart the web server (needs sudo rights or sudoers groups)
+    # - ssh $PROD_USERNAME@$PROD_HOST 'sudo systemctl restart nginx'
+  tags:
+    - deploy
+    - ci

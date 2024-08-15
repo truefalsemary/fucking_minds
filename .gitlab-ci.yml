@@ -1,0 +1,13 @@
+include:
+  # Frontend CI handler
+  - local: frontend/.gitlab-ci.yml
+    rules:
+      - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      - changes:
+          - frontend/*
+
+  # Backend CI handler
+  # - local: yourbackend_entry_dir/.gitlab-ci.yml
+  #   rules:
+  #     - changes:
+  #         - yourbackend_entry_dir/*
