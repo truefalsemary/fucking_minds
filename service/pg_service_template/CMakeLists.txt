@@ -31,8 +31,9 @@ add_library(${PROJECT_NAME}_objs OBJECT
 
     src/components/views.hpp
     src/models/auth/token_model.hpp
-    src/controllers/authentification/auth_controller.hpp
-    src/controllers/authentification/auth_controller.cpp
+    src/models/auth/token_model.cpp
+    src/controllers/authentication/auth_controller.hpp
+    src/controllers/authentication/auth_controller.cpp
     src/controllers/catalogs/course_catalog_controller.hpp
     src/controllers/catalogs/course_catalog_controller.cpp
     src/views/v1/catalogs/courses/create_course.hpp
@@ -46,6 +47,14 @@ add_library(${PROJECT_NAME}_objs OBJECT
     src/controllers/catalogs/lesson_catalog_controller.cpp
     src/views/v1/catalogs/lessons/create_lesson.hpp
     src/views/v1/catalogs/lessons/create_lesson.cpp
+
+    src/models/sign/sign_data.hpp
+    src/controllers/authentication/sign_controller.hpp
+    src/controllers/authentication/sign_controller.cpp
+    src/views/v1/authentication/login/login.hpp
+    src/views/v1/authentication/login/login.cpp
+    src/views/v1/authentication/register/register.hpp
+    src/views/v1/authentication/register/register.cpp
 )
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver::postgresql)
 

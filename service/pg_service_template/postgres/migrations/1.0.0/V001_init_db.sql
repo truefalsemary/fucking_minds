@@ -15,11 +15,11 @@ CREATE TYPE StatusCode AS ENUM (
 
 CREATE TABLE IF NOT EXISTS Users (
     user_id TEXT PRIMARY KEY DEFAULT uuid_generate_v4(),
-    current_user_type UserType NOT NULL,
+    current_user_type UserType NOT NULL DEFAULT 'anonymous',
     user_email VARCHAR(255) NOT NULL UNIQUE,
-    user_password BYTEA NOT NULL,
-    user_name VARCHAR(255) NOT NULL,
-    user_surname VARCHAR(255) NOT NULL,
+    user_password TEXT NOT NULL,
+    user_name VARCHAR(255) DEFAULT NULL,
+    user_surname VARCHAR(255) DEFAULT NULL,
     user_middle_name VARCHAR(255) DEFAULT NULL
 );
 

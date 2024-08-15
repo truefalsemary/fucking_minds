@@ -1,14 +1,11 @@
-#include "lesson.hpp"
+#include "token_model.hpp"
 
 namespace lms_service {
 userver::formats::json::Value Serialize(
-    const Lesson& lesson,
+    const Token& token,
     userver::formats::serialize::To<userver::formats::json::Value>) {
   userver::formats::json::ValueBuilder item;
-  item["id"] = lesson.lesson_id;
-  item["title"] = lesson.title;
-  item["description"] = lesson.description;
-  item["author_id"] = lesson.author_id;
+  item["id"] = token.data;
   return item.ExtractValue();
 }
 }  // namespace lms_service

@@ -105,7 +105,7 @@ docker-stop:
 .PHONY: docker-clean
 docker-clean:
 	$(DOCKER_COMPOSE) down -v
-	rm -rf ./.pgdata
+	sudo rm -rf ./.pgdata
 
 # Combine stop and clean targets if needed
 .PHONY: docker-stop-and-clean

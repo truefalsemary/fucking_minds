@@ -1,9 +1,9 @@
 #pragma once
+
 #include <string>
 #include <userver/formats/json/value_builder.hpp>
 
-namespace lms_service 
-{
+namespace lms_service {
 struct Lesson {
   std::string lesson_id;
   std::string title;
@@ -15,9 +15,8 @@ struct Lesson {
            author_id.empty();
   }
 };
-  userver::formats::json::Value Serialize(
-      const Lesson& lesson,
-       userver::formats::serialize::To<userver::formats::json::Value>);
-
+userver::formats::json::Value Serialize(
+    const Lesson& lesson,
+    userver::formats::serialize::To<userver::formats::json::Value>);
 
 }  // namespace lms_service

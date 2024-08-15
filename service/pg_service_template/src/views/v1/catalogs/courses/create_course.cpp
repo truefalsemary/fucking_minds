@@ -7,7 +7,7 @@
 #include <userver/storages/postgres/cluster.hpp>
 #include <userver/storages/postgres/component.hpp>
 
-#include "../../../../controllers/authentification/auth_controller.hpp"
+#include "../../../../controllers/authentication/auth_controller.hpp"
 #include "../../../../controllers/catalogs/course_catalog_controller.hpp"
 #include "../../../../models/auth/token_model.hpp"
 #include "../../../../models/courses/course_data.hpp"
