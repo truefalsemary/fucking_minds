@@ -4,6 +4,7 @@
 
 namespace lms_service {
 
-void AppendCreateLessonView(userver::components::ComponentList& component_list);
+void AppendGetLessonsView(
+    userver::components::ComponentList& component_list);
 
 }  // namespace lms_service

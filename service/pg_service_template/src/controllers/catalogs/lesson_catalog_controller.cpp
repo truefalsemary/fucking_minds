@@ -7,6 +7,7 @@ namespace lms_service {
 namespace lesson_catalog_controller {
 Lesson createLesson(const lms_service::LessonData& lesson_data,
                     userver::storages::postgres::ClusterPtr pg_cluster_) {
+  //TODO: add author status validation
   auto result = pg_cluster_->Execute(
       userver::storages::postgres::ClusterHostType::kMaster,
       "INSERT INTO Lessons(lesson_title, lesson_description, author_id) "
@@ -17,30 +18,54 @@ Lesson createLesson(const lms_service::LessonData& lesson_data,
   return result.AsSingleRow<Lesson>(userver::storages::postgres::kRowTag);
 }
 
-// userver::storages::postgres::ResultSet getLessons(
-//     userver::storages::postgres::ClusterPtr pg_cluster_) {
-//   return pg_cluster_->Execute(
-//       userver::storages::postgres::ClusterHostType::kMaster,
-//       "SELECT * FROM Lessons");
-// }
+std::vector<Lesson> getLessons(
+    userver::storages::postgres::ClusterPtr pg_cluster_) 
+    {
+  auto result = pg_cluster_->Execute(
+      userver::storages::postgres::ClusterHostType::kMaster,
+      "SELECT * FROM Lessons");
+  return result.AsContainer<std::vector<Lesson>>(
+      userver::storages::postgres::kRowTag);
+}
 
-// userver::storages::postgres::ResultSet getLessonByID(
-//     const std::string& id,
-//     userver::storages::postgres::ClusterPtr pg_cluster_) {
-//   return pg_cluster_->Execute(
-//       userver::storages::postgres::ClusterHostType::kMaster,
-//       "SELECT * FROM Lessons WHERE lesson_id = $1", id);
-// }
+std::optional<Lesson> getLessonByID(
+    userver::storages::postgres::ClusterPtr pg_cluster_,
+    const std::string& id) {
+  auto result = pg_cluster_->Execute(
+      userver::storages::postgres::ClusterHostType::kMaster,
+      "SELECT * FROM Lessons WHERE lesson_id = $1", id);
 
-// userver::storages::postgres::ResultSet updateLessonByID(
-//     const std::string& id, const lms_service::LessonData& lesson_data,
-//     userver::storages::postgres::ClusterPtr pg_cluster_) {
-//   return pg_cluster_->Execute(
-//       userver::storages::postgres::ClusterHostType::kMaster,
-//       "UPDATE Lessons "
-//       " SET title = $1, description = $2 "
-//       "WHERE lesson_id = $3",
-//       lesson_data.title, lesson_data.description, id);
-// }
+  return result.AsOptionalSingleRow<Lesson>(
+      userver::storages::postgres::kRowTag);
+}
+
+std::optional<Lesson> updateLessonByID(
+    const std::string& id, const lms_service::LessonData& lesson_data,
+    userver::storages::postgres::ClusterPtr pg_cluster_) {
+  auto result = pg_cluster_->Execute(
+      userver::storages::postgres::ClusterHostType::kMaster,
+      "UPDATE Lessons "
+      " SET lesson_title = $1, lesson_description = $2 "
+      "WHERE lesson_id = $3 AND author_id = $4 "
+      "RETURNING * ",
+      lesson_data.title, lesson_data.description, id, lesson_data.author_id);
+
+  return result.AsOptionalSingleRow<Lesson>(
+      userver::storages::postgres::kRowTag);
+}
+
+std::optional<std::string> deleteLessonByID(
+    const std::string& id, const std::string& author_id,
+    userver::storages::postgres::ClusterPtr pg_cluster_)
+    {
+  auto result = pg_cluster_->Execute(
+      userver::storages::postgres::ClusterHostType::kMaster,
+      "DELETE FROM Lessons "
+      "WHERE lesson_id = $1 AND author_id = $2 "
+      "RETURNING lesson_id",
+      id, author_id);
+
+  return result.AsOptionalSingleRow<std::string>();
+    }
 };  // namespace lesson_catalog_controller
 }  // namespace lms_service

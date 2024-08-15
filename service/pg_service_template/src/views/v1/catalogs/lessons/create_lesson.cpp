@@ -15,18 +15,18 @@
 
 namespace lms_service {
 namespace {
-class LessonCatalogView final
+class CreateLessonView final
     : public userver::server::handlers::HttpHandlerBase {
  public:
   static constexpr std::string_view kName = "handler-v1-lesson-create";
 
-  LessonCatalogView(
+  CreateLessonView(
       const userver::components::ComponentConfig& config,
       const userver::components::ComponentContext& component_context)
       : HttpHandlerBase(config, component_context),
         pg_cluster_(
             component_context
-                .FindComponent<userver::components::Postgres>("postgres-db-1")
+                .FindComponent<userver::components::Postgres>("lms_service_db_1")
                 .GetCluster()) {}
 
   std::string HandleRequestThrow(
@@ -58,9 +58,9 @@ class LessonCatalogView final
 
 }  // namespace
 
-void AppendLessonCatalogView(
+void AppendCreateLessonView(
     userver::components::ComponentList& component_list) {
-  component_list.Append<LessonCatalogView>();
+  component_list.Append<CreateLessonView>();
 }
 
 }  // namespace lms_service
