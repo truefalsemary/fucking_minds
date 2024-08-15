@@ -13,4 +13,7 @@ struct User {
   std::string surname;
   std::string middle_name;
 };
+
+void data_pending(
+    userver::formats::json::ValueBuilder& item, const User& user);
 }  // namespace lms_service

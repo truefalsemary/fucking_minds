@@ -10,4 +10,6 @@ struct UserSession {
   std::string email;
   std::string password;
 };
+void data_pending(userver::formats::json::ValueBuilder& item,
+                  const UserSession& user_session);
 }  // namespace lms_service

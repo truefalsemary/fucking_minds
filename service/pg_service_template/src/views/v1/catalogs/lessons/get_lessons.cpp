@@ -37,7 +37,7 @@ class GetLessonsView final
     // TODO: replace std::optional to std::exception structure
     if (!token_id.has_value()) {
       auto& response = request.GetHttpResponse();
-      response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
+      response.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
       return {};
     }
     auto result = lesson_catalog_controller::getLessons(pg_cluster_);

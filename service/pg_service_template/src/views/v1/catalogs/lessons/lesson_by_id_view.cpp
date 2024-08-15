@@ -21,11 +21,16 @@ std::string get_handler(userver::storages::postgres::ClusterPtr pg_cluster,
     const userver::server::http::HttpRequest& request) 
     {
   std::string id = request.GetPathArg("id");
+  if (id.empty()) {
+    auto& response = request.GetHttpResponse();
+    response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
+    return {};
+  }
   auto result = lesson_catalog_controller::getLessonByID(pg_cluster, id);
   if (!result.has_value()) 
   {
     auto& response = request.GetHttpResponse();
-    response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
+    response.SetStatus(userver::server::http::HttpStatus::kNotFound);
     return {};
   }
   return ToString(
@@ -36,11 +41,17 @@ std::string delete_handler(userver::storages::postgres::ClusterPtr pg_cluster,
                             const userver::server::http::HttpRequest& request,
                             const std::string& token_id) {
   std::string id = request.GetPathArg("id");
+  if(id.empty())
+  {
+    auto& response = request.GetHttpResponse();
+    response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
+    return {};
+  }
   auto result = lesson_catalog_controller::deleteLessonByID(id, token_id, pg_cluster);
   if (!result.has_value()) 
   {
     auto& response = request.GetHttpResponse();
-    response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
+    response.SetStatus(userver::server::http::HttpStatus::kNotFound);
     return {};
   }
   return ToString(
@@ -55,11 +66,17 @@ std::string update_handler(userver::storages::postgres::ClusterPtr pg_cluster,
   data.description = request.GetArg("description");
   data.author_id = token_id;
   std::string id = request.GetPathArg("id");
+  if(data.empty())
+  {
+    auto& response = request.GetHttpResponse();
+    response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
+    return {};
+  }
   auto result = lesson_catalog_controller::updateLessonByID(id, data, pg_cluster);
 
   if (!result.has_value()) {
     auto& response = request.GetHttpResponse();
-    response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
+    response.SetStatus(userver::server::http::HttpStatus::kNotFound);
     return {};
   }
   return ToString(
@@ -105,7 +122,7 @@ class LessonById final : public userver::server::handlers::HttpHandlerBase {
     // TODO: replace std::optional to std::exception structure
     if (!token_id.has_value()) {
       auto& response = request.GetHttpResponse();
-      response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
+      response.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
       return {};
     }
     return execute_handler(pg_cluster_, request, token_id.value());

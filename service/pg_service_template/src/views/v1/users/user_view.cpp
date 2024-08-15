@@ -11,7 +11,7 @@
 #include "../../../controllers/users/user_controller.hpp"
 #include "../../../models/auth/token_model.hpp"
 #include "../../../models/user/user_data.hpp"
-#include <userver/formats/serialize/common_containers.hpp>
+#include "../../../models/serialization/serialization.hpp"
 
     namespace lms_service {
   namespace {
@@ -38,14 +38,19 @@
       // TODO: replace std::optional to std::exception structure
       if (!token_id.has_value()) {
         auto& response = request.GetHttpResponse();
-        response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
+        response.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
         return {};
       }
 
       auto result =
           user_controller::updateUserNameById(data, token_id.value(), pg_cluster_);
+      if (!result.has_value()) {
+        auto& response = request.GetHttpResponse();
+        response.SetStatus(userver::server::http::HttpStatus::kNotFound);
+        return {};
+      }
       return ToString(
-          userver::formats::json::ValueBuilder{result}.ExtractValue());
+          userver::formats::json::ValueBuilder{result.value()}.ExtractValue());
     }
 
     userver::storages::postgres::ClusterPtr pg_cluster_;
