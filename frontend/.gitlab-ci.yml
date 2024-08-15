@@ -35,6 +35,7 @@ deploy_web:
     - ls yandex_cloud/ || curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
     - yc config set service-account-key $YC_AUTHORIZED_KEYS
     - yc container registry configure-docker
+    - ssh-keyscan -H $PROD_HOST >> ~/.ssh/known_hosts
 
   # TODO: move id of registry to the secrets
   script:
