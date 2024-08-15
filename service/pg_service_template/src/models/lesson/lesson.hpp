@@ -16,12 +16,6 @@ struct Lesson {
            author_id.empty();
   }
 };
-userver::formats::json::Value Serialize(
-    const Lesson& lesson,
-    userver::formats::serialize::To<userver::formats::json::Value>);
-
-userver::formats::json::Value Serialize(
-    const std::vector<Lesson>& lesson,
-    userver::formats::serialize::To<userver::formats::json::Value>);
-
+void data_pending(
+  userver::formats::json::ValueBuilder& item, const Lesson& lesson);
 }  // namespace lms_service

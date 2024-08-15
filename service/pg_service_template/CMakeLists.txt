@@ -38,6 +38,9 @@ add_library(${PROJECT_NAME}_objs OBJECT
     src/components/postgres_components/postgres_components.cpp
 
     src/components/views.hpp
+    src/models/serialization/serialization.hpp
+    src/models/serialization/serialization.cpp
+    src/models/courses/course.cpp
     src/models/auth/token_model.hpp
     src/models/auth/token_model.cpp
     src/models/user/user_session.hpp
@@ -46,6 +49,10 @@ add_library(${PROJECT_NAME}_objs OBJECT
     src/models/user/user_data.cpp
     src/models/user/user.hpp
     src/models/user/user.cpp
+    src/models/courses/course_data.hpp
+    src/models/courses/course_data.cpp
+    src/models/courses/course.hpp
+    src/models/courses/course.cpp
     src/controllers/authentication/auth_controller.hpp
     src/controllers/authentication/auth_controller.cpp
     src/controllers/catalogs/course_catalog_controller.hpp

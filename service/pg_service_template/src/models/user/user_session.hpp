@@ -10,7 +10,4 @@ struct UserSession {
   std::string email;
   std::string password;
 };
-userver::formats::json::Value Serialize(
-    const UserSession& user_session,
-    userver::formats::serialize::To<userver::formats::json::Value>);
 }  // namespace lms_service

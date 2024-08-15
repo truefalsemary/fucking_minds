@@ -12,6 +12,7 @@
 #include "../../../../models/auth/token_model.hpp"
 #include "../../../../models/lesson/lesson.hpp"
 #include "../../../../models/lesson/lesson_data.hpp"
+#include "../../../../models/serialization/serialization.hpp"
 
 namespace lms_service {
 namespace {
