@@ -1,12 +1,10 @@
-default:
-  image: ghcr.io/cirruslabs/flutter
-
 # All the CI stages
 stages:
   - analyze # Health check
   - deploy # Upload to prod server
 
 flutter_analyze:
+  image: ghcr.io/cirruslabs/flutter
   stage: analyze
   interruptible: true
 
@@ -46,6 +44,7 @@ deploy_web:
     # Copy actual docker-compose.yaml to prod server
     - scp ./docker-compose.yaml $PROD_USERNAME@$PROD_HOST:/home/$PROD_USERNAME
 
+    # Copy nginx folder to prod server
     - scp -r ./nginx $PROD_USERNAME@$PROD_HOST:/home/$PROD_USERNAME
 
     # and run docker compose up for new image (sent deploy signal to prod server)
