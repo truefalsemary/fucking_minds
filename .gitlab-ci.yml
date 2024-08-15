@@ -1,12 +1,22 @@
 include:
-  # Frontend CI handler 
+  # Frontend CI handler
   - local: lms_front/.gitlab-ci.yml
     rules:
       - changes:
-          - lms_front/*
+        - lms_front/*
 
-  # Backend CI handler 
+  # Backend CI handler
   # - local: yourbackend_entry_dir/.gitlab-ci.yml
   #   rules:
   #     - changes:
   #         - yourbackend_entry_dir/*
+
+# This job basically will not run
+# but the GitLab CI will pass its yaml lint without yaml error
+#
+# This error occured when includes .gitlab-ci.yml without runnable jobs
+dummy_job:
+  rules:
+    - when: never
+  script:
+    - echo 'This job should not run (see comment above)'
