@@ -5,8 +5,12 @@ WORKDIR /app
 # copy /frontend -> /app
 COPY . . 
 
-# get deps, build models, build web release
-RUN make build_web
+# get deps, genearte codegen files
+RUN make deps
+RUN make generate
+
+# start flutter build for web release
+RUN flutter build web --release
 
 # copy artifact to nginx specific folder
 RUN mkdir -p /usr/share/nginx/html

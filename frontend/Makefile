@@ -14,15 +14,13 @@ build_models:
 l10n:
 	flutter gen-l10n
 
+generate:
+	make l10n
+	make build_models
+
 # Start fixing and building everything
 all:
 	make deps
 	make fix
 	make build_models
 	make l10n
-
-build_web:
-	make deps
-	make build_models
-	make l10n
-	flutter build web --release
