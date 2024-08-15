@@ -32,8 +32,20 @@ deploy_web:
   interruptible: false
 
   before_script:
+    # Install yandex cloud cli if it is not installed
     - ls ./yandex_cloud || curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+
+    # Add ssh key to known hosts
     - ssh-keyscan -H $PROD_HOST >> ~/.ssh/known_hosts
+
+    # Install ssh-agent if it is not installed
+    - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
+
+    # Add ssh key to ssh agent
+    - eval $(ssh-agent -s)
+
+    # Add ssh key to ssh agent
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
 
   # TODO: move id of registry to the secrets
   script:
@@ -47,13 +59,13 @@ deploy_web:
 
     - cd ..
     # Copy actual docker-compose.yaml to prod server
-    - scp -i $SSH_PRIVATE_KEY ./docker-compose.yaml $PROD_USERNAME@$PROD_HOST:/home/$PROD_USERNAME
+    - scp ./docker-compose.yaml $PROD_USERNAME@$PROD_HOST:/home/$PROD_USERNAME
 
     # Copy nginx folder to prod server
-    - scp -i $SSH_PRIVATE_KEY -r ./nginx $PROD_USERNAME@$PROD_HOST:/home/$PROD_USERNAME
+    - scp -r ./nginx $PROD_USERNAME@$PROD_HOST:/home/$PROD_USERNAME
 
     # and run docker compose up for new image (sent deploy signal to prod server)
-    - ssh -i $SSH_PRIVATE_KEY $PROD_USERNAME@$PROD_HOST 'docker compose up'
+    - ssh $PROD_USERNAME@$PROD_HOST 'docker compose up'
 
   tags:
     - shell-executor
