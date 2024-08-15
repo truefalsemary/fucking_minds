@@ -29,7 +29,9 @@ add_library(${PROJECT_NAME}_objs OBJECT
 
     src/utils/utils.hpp
     src/models/enums/user_type.hpp
+    src/models/enums/user_type.cpp
     src/models/enums/user_role.hpp
+    src/models/enums/user_type.cpp
     src/models/enums/status_code.hpp
 
     src/components/postgres_components/postgres_components.hpp
@@ -72,6 +74,12 @@ add_library(${PROJECT_NAME}_objs OBJECT
     src/views/v1/catalogs/lessons/get_lessons.cpp
     src/views/v1/catalogs/lessons/lesson_by_id_view.hpp
     src/views/v1/catalogs/lessons/lesson_by_id_view.cpp
+
+    src/controllers/users/user_controller.hpp
+    src/controllers/users/user_controller.cpp
+
+    src/views/v1/users/user_view.hpp
+    src/views/v1/users/user_view.cpp
 )
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver::postgresql)
 
