@@ -2,6 +2,7 @@ include:
   # Frontend CI handler
   - local: lms_front/.gitlab-ci.yml
     rules:
+      - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       - changes:
           - lms_front/*
 
@@ -10,11 +11,3 @@ include:
   #   rules:
   #     - changes:
   #         - yourbackend_entry_dir/*
-
-# This job basically will not run
-# but the GitLab CI will pass its yaml lint without yaml error
-#
-# This error occured when includes .gitlab-ci.yml without runnable jobs
-dummy_job:
-  stage: .post
-  script: echo "Dummy job"
