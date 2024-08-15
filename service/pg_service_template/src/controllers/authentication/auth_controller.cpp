@@ -25,7 +25,7 @@ std::optional<std::string> GetUserIdByToken(
       "SELECT user_id from Auth_sessions "
       "WHERE id = $1 ",
       token.data);
-  return result.AsSingleRow<std::optional<std::string>>();
+  return result.AsOptionalSingleRow<std::string>();
 }
 }  // namespace authentication
 }  // namespace lms_service
