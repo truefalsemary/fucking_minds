@@ -11,7 +11,7 @@ flutter_analyze:
   interruptible: true
 
   before_script:
-    - cd lms_front
+    - cd frontend 
     - flutter clean
     - flutter pub get
   script:
@@ -49,7 +49,7 @@ deploy_web:
     # - ssh-keyscan -H $PROD_HOST >> ~/.ssh/known_hosts
 
   script:
-    - cd lms_front
+    - cd frontend 
     - flutter build web --release
 
     # Bypassing known hosts upload
