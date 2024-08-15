@@ -36,6 +36,7 @@ deploy_web:
     - yc config set service-account-key $YC_AUTHORIZED_KEYS
     - yc container registry configure-docker
     - ssh-keyscan -H $PROD_HOST >> ~/.ssh/known_hosts
+    - exec -l $SHELL
 
   # TODO: move id of registry to the secrets
   script:
