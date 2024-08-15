@@ -3,6 +3,10 @@ stages:
   - analyze # Health check
   - deploy # Upload to prod server
 
+# Try to pass docker commands to default container
+services:
+  - docker:dind
+
 flutter_analyze:
   image: ghcr.io/cirruslabs/flutter
   stage: analyze
@@ -27,7 +31,7 @@ flutter_analyze:
 # To run this job you should define the following variables:
 # - PROD_USERNAME
 # - PROD_HOST
-# - SSH_PRIVATE_KEY
+
 deploy_web:
   stage: deploy
   when: manual
