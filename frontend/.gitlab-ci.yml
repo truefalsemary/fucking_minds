@@ -31,6 +31,12 @@ deploy_web:
   when: manual
   interruptible: false
 
+  before_script:
+    - echo $YC_AUTHORIZED_KEYS > ./authorized_keys
+    - chmod 600 ./authorized_keys
+    - yc config set service-account-key ./authorized_keys
+    - yc container registry configure-docker
+
   # TODO: move id of registry to the secrets
   script:
     - cd frontend
