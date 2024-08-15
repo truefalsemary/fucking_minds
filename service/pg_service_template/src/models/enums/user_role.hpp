@@ -6,7 +6,7 @@ enum class UserType { kStudent, kTeacher, kAdmin };
 
 template <>
 struct userver::storages::postgres::io::CppToUserPg<UserType> {
-  static constexpr DBTypeName postgres_name = "postgres-db-1";
+  static constexpr DBTypeName postgres_name = "lms_service_db_1";
   static constexpr USERVER_NAMESPACE::utils::TrivialBiMap enumerators =
       [](auto selector) {
         return selector()

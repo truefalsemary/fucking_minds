@@ -93,7 +93,7 @@ class LessonById final : public userver::server::handlers::HttpHandlerBase {
       : HttpHandlerBase(config, component_context),
         pg_cluster_(
             component_context
-                .FindComponent<userver::components::Postgres>("postgres-db-1")
+                .FindComponent<userver::components::Postgres>("lms_service_db_1")
                 .GetCluster()) {}
 
   std::string HandleRequestThrow(
