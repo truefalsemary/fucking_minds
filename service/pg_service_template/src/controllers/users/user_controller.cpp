@@ -2,7 +2,7 @@
 
 namespace lms_service {
 namespace user_controller {
-std::optional<User> updateUserById(
+std::optional<User> updateUserNameById(
     const UserData& user_data, const std::string id,
     userver::storages::postgres::ClusterPtr pg_cluster_) {
   auto result = pg_cluster_->Execute(
@@ -16,5 +16,22 @@ std::optional<User> updateUserById(
 
   return result.AsOptionalSingleRow<User>();
 }
+
+std::optional<User> updateUserTypeById(
+    const std::string& type, const std::string id,
+    userver::storages::postgres::ClusterPtr pg_cluster_)
+{
+  auto result = pg_cluster_->Execute(
+      userver::storages::postgres::ClusterHostType::kMaster,
+      "UPDATE Users "
+      " SET current_user_type = $1 "
+      "WHERE user_id = $2 "
+      "RETURNING (user_id, current_user_type, user_name, user_surname, "
+      "user_middle_name) ",
+      parseTypeFromString(type), id);
+
+  return result.AsOptionalSingleRow<User>();
+}
+
 }  // namespace user_controller
 }  // namespace lms_service

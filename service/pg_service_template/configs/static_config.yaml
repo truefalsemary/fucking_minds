@@ -55,6 +55,11 @@ components_manager:
             method: PUT
             task_processor: main-task-processor
 
+        handler-user-type-update:
+            path: /v1/user/{id}/type/change
+            method: PUT
+            task_processor: main-task-processor
+
         handler-register-user:
             path: /register
             method: POST

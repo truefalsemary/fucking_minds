@@ -266,9 +266,9 @@ paths:
                                 properties:
                                     id:
                                         type: string
-    /v1/users:
+    /v1/user:
         put:
-            description: update already existed user
+            description: update self name
             tags: 
                 - User administration
             requestBody:
@@ -277,6 +277,34 @@ paths:
                     application/json:
                         schema:
                             $ref: '#/components/schemas/user_data'
+            security:
+                -   UserTicketAuth: [ ]
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/user'
+                '400':
+                    description: invalid input parameters
+                '401':
+                    $ref: "#/components/responses/UnauthorizedError"
+    /v1/user/{id}/type/change:
+        put:
+            description: update type of user by id
+            tags: 
+                - User administration
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                role:
+                                    description: new user type
+                                    $ref: '#/components/schemas/user_type'
             security:
                 -   UserTicketAuth: [ ]
             responses:

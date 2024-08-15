@@ -7,3 +7,4 @@
 #include "../views/v1/catalogs/lessons/get_lessons.hpp"
 #include "../views/v1/catalogs/lessons/lesson_by_id_view.hpp"
 #include "../views/v1/users/user_view.hpp"
+#include "../views/v1/users/user_type_change_view.hpp"

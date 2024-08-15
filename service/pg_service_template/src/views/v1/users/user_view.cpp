@@ -43,7 +43,7 @@
       }
 
       auto result =
-          user_controller::updateUserById(data, token_id.value(), pg_cluster_);
+          user_controller::updateUserNameById(data, token_id.value(), pg_cluster_);
       return ToString(
           userver::formats::json::ValueBuilder{result}.ExtractValue());
     }
