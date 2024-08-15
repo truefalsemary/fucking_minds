@@ -16,6 +16,6 @@ include:
 #
 # This error occured when includes .gitlab-ci.yml without runnable jobs
 dummy_job:
-  stage: .pre
+  stage: .post
   script:
     - exit 0
