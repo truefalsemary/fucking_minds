@@ -11,6 +11,7 @@
 #include <userver/utils/assert.hpp>
 
 #include "../../../../controllers/authentication/sign_controller.hpp"
+#include "../../../../models/serialization/serialization.hpp"
 
 namespace lms_service {
 

@@ -10,8 +10,8 @@
 #include "../../../../controllers/authentication/auth_controller.hpp"
 #include "../../../../controllers/catalogs/lesson_catalog_controller.hpp"
 #include "../../../../models/auth/token_model.hpp"
-#include "../../../../models/lesson/lesson.hpp"
 #include "../../../../models/lesson/lesson_data.hpp"
+#include "../../../../models/serialization/serialization.hpp"
 
 namespace lms_service {
 namespace {

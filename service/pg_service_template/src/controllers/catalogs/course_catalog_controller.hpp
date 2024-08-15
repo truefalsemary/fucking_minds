@@ -1,10 +1,13 @@
 #pragma once
 
-#include "../../models/courses/course_data.hpp"
+#include <userver/storages/postgres/cluster.hpp>
 
-namespace lms_server {
-class CourseCatalogController {
-  void CreateCourse(userver::storages::postgres::ClusterPtr pg_cluster,
-                    const lms_service::CourseData& course_data) {}
-};
+#include "../../models/courses/course_data.hpp"
+#include "../../models/courses/course.hpp"
+
+namespace lms_service {
+  namespace course_catalog_controller {
+    Course CreateCourse(const lms_service::CourseData& course_data,
+    userver::storages::postgres::ClusterPtr pg_cluster);
+  } // namespace course_catalog_controller
 }  // namespace lms_server

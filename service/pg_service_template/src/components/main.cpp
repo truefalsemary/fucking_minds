@@ -21,5 +21,7 @@ int main(int argc, char* argv[]) {
   lms_service::AppendRegisterUser(component_list);
   lms_service::AppendGetLessonsView(component_list);
   lms_service::AppendLessonByIdView(component_list);
+  lms_service::AppendUserView(component_list);
+  lms_service::AppendUserTypeChangeView(component_list);
   return userver::utils::DaemonMain(argc, argv, component_list);
 }

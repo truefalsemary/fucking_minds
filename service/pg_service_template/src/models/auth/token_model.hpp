@@ -7,7 +7,6 @@ namespace lms_service {
 struct Token {
   std::string data;
 };
-userver::formats::json::Value Serialize(
-    const Token& token,
-    userver::formats::serialize::To<userver::formats::json::Value>);
+void data_pending(
+    userver::formats::json::ValueBuilder& item, const Token& token);
 }  // namespace lms_service
