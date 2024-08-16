@@ -8,3 +8,4 @@
 #include "../views/v1/catalogs/lessons/lesson_by_id_view.hpp"
 #include "../views/v1/users/user_view.hpp"
 #include "../views/v1/users/user_type_change_view.hpp"
+#include "../views/v1/course_administration/enroll_in_course.hpp"

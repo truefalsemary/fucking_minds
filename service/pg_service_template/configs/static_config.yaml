@@ -59,16 +59,6 @@ components_manager:
             path: /v1/user/{id}/type/change
             method: PUT
             task_processor: main-task-processor
-        
-        handler-user-add-to-course:
-            path: /v1/user/add/to_course/{id}
-            method: POST
-            task_processor: main-task-processor
-            
-        handler-user-by-id-add-to-course-by-id:
-            path: /v1/user/{user_id}/add/to_course/{course_id}
-            method: POST
-            task_processor: main-task-processor
 
         handler-register-user:
             path: /register
@@ -84,6 +74,16 @@ components_manager:
             path: /v1/course/create
             method: POST
             task_processor: main-task-processor   
+        
+        handler-v1-user-add-to-course:
+            path: /v1/user/add/to_course/{id}
+            method: POST
+            task_processor: main-task-processor
+            
+        # handler-v1-user-by-id-add-to-course-by-id:
+        #     path: /v1/user/{user_id}/add/to_course/{course_id}
+        #     method: POST
+        #     task_processor: main-task-processor
 
         # handler-v1-get-courses:
         #     path: /v1/courses
