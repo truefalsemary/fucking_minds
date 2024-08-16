@@ -18,6 +18,7 @@ class App extends StatelessWidget {
     return RepositoryScope(
       _diContainer,
       child: MaterialApp.router(
+        title: 'YaLMS',
         theme: lightTheme,
         locale: const Locale('ru'),
         localizationsDelegates: S.localizationsDelegates,

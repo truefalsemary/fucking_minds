@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lms_front/features/main_page/course_list/course_list_sort_category.dart';
-import 'package:lms_front/features/main_page/course_list/course_list_sort_cubit/course_list_sort_cubit.dart';
+import 'package:lms_front/features/main_page/domain/course_list_sort_category/course_list_sort_category.dart';
+import 'package:lms_front/features/main_page/domain/course_list_sort_cubit/course_list_sort_cubit.dart';
 import 'package:lms_front/ui_kit/components/card/decorated_container.dart';
 
 class CourseListSortBar extends StatelessWidget {

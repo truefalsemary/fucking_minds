@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lms_front/features/main_page/course_list/course_list_sort_category.dart';
+import 'package:lms_front/features/main_page/domain/course_list_sort_category/course_list_sort_category.dart';
 import 'package:lms_front/features/shared/data/models/course_related/cource/course.dart';
 
 part 'course_list_sort_state.dart';

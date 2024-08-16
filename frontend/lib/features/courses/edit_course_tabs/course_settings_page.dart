@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lms_front/features/courses/edit_course_tabs/course_program_tab.dart';
 import 'package:lms_front/ui_kit/typography/app_text_theme.dart';
 import 'package:lms_front/ui_kit/ui_kit.dart';
 
@@ -55,8 +56,7 @@ class CourseSettingsPage extends StatelessWidget {
                 clipBehavior: Clip.none,
                 children: [
                   TabContentWrapper(child: SettingsTab()),
-                  TabContentWrapper(
-                      child: Icon(Icons.directions_transit, size: 350)),
+                  TabContentWrapper(child: ProgramTab()),
                   TabContentWrapper(
                       child: Icon(Icons.directions_car, size: 350)),
                   TabContentWrapper(

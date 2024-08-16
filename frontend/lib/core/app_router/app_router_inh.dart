@@ -34,6 +34,19 @@ class AppRouter extends InheritedWidget {
   void goHome() {
     router.go('/');
   }
+
+  /// Initially goes to 'program' tab
+  void goToCoursePage(String courseId) {
+    router.go('/course/$courseId/program');
+  }
+
+  void goToCoursePageSpecificTab(String courseId, String tabName) {
+    router.go('/course/$courseId/$tabName');
+  }
+
+  void goToCourseSettings(String courseId) {
+    router.go('/course/$courseId/settings');
+  }
 }
 
 extension AppRouterExtension on BuildContext {

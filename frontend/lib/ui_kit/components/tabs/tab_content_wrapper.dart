@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TabContentWrapper extends StatelessWidget {
+class TabContentWrapper extends StatefulWidget {
   const TabContentWrapper({
     required this.child,
     super.key,
@@ -11,9 +11,16 @@ class TabContentWrapper extends StatelessWidget {
   final EdgeInsets padding;
 
   @override
+  State<TabContentWrapper> createState() => _TabContentWrapperState();
+}
+
+class _TabContentWrapperState extends State<TabContentWrapper>
+    with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Padding(
-        padding: padding,
+        padding: widget.padding,
         child: DecoratedBox(
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
@@ -22,7 +29,10 @@ class TabContentWrapper extends StatelessWidget {
             ),
             border: Border.all(),
           ),
-          child: child,
+          child: widget.child,
         ));
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

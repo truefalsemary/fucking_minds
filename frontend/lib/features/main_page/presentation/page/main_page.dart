@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lms_front/features/main_page/course_list/course_list.dart';
-import 'package:lms_front/features/main_page/course_list/course_list_sort_bar.dart';
-import 'package:lms_front/features/main_page/course_list/course_list_sort_cubit/course_list_sort_cubit.dart';
+import 'package:lms_front/features/main_page/domain/course_list_sort_cubit/course_list_sort_cubit.dart';
+import 'package:lms_front/features/main_page/presentation/course_list/course_list.dart';
+import 'package:lms_front/features/main_page/presentation/course_list/course_list_sort_bar.dart';
 import 'package:lms_front/features/shared/presentation/user_profile_button.dart';
 
 class MainPage extends StatelessWidget {
