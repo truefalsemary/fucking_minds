@@ -84,6 +84,21 @@ add_library(${PROJECT_NAME}_objs OBJECT
     src/views/v1/catalogs/lessons/lesson_by_id_view.hpp
     src/views/v1/catalogs/lessons/lesson_by_id_view.cpp
 
+    src/controllers/catalogs/task_catalog_controller.hpp
+    src/controllers/catalogs/task_catalog_controller.cpp
+
+    src/models/task/task_data.hpp
+    src/models/task/task_data.cpp
+    src/models/task/task.hpp
+    src/models/task/task.cpp
+
+    src/views/v1/catalogs/tasks/create_task.hpp
+    src/views/v1/catalogs/tasks/create_task.cpp
+    src/views/v1/catalogs/tasks/get_tasks.hpp
+    src/views/v1/catalogs/tasks/get_tasks.cpp
+    src/views/v1/catalogs/tasks/task_by_id.hpp
+    src/views/v1/catalogs/tasks/task_by_id.cpp
+
     src/controllers/users/user_controller.hpp
     src/controllers/users/user_controller.cpp
 

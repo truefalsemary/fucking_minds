@@ -200,20 +200,20 @@ components_manager:
         #     method: GET,PUT,DELETE
         #     task_processor: main-task-processor
 
-        # handler-v1-task-create:
-        #     path: /v1/task/create
-        #     method: POST
-        #     task_processor: main-task-processor
+        handler-v1-task-create:
+            path: /v1/task/create
+            method: POST
+            task_processor: main-task-processor
 
-        # handler-v1-get-tasks:        
-        #     path: /v1/tasks
-        #     method: GET
-        #     task_processor: main-task-processor
+        handler-v1-get-tasks:        
+            path: /v1/tasks
+            method: GET
+            task_processor: main-task-processor
 
-        # handler-v1-task: 
-        #     path: /v1/task/{id}
-        #     method: GET,PUT,DELETE
-        #     task_processor: main-task-processor
+        handler-v1-task: 
+            path: /v1/task/{id}
+            method: GET,PUT,DELETE
+            task_processor: main-task-processor
 
         # handler-v1-set-inspectors:
         #     path: /v1/course/{course_id}/set_inspectors
