@@ -9,9 +9,11 @@ std::optional<UserCourse> enroll_in_course(const UserCourseData& course_data,
       userver::storages::postgres::ClusterHostType::kMaster,
       "INSERT INTO User_Course "
       "(user_id, course_id, user_role) VALUES ($1, $2, $3) "
+      "ON CONFLICT DO NOTHING "
       "RETURNING * ",
       course_data.user_id, course_data.course_id, UserRole::kStudent);
-  return result.AsOptionalSingleRow<UserCourse>();
+  return result.AsOptionalSingleRow<UserCourse>(
+      userver::storages::postgres::kRowTag);
 }
 }  // namespace course_administration
 }  // namespace lms_service
