@@ -17,7 +17,7 @@
   namespace {
   class UserView final : public userver::server::handlers::HttpHandlerBase {
    public:
-    static constexpr std::string_view kName = "handler-user";
+    static constexpr std::string_view kName = "handler-user-name-update";
 
     UserView(const userver::components::ComponentConfig& config,
              const userver::components::ComponentContext& component_context)

@@ -1,4 +1,4 @@
-#include "create_course.hpp"
+#include "enroll_in_course_view.hpp"
 
 #include <fmt/format.h>
 
@@ -6,24 +6,20 @@
 #include <userver/server/handlers/http_handler_base.hpp>
 #include <userver/storages/postgres/cluster.hpp>
 #include <userver/storages/postgres/component.hpp>
-
-#include "../../../../controllers/authentication/auth_controller.hpp"
-#include "../../../../controllers/catalogs/course_catalog_controller.hpp"
-#include "../../../../models/auth/token_model.hpp"
-#include "../../../../models/courses/course_data.hpp"
-#include "../../../../models/serialization/serialization.hpp"
-#include "../../../../utils/validation/time.hpp"
+#include <userver/utils/assert.hpp>
+#include "../../../controllers/authentication/auth_controller.hpp"
+#include "../../../controllers/course_administration/course_administration_controller.hpp"
+#include "../../../models/auth/token_model.hpp"
+#include "../../../models/serialization/serialization.hpp"
 
 namespace lms_service {
-
 namespace {
-
-class CreateCourseView final
+class EnrollInCourseView final
     : public userver::server::handlers::HttpHandlerBase {
  public:
-  static constexpr std::string_view kName = "handler-v1-course-create";
+  static constexpr std::string_view kName = "handler-v1-user-add-to-course";
 
-  CreateCourseView(
+  EnrollInCourseView(
       const userver::components::ComponentConfig& config,
       const userver::components::ComponentContext& component_context)
       : HttpHandlerBase(config, component_context),
@@ -35,31 +31,29 @@ class CreateCourseView final
   std::string HandleRequestThrow(
       const userver::server::http::HttpRequest& request,
       userver::server::request::RequestContext&) const override {
+
     auto token_id = authentication::GetSessionInfo(pg_cluster_, request);
     // TODO: replace std::optional to std::exception structure
-    if (!token_id.has_value()) {
+    if (!token_id.has_value()) 
+    {
       auto& response = request.GetHttpResponse();
       response.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
       return {};
     }
-
-    lms_service::CourseData data;
-    data.title = request.GetArg("title");
-    data.description = request.GetArg("description");
-    data.author_id = token_id.value();
-
-    if (request.HasArg("start_ts"))
-      data.start_ts = lms_service::validation::ValidateTimeStamp(
-          request.GetArg("start_ts"));
-    if (request.HasArg("end_ts"))
-      data.end_ts =
-          lms_service::validation::ValidateTimeStamp(request.GetArg("end_ts"));
-
-    if (!data.empty()) {
-      auto result = lms_service::course_catalog_controller::CreateCourse(
-          data, pg_cluster_);
+    UserCourseData data;
+    data.user_id = token_id.value();
+    data.course_id = request.GetPathArg("id");
+    if (!data.empty()) 
+    {
+      auto result = course_administration::enroll_in_course(data, pg_cluster_);
+      if(!result.has_value())
+      {
+        auto& response = request.GetHttpResponse();
+        response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
+        return {};
+      }
       return ToString(
-          userver::formats::json::ValueBuilder{result}.ExtractValue());
+          userver::formats::json::ValueBuilder{result.value()}.ExtractValue());
     }
     auto& response = request.GetHttpResponse();
     response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
@@ -71,9 +65,9 @@ class CreateCourseView final
 
 }  // namespace
 
-void AppendCreateCourseView(
+void AppendEnrollInCourseView(
     userver::components::ComponentList& component_list) {
-  component_list.Append<CreateCourseView>();
+  component_list.Append<EnrollInCourseView>();
 }
 
 }  // namespace lms_service

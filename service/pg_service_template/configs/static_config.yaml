@@ -50,8 +50,8 @@ components_manager:
             throttling_enabled: false
             url_trailing_slash: strict-match
         
-        handler-user:
-            path: /v1/user
+        handler-user-name-update:
+            path: /v1/update/user_name
             method: PUT
             task_processor: main-task-processor
 
@@ -74,6 +74,21 @@ components_manager:
             path: /v1/course/create
             method: POST
             task_processor: main-task-processor   
+        
+        handler-v1-user-add-to-course:
+            path: /v1/user/add/to_course/{id}
+            method: POST
+            task_processor: main-task-processor
+
+        handler-v1-user-leave-course:
+            path: /v1/user/leave/course/{id}
+            method: DELETE
+            task_processor: main-task-processor
+            
+        # handler-v1-user-by-id-add-to-course-by-id:
+        #     path: /v1/user/{user_id}/add/to_course/{course_id}
+        #     method: POST
+        #     task_processor: main-task-processor
 
         # handler-v1-get-courses:
         #     path: /v1/courses

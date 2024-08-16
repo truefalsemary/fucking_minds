@@ -12,7 +12,7 @@ UserType parseTypeFromString(const std::string& user_role);
 }
 template <>
 struct userver::storages::postgres::io::CppToUserPg<lms_service::UserType> {
-  static constexpr DBTypeName postgres_name = "lms_service_db_1";
+  static constexpr DBTypeName postgres_name = "public.usertype";
   static constexpr USERVER_NAMESPACE::utils::TrivialBiMap enumerators =
       [](auto selector) {
         return selector()
