@@ -28,6 +28,7 @@ int main(int argc, char* argv[]) {
   lms_service::AppendTaskByIdView(component_list);
   lms_service::AppendCreateMaterialView(component_list);
   lms_service::AppendGetMaterialsView(component_list);
+  lms_service::AppendMaterialByIdView(component_list);
 
   return userver::utils::DaemonMain(argc, argv, component_list);
 }

@@ -185,10 +185,10 @@ components_manager:
             method: GET
             task_processor: main-task-processor
 
-        # handler-v1-material:
-        #     path: /v1/material/{id}
-        #     method: GET,PUT,DELETE
-        #     task_processor: main-task-processor
+        handler-v1-material:
+            path: /v1/material/{id}
+            method: GET,PUT,DELETE
+            task_processor: main-task-processor
 
         handler-v1-task-create:
             path: /v1/task/create
