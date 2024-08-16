@@ -65,7 +65,7 @@ deploy_web:
     - scp -r ./nginx $PROD_USERNAME@$PROD_HOST:/home/$PROD_USERNAME
 
     # and run docker compose up for new image (sent deploy signal to prod server)
-    - ssh $PROD_USERNAME@$PROD_HOST 'docker compose up'
+    - ssh $PROD_USERNAME@$PROD_HOST 'docker compose up -d'
 
   tags:
     - shell-executor
