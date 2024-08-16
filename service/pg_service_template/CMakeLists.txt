@@ -28,6 +28,8 @@ userver_setup_environment()
 add_library(${PROJECT_NAME}_objs OBJECT
 
     src/utils/utils.hpp
+    src/utils/validation/time.hpp
+    src/utils/validation/time.cpp
     src/models/enums/user_type.hpp
     src/models/enums/user_type.cpp
     src/models/enums/user_role.hpp

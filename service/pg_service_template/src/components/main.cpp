@@ -15,7 +15,7 @@ int main(int argc, char* argv[]) {
                             .Append<userver::server::handlers::TestsControl>();
 
   lms_service::AppendPostgresComponents(component_list);
-  lms_service::AppendCourseCatalogView(component_list);
+  lms_service::AppendCreateCourseView(component_list);
   lms_service::AppendCreateLessonView(component_list);
   lms_service::AppendLoginUser(component_list);
   lms_service::AppendRegisterUser(component_list);

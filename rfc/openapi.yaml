@@ -198,6 +198,22 @@ components:
                 - id
                 - content_link
                 - sent_ts
+        user_course:
+            type: object
+            properties:
+                user_id:
+                    description: user id
+                    type: string
+                course_id:
+                    description: course id
+                    type: string
+                user_role:
+                    description: user role on this course
+                    $ref: '#/components/schemas/user_role'
+            required:
+                - user_id
+                - course_id
+                - user_role
     responses:
         UnauthorizedError:
             description: X-Ya-User-Ticket key is missing or invalid
