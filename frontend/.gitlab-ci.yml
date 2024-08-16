@@ -25,7 +25,7 @@ flutter_analyze:
 # To run this job you should define the following variables:
 # - PROD_USERNAME
 # - PROD_HOST
-
+# - SSH_PRIVATE_KEY
 deploy_web:
   stage: deploy
   when: manual
@@ -34,24 +34,20 @@ deploy_web:
   before_script:
     # Install yandex cloud cli if it is not installed
     - ls ./yandex_cloud || curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
-
     # Add ssh key to known hosts
     - ssh-keyscan -H $PROD_HOST >> ~/.ssh/known_hosts
-
     # Install ssh-agent if it is not installed
     - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
-
     # Add ssh key to ssh agent
     - eval $(ssh-agent -s)
-
-    # Add ssh key to ssh agent
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
 
-  # TODO: move id of registry to the secrets
   script:
+    # Use yandex cloud cli to authenticate into docker registry
     - yc config set service-account-key $YC_AUTHORIZED_KEYS
     - yc container registry configure-docker
 
+    # Build docker image and push the result to the registry
     - cd frontend
     - docker build -t frontend .
     - docker tag frontend cr.yandex/crp08k5ngpk2phfn7dum/frontend
@@ -61,10 +57,10 @@ deploy_web:
     # Copy actual docker-compose.yaml to prod server
     - scp ./docker-compose.yaml $PROD_USERNAME@$PROD_HOST:/home/$PROD_USERNAME
 
-    # Copy nginx folder to prod server
+    # Copy actual nginx config folder to prod server
     - scp -r ./nginx $PROD_USERNAME@$PROD_HOST:/home/$PROD_USERNAME
 
-    # and run docker compose up for new image (sent deploy signal to prod server)
+    # and run docker compose up for new image (sent deploy signal to the prod server)
     - ssh $PROD_USERNAME@$PROD_HOST 'docker compose up -d'
 
   tags:
