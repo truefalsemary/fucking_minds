@@ -180,10 +180,10 @@ components_manager:
             method: POST
             task_processor: main-task-processor
 
-        # handler-v1-get-materials:
-        #     path: /v1/materials
-        #     method: GET
-        #     task_processor: main-task-processor
+        handler-v1-get-materials:
+            path: /v1/materials
+            method: GET
+            task_processor: main-task-processor
 
         # handler-v1-material:
         #     path: /v1/material/{id}

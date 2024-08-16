@@ -12,3 +12,4 @@
 #include "../views/v1/catalogs/tasks/get_tasks.hpp"
 #include "../views/v1/catalogs/tasks/task_by_id.hpp"
 #include "../views/v1/catalogs/materials/create_material.hpp"
+#include "../views/v1/catalogs/materials/get_materials.hpp"
