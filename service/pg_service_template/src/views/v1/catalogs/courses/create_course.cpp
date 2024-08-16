@@ -52,7 +52,7 @@ class CreateCourseView final
       data.start_ts = lms_service::validation::ValidateTimeStamp(
           request.GetArg("start_ts"));
     if (request.HasArg("end_ts"))
-      data.start_ts =
+      data.end_ts =
           lms_service::validation::ValidateTimeStamp(request.GetArg("end_ts"));
 
     if (!data.empty()) {
