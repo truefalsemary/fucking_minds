@@ -20,7 +20,7 @@ class CourseTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoButton(
       padding: EdgeInsets.zero,
-      onPressed: () => context.appRouter.go('/course/${course.id}'),
+      onPressed: () => context.appRouter.go('/course/${course.id}/program'),
       child: DecoratedContainer(
         width: MediaQuery.sizeOf(context).width,
         child: Column(

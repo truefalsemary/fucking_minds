@@ -1,14 +1,14 @@
 import 'package:bloc/bloc.dart';
-import 'package:lms_front/core/networking/mock.dart';
 import 'package:lms_front/features/shared/data/models/course_related/cource/course.dart';
-import 'package:lms_front/features/shared/domain/course_list_bloc/course_list_event.dart';
-import 'package:lms_front/features/shared/domain/course_list_bloc/course_list_state.dart';
+import 'package:lms_front/features/shared/domain/course/course_list_bloc/course_list_event.dart';
+import 'package:lms_front/features/shared/domain/course/course_list_bloc/course_list_state.dart';
 import 'package:lms_front/features/shared/domain/repositories/course_repository.dart';
 
 class CourseListBloc extends Bloc<CourseListEvent, CourseListState> {
-  final CourseRepository repository;
+  final CourseRepository courseRepository;
 
-  CourseListBloc({required this.repository}) : super(CourseListInitial()) {
+  CourseListBloc({required this.courseRepository})
+      : super(const CourseListState.initial()) {
     on<CourseListFetched>(_onCourseListFetched);
     on<CourseCreated>(_onCourseCreated);
     on<CourseUpdated>(_onCourseUpdated);
@@ -19,12 +19,12 @@ class CourseListBloc extends Bloc<CourseListEvent, CourseListState> {
     CourseListFetched event,
     Emitter<CourseListState> emit,
   ) async {
-    emit(CourseListLoadInProgress());
+    emit(const CourseListState.loadInProgress());
     try {
-      // final courses = await repository.readAll();
-      emit(CourseListLoadSuccess(Mock.mockCourses));
-    } catch (e) {
-      emit(CourseListLoadFailure(e));
+      final courses = await courseRepository.readAll();
+      emit(CourseListState.loadSuccess(courses));
+    } on () catch (e) {
+      emit(CourseListState.loadFailure(e));
     }
   }
 
@@ -33,15 +33,15 @@ class CourseListBloc extends Bloc<CourseListEvent, CourseListState> {
     Emitter<CourseListState> emit,
   ) async {
     try {
-      await repository.create(event.newCourse);
+      await courseRepository.create(event.newCourse);
       final currentState = state;
       if (currentState is CourseListLoadSuccess) {
         final updatedCourses = List<Course>.from(currentState.courses)
           ..add(event.newCourse);
-        emit(CourseListLoadSuccess(updatedCourses));
+        emit(CourseListState.loadSuccess(updatedCourses));
       }
-    } catch (e) {
-      emit(CourseOperationFailure(e));
+    } on () catch (e) {
+      emit(CourseListState.operationFailure(e));
     }
   }
 
@@ -50,7 +50,8 @@ class CourseListBloc extends Bloc<CourseListEvent, CourseListState> {
     Emitter<CourseListState> emit,
   ) async {
     try {
-      await repository.update(event.updatedCourse.id, event.updatedCourse);
+      await courseRepository.update(
+          event.updatedCourse.id, event.updatedCourse);
       final currentState = state;
       if (currentState is CourseListLoadSuccess) {
         final updatedCourses = currentState.courses.map((course) {
@@ -58,10 +59,10 @@ class CourseListBloc extends Bloc<CourseListEvent, CourseListState> {
               ? event.updatedCourse
               : course;
         }).toList();
-        emit(CourseListLoadSuccess(updatedCourses));
+        emit(CourseListState.loadSuccess(updatedCourses));
       }
-    } catch (e) {
-      emit(CourseOperationFailure(e));
+    } on () catch (e) {
+      emit(CourseListState.operationFailure(e));
     }
   }
 
@@ -70,16 +71,16 @@ class CourseListBloc extends Bloc<CourseListEvent, CourseListState> {
     Emitter<CourseListState> emit,
   ) async {
     try {
-      await repository.delete(event.courseId);
+      await courseRepository.delete(event.courseId);
       final currentState = state;
       if (currentState is CourseListLoadSuccess) {
         final updatedCourses = currentState.courses
             .where((course) => course.id != event.courseId)
             .toList();
-        emit(CourseListLoadSuccess(updatedCourses));
+        emit(CourseListState.loadSuccess(updatedCourses));
       }
-    } catch (e) {
-      emit(CourseOperationFailure(e));
+    } on () catch (e) {
+      emit(CourseListState.operationFailure(e));
     }
   }
 }
