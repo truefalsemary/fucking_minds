@@ -266,7 +266,7 @@ paths:
                                 properties:
                                     id:
                                         type: string
-    /v1/user:
+    /v1/update/user_name:
         put:
             description: update self name
             tags: 
