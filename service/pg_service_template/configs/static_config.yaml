@@ -175,10 +175,10 @@ components_manager:
         #     method: GET
         #     task_processor: main-task-processor
 
-        # handler-v1-material-create:
-        #     path: /v1/material/create
-        #     method: POST
-        #     task_processor: main-task-processor
+        handler-v1-material-create:
+            path: /v1/material/create
+            method: POST
+            task_processor: main-task-processor
 
         # handler-v1-get-materials:
         #     path: /v1/materials
