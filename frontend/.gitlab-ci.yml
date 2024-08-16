@@ -7,6 +7,9 @@ flutter_analyze:
   image: ghcr.io/cirruslabs/flutter
   stage: analyze
   interruptible: true
+  only:
+    refs:
+      - merge_requests
 
   before_script:
     - cd frontend
@@ -16,9 +19,6 @@ flutter_analyze:
     - dart fix --dry-run
     - dart fix --apply
     - flutter analyze --fatal-warnings --no-fatal-infos
-  only:
-    refs:
-      - merge_requests
   tags:
     - docker-executor
 
@@ -30,6 +30,9 @@ deploy_web:
   stage: deploy
   when: manual
   interruptible: false
+  only:
+    refs:
+      - merge_requests
 
   before_script:
     # Install yandex cloud cli if it is not installed
