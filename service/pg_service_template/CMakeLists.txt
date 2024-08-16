@@ -104,6 +104,21 @@ add_library(${PROJECT_NAME}_objs OBJECT
     src/views/v1/users/user_view.cpp
     src/views/v1/users/user_type_change_view.hpp
     src/views/v1/users/user_type_change_view.cpp
+
+    src/controllers/catalogs/material_catalog_controller.hpp
+    src/controllers/catalogs/material_catalog_controller.cpp
+
+    src/models/material/material.hpp
+    src/models/material/material.cpp
+    src/models/material/material_data.hpp
+    src/models/material/material_data.cpp
+
+    src/views/v1/catalogs/materials/create_material.hpp
+    src/views/v1/catalogs/materials/create_material.cpp
+    src/views/v1/catalogs/materials/get_materials.hpp
+    src/views/v1/catalogs/materials/get_materials.cpp
+    src/views/v1/catalogs/materials/material_by_id.hpp
+    src/views/v1/catalogs/materials/material_by_id.cpp
 )
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver::postgresql)
 
