@@ -41,6 +41,8 @@ deploy_web:
     # Add ssh key to ssh agent
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    # Update shell to make yc command available
+    - source ~/.bashrc
 
   script:
     # Use yandex cloud cli to authenticate into docker registry
