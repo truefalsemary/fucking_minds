@@ -1,0 +1,28 @@
+services:
+  frontend:
+    image: cr.yandex/crp08k5ngpk2phfn7dum/frontend
+    # build:
+    #   context: ./frontend
+    #   dockerfile: Dockerfile
+    volumes:
+      # Frontend MUST build static files and put them here
+      - frontend_static:/usr/share/nginx/html
+
+  proxy_server:
+    image: nginx
+    depends_on:
+      - frontend
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      # ! (IMPORTANT) Get frontend static files from frontend container
+      - frontend_static:/usr/share/nginx/html
+
+# Network by default 
+# (all container use it under the hood implicitly)
+networks:
+  default:
+
+volumes:
+  frontend_static:

@@ -1,30 +1,26 @@
-default:
-  image: ghcr.io/cirruslabs/flutter
-
 # All the CI stages
 stages:
   - analyze # Health check
   - deploy # Upload to prod server
 
 flutter_analyze:
+  image: ghcr.io/cirruslabs/flutter
   stage: analyze
   interruptible: true
+  only:
+    refs:
+      - merge_requests
 
   before_script:
-    - cd frontend 
+    - cd frontend
     - flutter clean
     - flutter pub get
   script:
     - dart fix --dry-run
     - dart fix --apply
     - flutter analyze --fatal-warnings --no-fatal-infos
-  only:
-    refs:
-      - merge_requests
-
   tags:
-    - flutter_analyze
-    - ci
+    - docker-executor
 
 # To run this job you should define the following variables:
 # - PROD_USERNAME
@@ -34,33 +30,43 @@ deploy_web:
   stage: deploy
   when: manual
   interruptible: false
+  only:
+    refs:
+      - merge_requests
 
   before_script:
-    # Make sure that ssh client is configured
-    # and the private key is available
+    # Install yandex cloud cli if it is not installed
+    - ls ./yandex_cloud || curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+    # Add ssh key to known hosts
+    - ssh-keyscan -H $PROD_HOST >> ~/.ssh/known_hosts
+    # Install ssh-agent if it is not installed
     - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
+    # Add ssh key to ssh agent
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-
-    # Add production server to known hosts
-    # todo: try this later to no bypassing known hosts check
-    # - ssh-keyscan -H $PROD_HOST >> ~/.ssh/known_hosts
+    # Update shell to make yc command available
+    - source ~/.bashrc
 
   script:
-    - cd frontend 
-    - flutter build web --release
+    # Use yandex cloud cli to authenticate into docker registry
+    - yc config set service-account-key $YC_AUTHORIZED_KEYS
+    - yc container registry configure-docker
 
-    # Bypassing known hosts upload
-    - scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./build/web/* $PROD_USERNAME@$PROD_HOST:/var/www/lms-front/web
+    # Build docker image and push the result to the registry
+    - cd frontend
+    - docker build -t frontend .
+    - docker tag frontend cr.yandex/crp08k5ngpk2phfn7dum/frontend
+    - docker push cr.yandex/crp08k5ngpk2phfn7dum/frontend
 
-    # Copy the web build to production server
-    # If known hosts check is bypassed, this will fail?
-    # - scp -r ./build/web/* $PROD_USERNAME@$PROD_HOST:/var/www/lms-front/web
+    - cd ..
+    # Copy actual docker-compose.yaml to prod server
+    - scp ./docker-compose.yaml $PROD_USERNAME@$PROD_HOST:/home/$PROD_USERNAME
 
-    # Restart the web server (needs sudo rights or sudoers groups)
-    # - ssh $PROD_USERNAME@$PROD_HOST 'sudo systemctl restart nginx'
+    # Copy actual nginx config folder to prod server
+    - scp -r ./nginx $PROD_USERNAME@$PROD_HOST:/home/$PROD_USERNAME
+
+    # and run docker compose up for new image (sent deploy signal to the prod server)
+    - ssh $PROD_USERNAME@$PROD_HOST 'docker compose up -d'
+
   tags:
-    - deploy
-    - ci
+    - shell-executor

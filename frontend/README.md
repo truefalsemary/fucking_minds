@@ -17,6 +17,7 @@ LMS - Learning Management System для создания, редактирова
 
 ## FAQ
 
-### [Соглашение о коммитах и Merge Requests](docs/FAQ/3.%20contribution.md)
+### [Соглашение о коммитах и Merge Requests](docs/FAQ/2.%20contribution.md)
 ### [Как запустить проект](docs/FAQ/1.%20project%20setup.md)
-### [Как деплоить Web версию на VPS (GitLab)](docs/FAQ/2.%20project%20deploy.md)
+### [Как деплоить Web версию на VPS (GitLab без контейнеров)](docs/FAQ/3.%20manual%20project%20deploy.md)
+### [Как деплоить Web версию на VPS (GitLab с Docker контейнерами)](docs/FAQ/4.%20docker%20project%20deploy.md)
