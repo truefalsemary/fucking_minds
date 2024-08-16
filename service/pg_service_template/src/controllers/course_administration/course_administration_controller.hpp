@@ -10,5 +10,9 @@ namespace course_administration {
 std::optional<UserCourse> enroll_in_course(
     const UserCourseData& course_data,
     userver::storages::postgres::ClusterPtr pg_cluster);
+
+std::optional<UserCourse> leave_course(
+    const UserCourseData& user_data,
+    userver::storages::postgres::ClusterPtr pg_cluster);
 }  // namespace course_administration_controller
 }  // namespace lms_service

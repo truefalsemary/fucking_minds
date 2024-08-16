@@ -355,16 +355,31 @@ paths:
                         type: string
             security:
                 -   UserTicketAuth: [ ]
-            requestBody:
-                required: true
-                content:
-                    application/json:
-                        schema:
-                            type: object
-                            properties:
-                                role:
-                                    description: user role
-                                    $ref: '#/components/schemas/user_role'
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/user'
+                '400':
+                    description: invalid input parameters
+                '401':
+                    $ref: "#/components/responses/UnauthorizedError"
+    /v1/user/leave/course/{id}:
+        delete:
+            description: leave course
+            tags: 
+                - User administration
+            parameters:
+                -   name: id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+            security:
+                -   UserTicketAuth: [ ]
             responses:
                 '200':
                     description: OK

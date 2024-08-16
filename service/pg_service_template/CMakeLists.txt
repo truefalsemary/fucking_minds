@@ -112,8 +112,10 @@ add_library(${PROJECT_NAME}_objs OBJECT
     src/models/user_course/user_course.cpp
     src/controllers/course_administration/course_administration_controller.hpp
     src/controllers/course_administration/course_administration_controller.cpp
-    src/views/v1/course_administration/enroll_in_course.hpp
-    src/views/v1/course_administration/enroll_in_course.cpp
+    src/views/v1/users/enroll_in_course_view.hpp
+    src/views/v1/users/enroll_in_course_view.cpp
+    src/views/v1/users/leave_course_view.hpp
+    src/views/v1/users/leave_course_view.cpp
 )
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver::postgresql)
 

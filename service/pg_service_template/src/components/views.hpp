@@ -9,7 +9,8 @@
 #include "../views/v1/users/user_view.hpp"
 #include "../views/v1/users/user_type_change_view.hpp"
 
-#include "../views/v1/course_administration/enroll_in_course.hpp"
+#include "../views/v1/users/enroll_in_course_view.hpp"
+#include "../views/v1/users/leave_course_view.hpp"
 
 #include "../views/v1/catalogs/tasks/create_task.hpp"
 #include "../views/v1/catalogs/tasks/get_tasks.hpp"

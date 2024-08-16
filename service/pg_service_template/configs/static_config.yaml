@@ -79,6 +79,11 @@ components_manager:
             path: /v1/user/add/to_course/{id}
             method: POST
             task_processor: main-task-processor
+
+        handler-v1-user-leave-course:
+            path: /v1/user/leave/course/{id}
+            method: DELETE
+            task_processor: main-task-processor
             
         # handler-v1-user-by-id-add-to-course-by-id:
         #     path: /v1/user/{user_id}/add/to_course/{course_id}

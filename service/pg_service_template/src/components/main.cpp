@@ -25,6 +25,7 @@ int main(int argc, char* argv[]) {
   lms_service::AppendUserTypeChangeView(component_list);
   
   lms_service::AppendEnrollInCourseView(component_list);
+  lms_service::AppendLeaveCourseView(component_list);
 
   lms_service::AppendCreateTaskView(component_list);
   lms_service::AppendGetTasksView(component_list);

@@ -1,4 +1,4 @@
-#include "enroll_in_course.hpp"
+#include "leave_course_view.hpp"
 
 #include <fmt/format.h>
 
@@ -14,12 +14,12 @@
 
 namespace lms_service {
 namespace {
-class EnrollInCourseView final
+class LeaveCourseView final
     : public userver::server::handlers::HttpHandlerBase {
  public:
-  static constexpr std::string_view kName = "handler-v1-user-add-to-course";
+  static constexpr std::string_view kName = "handler-v1-user-leave-course";
 
-  EnrollInCourseView(
+  LeaveCourseView(
       const userver::components::ComponentConfig& config,
       const userver::components::ComponentContext& component_context)
       : HttpHandlerBase(config, component_context),
@@ -31,11 +31,9 @@ class EnrollInCourseView final
   std::string HandleRequestThrow(
       const userver::server::http::HttpRequest& request,
       userver::server::request::RequestContext&) const override {
-
     auto token_id = authentication::GetSessionInfo(pg_cluster_, request);
     // TODO: replace std::optional to std::exception structure
-    if (!token_id.has_value()) 
-    {
+    if (!token_id.has_value()) {
       auto& response = request.GetHttpResponse();
       response.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
       return {};
@@ -43,13 +41,11 @@ class EnrollInCourseView final
     UserCourseData data;
     data.user_id = token_id.value();
     data.course_id = request.GetPathArg("id");
-    if (!data.empty()) 
-    {
-      auto result = course_administration::enroll_in_course(data, pg_cluster_);
-      if(!result.has_value())
-      {
+    if (!data.empty()) {
+      auto result = course_administration::leave_course(data, pg_cluster_);
+      if (!result.has_value()) {
         auto& response = request.GetHttpResponse();
-        response.SetStatus(userver::server::http::HttpStatus::kNotFound);
+        response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
         return {};
       }
       return ToString(
@@ -65,9 +61,8 @@ class EnrollInCourseView final
 
 }  // namespace
 
-void AppendEnrollInCourseView(
-    userver::components::ComponentList& component_list) {
-  component_list.Append<EnrollInCourseView>();
+void AppendLeaveCourseView(userver::components::ComponentList& component_list) {
+  component_list.Append<LeaveCourseView>();
 }
 
 }  // namespace lms_service
