@@ -2,7 +2,7 @@
 
 #include <string>
 #include <optional>
-#include <vector>
+#include <chrono>
 #include <userver/formats/json/value_builder.hpp>
 
 namespace lms_service {
@@ -11,8 +11,8 @@ struct Course {
   std::string title;
   std::string description;
   std::string author_id;
-  std::optional<std::string> start_ts;
-  std::optional<std::string> end_ts;
+  std::optional<std::chrono::system_clock::time_point> start_ts;
+  std::optional<std::chrono::system_clock::time_point> end_ts;
 
   bool empty() {
     return course_id.empty() || title.empty() || description.empty() ||

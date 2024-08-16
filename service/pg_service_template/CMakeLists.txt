@@ -28,6 +28,8 @@ userver_setup_environment()
 add_library(${PROJECT_NAME}_objs OBJECT
 
     src/utils/utils.hpp
+    src/utils/validation/time.hpp
+    src/utils/validation/time.cpp
     src/models/enums/user_type.hpp
     src/models/enums/user_type.cpp
     src/models/enums/user_role.hpp
@@ -104,6 +106,14 @@ add_library(${PROJECT_NAME}_objs OBJECT
     src/views/v1/users/user_view.cpp
     src/views/v1/users/user_type_change_view.hpp
     src/views/v1/users/user_type_change_view.cpp
+
+    src/models/user_course/user_course.hpp
+    src/models/user_course/user_course_data.hpp
+    src/models/user_course/user_course.cpp
+    src/controllers/course_administration/course_administration_controller.hpp
+    src/controllers/course_administration/course_administration_controller.cpp
+    src/views/v1/course_administration/enroll_in_course.hpp
+    src/views/v1/course_administration/enroll_in_course.cpp
 )
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver::postgresql)
 

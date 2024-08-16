@@ -15,7 +15,7 @@ int main(int argc, char* argv[]) {
                             .Append<userver::server::handlers::TestsControl>();
 
   lms_service::AppendPostgresComponents(component_list);
-  lms_service::AppendCourseCatalogView(component_list);
+  lms_service::AppendCreateCourseView(component_list);
   lms_service::AppendCreateLessonView(component_list);
   lms_service::AppendLoginUser(component_list);
   lms_service::AppendRegisterUser(component_list);
@@ -23,6 +23,9 @@ int main(int argc, char* argv[]) {
   lms_service::AppendLessonByIdView(component_list);
   lms_service::AppendUserView(component_list);
   lms_service::AppendUserTypeChangeView(component_list);
+  
+  lms_service::AppendEnrollInCourseView(component_list);
+
   lms_service::AppendCreateTaskView(component_list);
   lms_service::AppendGetTasksView(component_list);
   lms_service::AppendTaskByIdView(component_list);
