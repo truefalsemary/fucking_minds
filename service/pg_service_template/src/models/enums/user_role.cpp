@@ -19,7 +19,7 @@ UserRole parseRoleFromString(const std::string& user_role) {
   if(user_role == "student")
     return UserRole::kStudent;
   else if(user_role == "teacher")
-    return UserRole::kStudent;
+    return UserRole::kTeacher;
   else if(user_role == "admin")
     return UserRole::kAdmin;
   else

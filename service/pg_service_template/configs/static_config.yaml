@@ -85,10 +85,10 @@ components_manager:
             method: DELETE
             task_processor: main-task-processor
             
-        # handler-v1-user-by-id-add-to-course-by-id:
-        #     path: /v1/user/{user_id}/add/to_course/{course_id}
-        #     method: POST
-        #     task_processor: main-task-processor
+        handler-v1-user-by-id-add-to-course-by-id:
+            path: /v1/user/{user_id}/add/to_course/{course_id}
+            method: POST
+            task_processor: main-task-processor
 
         handler-v1-get-courses:
             path: /v1/courses

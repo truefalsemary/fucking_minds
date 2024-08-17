@@ -14,5 +14,10 @@ std::optional<UserCourse> enroll_in_course(
 std::optional<UserCourse> leave_course(
     const UserCourseData& user_data,
     userver::storages::postgres::ClusterPtr pg_cluster);
+
+std::optional<UserCourse> add_user_to_course(
+    const UserCourse& user_data,
+    const std::string& author_request,
+        userver::storages::postgres::ClusterPtr pg_cluster);
 }  // namespace course_administration_controller
 }  // namespace lms_service
