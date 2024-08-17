@@ -38,6 +38,11 @@ add_library(models STATIC
     user_course/user_course_data.hpp
     user_course/user_course.hpp
     user_course/user_course.cpp
+
+    material/material.hpp
+    material/material.cpp
+    material/material_data.hpp
+    material/material_data.cpp
 )
 
 target_include_directories(models PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

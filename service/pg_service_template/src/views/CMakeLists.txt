@@ -30,6 +30,13 @@ add_library(views STATIC
     v1/users/user_type_change_view.cpp
     v1/users/user_view.hpp
     v1/users/user_view.cpp
+
+    v1/catalogs/materials/create_material.hpp
+    v1/catalogs/materials/create_material.cpp
+    v1/catalogs/materials/get_materials.hpp
+    v1/catalogs/materials/get_materials.cpp
+    v1/catalogs/materials/material_by_id.hpp
+    v1/catalogs/materials/material_by_id.cpp
 )
 
 target_include_directories(views PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
