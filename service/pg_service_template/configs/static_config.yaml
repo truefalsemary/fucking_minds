@@ -95,10 +95,10 @@ components_manager:
             method: GET
             task_processor: main-task-processor
 
-        # handler-v1-course:
-        #     path: /v1/course/{id}
-        #     method: GET,PUT,DELETE
-        #     task_processor: main-task-processor
+        handler-v1-course:
+            path: /v1/course/{id}
+            method: GET,PUT,DELETE
+            task_processor: main-task-processor
 
         # handler-v1-course-get-students:
         #     path: /v1/course/{id}/students
