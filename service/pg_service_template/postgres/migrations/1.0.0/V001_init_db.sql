@@ -123,14 +123,14 @@ CREATE TABLE IF NOT EXISTS Course_Lesson_Task (
 
 CREATE TABLE IF NOT EXISTS Sended_Tasks (
     student_id TEXT NOT NULL,
-    student_role UserRole NOT NULL DEFAULT 'student',
+    student_role UserRole NOT NULL DEFAULT 'student' CHECK (student_role = 'student'),
     task_id TEXT NOT NULL,
     course_id TEXT NOT NULL,
     lesson_id TEXT NOT NULL,
     status StatusCode NOT NULL DEFAULT 'not_sent',
     score INT NOT NULL,
     reviewer_id TEXT,
-    reviewer_role UserRole DEFAULT 'teacher',
+    reviewer_role UserRole NOT NULL DEFAULT 'teacher' CHECK (reviewer_role = 'teacher'),
     CONSTRAINT sended_task_pkey PRIMARY KEY (student_id, task_id, course_id, lesson_id),
     FOREIGN KEY (student_id, course_id, student_role) REFERENCES User_Course(user_id, course_id, user_role),
     FOREIGN KEY (task_id, course_id, lesson_id) REFERENCES Course_Lesson_Task(task_id, course_id, lesson_id),
