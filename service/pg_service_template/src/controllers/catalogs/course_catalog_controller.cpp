@@ -32,6 +32,51 @@ std::vector<Course> getCourses(
       userver::storages::postgres::kRowTag);
 }
 
+std::optional<Course> getCourseByID(
+    userver::storages::postgres::ClusterPtr pg_cluster_,
+    const std::string& id) 
+    {
+  auto result = pg_cluster_->Execute(
+      userver::storages::postgres::ClusterHostType::kMaster,
+      "SELECT * FROM Courses "
+      "WHERE course_id = $1",
+      id);
+  return result.AsOptionalSingleRow<Course>(
+      userver::storages::postgres::kRowTag);
+}
+
+std::optional<Course> updateCourseByID(
+    const std::string& id, const lms_service::CourseData& course_data,
+    userver::storages::postgres::ClusterPtr pg_cluster_) {
+  std::ostringstream query;
+  query << "UPDATE Courses "
+        << "SET course_title = $1, course_description = $2 "
+        << (course_data.start_ts.has_value() ? ", start_ts = $3 " : "")
+        << (course_data.end_ts.has_value() ? ", end_ts = $4 " : "")
+        << "WHERE course_id = $5 AND author_id = $6 "
+        << "RETURNING * ";
+  auto result = pg_cluster_->Execute(
+      userver::storages::postgres::ClusterHostType::kMaster,
+      query.str(),
+      course_data.title, course_data.description, course_data.start_ts, course_data.end_ts, id, course_data.author_id);
+
+  return result.AsOptionalSingleRow<Course>(
+      userver::storages::postgres::kRowTag);
+}
+
+std::optional<std::string> deleteCourseByID(
+    const std::string& id, const std::string& author_id,
+    userver::storages::postgres::ClusterPtr pg_cluster_)
+    {
+  auto result = pg_cluster_->Execute(
+      userver::storages::postgres::ClusterHostType::kMaster,
+      "DELETE FROM Courses "
+      "WHERE course_id = $1 AND author_id = $2 "
+      "RETURNING course_id",
+      id, author_id);
+
+  return result.AsOptionalSingleRow<std::string>();
+    }
 
 }  // namespace course_catalog_controller
 }  // namespace lms_service

@@ -9,6 +9,8 @@ add_library(views STATIC
     v1/catalogs/courses/create_course.cpp
     v1/catalogs/courses/get_courses.hpp
     v1/catalogs/courses/get_courses.cpp
+    v1/catalogs/courses/course_by_id_view.hpp
+    v1/catalogs/courses/course_by_id_view.cpp
 
     v1/catalogs/lessons/create_lesson.hpp
     v1/catalogs/lessons/create_lesson.cpp
