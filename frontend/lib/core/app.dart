@@ -1,3 +1,4 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lms_front/core/di/di_container.dart';
@@ -25,7 +26,8 @@ class App extends StatelessWidget {
         supportedLocales: S.supportedLocales,
         localeResolutionCallback: (locale, supportedLocales) => locale,
         debugShowCheckedModeBanner: false,
-        routerConfig: _diContainer.routerDelegate.router,
+        routeInformationParser: BeamerParser(),
+        routerDelegate: _diContainer.routerDelegate,
       ),
     );
   }

@@ -66,6 +66,9 @@ class _SingleCoursePageState extends State<SingleCoursePage>
             return <Widget>[
               SliverAppBar(
                 centerTitle: false,
+                leading: BackButton(
+                  onPressed: () => context.appRouter.pop(),
+                ),
                 title: Padding(
                   padding: const EdgeInsets.only(left: 25),
                   child: BlocBuilder<SingleCourseCubit, SingleCourseState>(

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:beamer/beamer.dart';
 
 class AppRouter extends InheritedWidget {
-  final GoRouter router;
+  final BeamerDelegate routerDelegate;
 
   const AppRouter({
-    required this.router,
+    required this.routerDelegate,
     required super.child,
     super.key,
   });
@@ -17,35 +17,36 @@ class AppRouter extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(AppRouter oldWidget) => router != oldWidget.router;
+  bool updateShouldNotify(AppRouter oldWidget) =>
+      routerDelegate != oldWidget.routerDelegate;
 
   void push(String route, [Object? extra]) {
-    router.push(route, extra: extra);
+    routerDelegate.beamToNamed(route, data: extra);
   }
 
   void go(String route, [Object? extra]) {
-    router.go(route, extra: extra);
+    routerDelegate.beamToNamed(route, data: extra);
   }
 
   void pop() {
-    router.pop();
+    routerDelegate.beamBack();
   }
 
   void goHome() {
-    router.go('/');
+    routerDelegate.beamToNamed('/');
   }
 
   /// Initially goes to 'program' tab
   void goToCoursePage(String courseId) {
-    router.go('/course/$courseId/program');
+    routerDelegate.beamToNamed('/course/$courseId/program');
   }
 
   void goToCoursePageSpecificTab(String courseId, String tabName) {
-    router.go('/course/$courseId/$tabName');
+    routerDelegate.popToNamed('/course/$courseId/$tabName');
   }
 
   void goToCourseSettings(String courseId) {
-    router.go('/course/$courseId/settings');
+    routerDelegate.popToNamed('/course/$courseId/settings');
   }
 }
 
