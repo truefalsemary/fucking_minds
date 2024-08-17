@@ -22,6 +22,9 @@ add_library(controllers STATIC
     users/user_controller.hpp
     users/user_controller.cpp
 
+    submissions/submissions_controller.hpp
+    submissions/submissions_controller.cpp
+
 )
 
 target_include_directories(controllers PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
