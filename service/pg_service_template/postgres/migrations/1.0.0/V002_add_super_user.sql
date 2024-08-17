@@ -1,2 +1,2 @@
 INSERT INTO USERS (current_user_type, user_email, user_password, user_name, user_surname, user_middle_name) 
-VALUES('super', 'super_user@super.ru', 'super', 'SuperVasya', 'Pupkin', 'Ivanovich')
+VALUES('super', 'superuser@super.ru', '73d1b1b1bc1dabfb97f216d897b7968e44b06457920f00f2dc6c1ed3be25ad4c', 'SuperVasya', 'Pupkin', 'Ivanovich')

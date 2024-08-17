@@ -9,9 +9,9 @@ namespace lms_service {
 struct User {
   std::string id;
   UserType type;
-  std::string name;
-  std::string surname;
-  std::string middle_name;
+  std::optional<std::string> name;
+  std::optional<std::string> surname;
+  std::optional<std::string> middle_name;
 };
 
 void data_pending(
