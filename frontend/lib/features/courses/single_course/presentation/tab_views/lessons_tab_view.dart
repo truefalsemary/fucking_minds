@@ -25,13 +25,7 @@ class LessonsTabView extends StatelessWidget {
             initial: () => const Center(child: Text('Starting...')),
             loadInProgress: () =>
                 const Center(child: CircularProgressIndicator()),
-            loadSuccess: (lessons) => Navigator(
-              onGenerateRoute: (settings) {
-                return MaterialPageRoute(
-                  builder: (context) => LessonsListView(lessons: lessons),
-                );
-              },
-            ),
+            loadSuccess: (lessons) => LessonsListView(lessons: lessons),
             loadFailure: (message) => Center(child: Text(message.toString())),
             operationFailure: (error) => Text(error.toString()),
           );

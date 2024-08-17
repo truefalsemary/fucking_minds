@@ -24,66 +24,21 @@ class AppRouterDelegate extends BeamerDelegate {
               '/courses': (context, state, data) => const ListCoursesPage(),
               '/courses/:filter': (context, state, data) =>
                   _FilteredCourseListPageBuilder(state: state),
-              '/course/:courseId': (context, state, data) {
-                final courseId = state.pathParameters['courseId']!;
-                return _SingleCoursePageBuilder(state: state);
-                // return BeamGuard(
-                //   pathPatterns: [],
-                //   guardNonMatching: true,
-                //   check: (context, location) => true,
-                //   beamToNamed: (origin, target) => '/course/$courseId/program',
-                // );
-              },
+              '/course/:courseId': (context, state, data) =>
+                  _SingleCoursePageBuilder(state: state),
               '/course/:courseId/settings': (context, state, data) =>
                   _CourseSettingsPageBuilder(state: state),
               '/course/:courseId/:tabName': (context, state, data) =>
                   _SingleCoursePageBuilder(state: state),
             },
           ),
-        );
-}
-
-// class AppRouterDelegate extends StatelessWidget {
-//   const AppRouterDelegate({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return BeamerProvider(
-//       routerDelegate: BeamerRouterDelegate(),
-//       child: MaterialApp.router(
-//         routerDelegate: BeamerRouterDelegate(),
-//         routeInformationParser: BeamerParser(),
-//       ),
-//     );
-//   }
-// }
-
-class BeamerRouterDelegate extends BeamerDelegate {
-  BeamerRouterDelegate()
-      : super(
-          initialPath: '/',
-          locationBuilder: RoutesLocationBuilder(
-            routes: {
-              '/': (context, state, data) => const _MainPageBuilder(),
-              '/courses': (context, state, data) => const ListCoursesPage(),
-              '/courses/:filter': (context, state, data) =>
-                  _FilteredCourseListPageBuilder(state: state),
-              '/course/:courseId': (context, state, data) {
-                final courseId = state.pathParameters['courseId']!;
-                // return BeamRedirect('/course/$courseId/program');
-                return BeamGuard(
-                  pathPatterns: [],
-                  guardNonMatching: true,
-                  check: (context, location) => true,
-                  beamToNamed: (origin, target) => '/course/$courseId/program',
-                );
-              },
-              '/course/:courseId/settings': (context, state, data) =>
-                  _CourseSettingsPageBuilder(state: state),
-              '/course/:courseId/:tabName': (context, state, data) =>
-                  _SingleCoursePageBuilder(state: state),
-            },
-          ),
+          guards: [
+            BeamGuard(
+              pathPatterns: ['/course/:courseId'],
+              check: (context, location) => false,
+              beamToNamed: (origin, target) => '/program',
+            ),
+          ],
         );
 }
 
