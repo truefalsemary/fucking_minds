@@ -33,6 +33,8 @@ class UserTypeChange final : public userver::server::handlers::HttpHandlerBase {
       const userver::server::http::HttpRequest& request,
       userver::server::request::RequestContext&) const override 
     {
+    
+
 
     auto token_id = authentication::GetSessionInfo(pg_cluster_, request);
     // TODO: replace std::optional to std::exception structure
@@ -41,17 +43,30 @@ class UserTypeChange final : public userver::server::handlers::HttpHandlerBase {
       response.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
       return {};
     }
-    auto id = request.GetArg("type");
-    if (id.empty()) {
+    auto type = request.GetArg("type");
+
+    Token author_token;
+    author_token.data =  request.GetPathArg("id");
+    auto target_token_id =
+        authentication::GetUserIdByToken(author_token, pg_cluster_);
+
+    if (!target_token_id.has_value()) {
+      auto& response = request.GetHttpResponse();
+      response.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
+      return {};
+    }
+
+    if (type.empty()) 
+    {
       auto& response = request.GetHttpResponse();
       response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
       return {};
     }
-    auto result =
-        user_controller::updateUserTypeById(id, token_id.value(), pg_cluster_);
+    auto result = user_controller::updateUserTypeById(
+        type, target_token_id.value(), token_id.value(), pg_cluster_);
     if (!result.has_value()) {
       auto& response = request.GetHttpResponse();
-      response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
+      response.SetStatus(userver::server::http::HttpStatus::kForbidden);
       return {};
     }
     return ToString(

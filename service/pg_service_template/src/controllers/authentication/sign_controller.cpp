@@ -51,8 +51,17 @@ std::optional<Token> register_user(
 
   if (result.IsEmpty()) return std::nullopt;
 
+  std::string user_id = result.AsSingleRow<std::string>();
+
+  auto result_session = pg_cluster_->Execute(
+      userver::storages::postgres::ClusterHostType::kMaster,
+      "INSERT INTO Auth_sessions(user_id) VALUES($1) "
+      "ON CONFLICT DO NOTHING "
+      "RETURNING id",
+      user_id);
+
   Token token;
-  token.data = result.AsSingleRow<std::string>();
+  token.data = result_session.AsSingleRow<std::string>();
   return token;
 }
 }  // namespace sign_controller

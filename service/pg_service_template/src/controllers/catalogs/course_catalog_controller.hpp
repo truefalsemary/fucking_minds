@@ -20,7 +20,7 @@ std::optional<Course> getCourseByID(
     const std::string& id);
 
 std::optional<Course> updateCourseByID(
-    const std::string& id, const lms_service::CourseData& lesson_data,
+    const std::string& id, const lms_service::CourseData& course_data,
     userver::storages::postgres::ClusterPtr pg_cluster_);
 
 std::optional<std::string> deleteCourseByID(

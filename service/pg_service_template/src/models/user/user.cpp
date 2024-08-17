@@ -5,8 +5,8 @@ void data_pending(
     {
       item["id"] = user.id;
       item["type"] = parseToString(user.type);
-      item["name"] = user.name;
-      item["surname"] = user.surname;
-      item["middle_name"] = user.middle_name;
+      item["name"] = user.name.value_or("");
+      item["surname"] = user.surname.value_or("");
+      item["middle_name"] = user.middle_name.value_or("");
     }
 }  // namespace lms_service

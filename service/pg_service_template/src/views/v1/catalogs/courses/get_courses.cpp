@@ -1,4 +1,4 @@
-#include "create_lesson.hpp"
+#include "get_courses.hpp"
 
 #include <fmt/format.h>
 
@@ -8,21 +8,21 @@
 #include <userver/storages/postgres/component.hpp>
 #include <userver/utils/assert.hpp>
 #include "../../../../controllers/authentication/auth_controller.hpp"
-#include "../../../../controllers/catalogs/lesson_catalog_controller.hpp"
+#include "../../../../controllers/catalogs/course_catalog_controller.hpp"
 #include "../../../../models/auth/token_model.hpp"
-#include "../../../../models/lesson/lesson_data.hpp"
+#include "../../../../models/courses/course.hpp"
+#include "../../../../models/courses/course_data.hpp"
 #include "../../../../models/serialization/serialization.hpp"
 
 namespace lms_service {
 namespace {
-class CreateLessonView final
+class GetCoursesView final
     : public userver::server::handlers::HttpHandlerBase {
  public:
-  static constexpr std::string_view kName = "handler-v1-lesson-create";
+  static constexpr std::string_view kName = "handler-v1-get-courses";
 
-  CreateLessonView(
-      const userver::components::ComponentConfig& config,
-      const userver::components::ComponentContext& component_context)
+  GetCoursesView(const userver::components::ComponentConfig& config,
+                 const userver::components::ComponentContext& component_context)
       : HttpHandlerBase(config, component_context),
         pg_cluster_(
             component_context
@@ -32,6 +32,7 @@ class CreateLessonView final
   std::string HandleRequestThrow(
       const userver::server::http::HttpRequest& request,
       userver::server::request::RequestContext&) const override {
+    
     auto token_id = authentication::GetSessionInfo(pg_cluster_, request);
     // TODO: replace std::optional to std::exception structure
     if (!token_id.has_value()) {
@@ -39,20 +40,9 @@ class CreateLessonView final
       response.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
       return {};
     }
-
-    lms_service::LessonData data;
-    data.title = request.GetArg("title");
-    data.description = request.GetArg("description");
-    data.author_id = token_id.value();
-
-    if (!data.empty()) {
-      auto result = lesson_catalog_controller::createLesson(data, pg_cluster_);
-      return ToString(
-          userver::formats::json::ValueBuilder{result}.ExtractValue());
-    }
-    auto& response = request.GetHttpResponse();
-    response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
-    return {};
+    auto result = course_catalog_controller::getCourses(pg_cluster_);
+    return ToString(
+        userver::formats::json::ValueBuilder{result}.ExtractValue());
   }
 
   userver::storages::postgres::ClusterPtr pg_cluster_;
@@ -60,9 +50,9 @@ class CreateLessonView final
 
 }  // namespace
 
-void AppendCreateLessonView(
+void AppendGetCoursesView(
     userver::components::ComponentList& component_list) {
-  component_list.Append<CreateLessonView>();
+  component_list.Append<GetCoursesView>();
 }
 
 }  // namespace lms_service

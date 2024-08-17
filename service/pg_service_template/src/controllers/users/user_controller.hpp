@@ -14,7 +14,9 @@ std::optional<User> updateUserNameById(
     const UserData& user_data, const std::string id,
     userver::storages::postgres::ClusterPtr pg_cluster_);
 
-std::optional<User> updateUserTypeById( const std::string& type,
-    const std::string id, userver::storages::postgres::ClusterPtr pg_cluster_);
+std::optional<User> updateUserTypeById(
+    const std::string& type, const std::string& id,
+    const std::string& author_request,
+    userver::storages::postgres::ClusterPtr pg_cluster_);
 }
 }
