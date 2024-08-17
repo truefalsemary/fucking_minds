@@ -1,6 +1,6 @@
 #include "course_catalog_controller.hpp"
 
-#include <sstream>
+#include <vector>
 
 #include <userver/storages/postgres/cluster.hpp>
 
@@ -20,6 +20,16 @@ Course CreateCourse(const lms_service::CourseData& course_data,
       course_data.title, course_data.description, course_data.author_id,
       course_data.start_ts, course_data.end_ts);
   return result.AsSingleRow<Course>(userver::storages::postgres::kRowTag);
+}
+
+std::vector<Course> getCourses(
+    userver::storages::postgres::ClusterPtr pg_cluster_) 
+    {
+  auto result = pg_cluster_->Execute(
+      userver::storages::postgres::ClusterHostType::kMaster,
+      "SELECT * FROM Courses");
+  return result.AsContainer<std::vector<Course>>(
+      userver::storages::postgres::kRowTag);
 }
 
 

@@ -20,7 +20,7 @@ template <class T>
 userver::formats::json::Value Serialize(
   const std::vector<T>& objs,
   userver::formats::serialize::To<userver::formats::json::Value>) {
-    userver::formats::json::ValueBuilder item;
+    userver::formats::json::ValueBuilder item(userver::formats::json::Type::kArray);
     for (auto&& obj : objs) 
     {
       userver::formats::json::ValueBuilder current_item;

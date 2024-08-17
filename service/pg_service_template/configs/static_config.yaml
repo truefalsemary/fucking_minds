@@ -90,10 +90,10 @@ components_manager:
         #     method: POST
         #     task_processor: main-task-processor
 
-        # handler-v1-get-courses:
-        #     path: /v1/courses
-        #     method: GET
-        #     task_processor: main-task-processor
+        handler-v1-get-courses:
+            path: /v1/courses
+            method: GET
+            task_processor: main-task-processor
 
         # handler-v1-course:
         #     path: /v1/course/{id}
