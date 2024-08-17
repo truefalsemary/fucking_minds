@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lms_front/core/logger/logger.dart';
+import 'package:lms_front/features/auth/presentation/pages/first_auth_page.dart';
+import 'package:lms_front/features/auth/presentation/pages/login_page.dart';
+import 'package:lms_front/features/auth/presentation/pages/register_page.dart';
 import 'package:lms_front/features/courses/edit_course_tabs/course_settings_page.dart';
 import 'package:lms_front/features/courses/list_courses_page.dart';
 import 'package:lms_front/features/courses/single_course/presentation/page/single_course_page.dart';
@@ -18,6 +21,18 @@ class AppRouterDelegate {
   final router = GoRouter(
     initialLocation: '/',
     routes: [
+      GoRoute(
+        path: '/first-auth',
+        builder: (context, state) => const FistAuthPage(),
+      ),
+      GoRoute(
+        path: '/login',
+        builder: (context, state) => const LoginPage(),
+      ),
+      GoRoute(
+        path: '/register',
+        builder: (context, state) => const RegisterPage(),
+      ),
       GoRoute(
         path: '/',
         builder: (context, state) => const _MainPageBuilder(),
