@@ -19,7 +19,16 @@ Course CreateCourse(const lms_service::CourseData& course_data,
       "RETURNING *",
       course_data.title, course_data.description, course_data.author_id,
       course_data.start_ts, course_data.end_ts);
-  return result.AsSingleRow<Course>(userver::storages::postgres::kRowTag);
+
+  auto created_course = result.AsSingleRow<Course>(userver::storages::postgres::kRowTag);
+
+  pg_cluster->Execute(
+      userver::storages::postgres::ClusterHostType::kMaster,
+      "INSERT INTO User_Course(user_id, course_id, user_role) "
+      "VALUES($1, $2, 'admin')",
+      created_course.author_id, created_course.course_id);
+
+  return created_course;
 }
 
 std::vector<Course> getCourses(
