@@ -32,9 +32,6 @@ class CreateLessonView final
   std::string HandleRequestThrow(
       const userver::server::http::HttpRequest& request,
       userver::server::request::RequestContext&) const override {
-    lms_service::LessonData data;
-    data.title = request.GetArg("title");
-    data.description = request.GetArg("description");
     auto token_id = authentication::GetSessionInfo(pg_cluster_, request);
     // TODO: replace std::optional to std::exception structure
     if (!token_id.has_value()) {
@@ -42,7 +39,12 @@ class CreateLessonView final
       response.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
       return {};
     }
+
+    lms_service::LessonData data;
+    data.title = request.GetArg("title");
+    data.description = request.GetArg("description");
     data.author_id = token_id.value();
+
     if (!data.empty()) {
       auto result = lesson_catalog_controller::createLesson(data, pg_cluster_);
       return ToString(
