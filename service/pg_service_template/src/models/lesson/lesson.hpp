@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include <vector>
 #include <userver/formats/json/value_builder.hpp>
 
 namespace lms_service {

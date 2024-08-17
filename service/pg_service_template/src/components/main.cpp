@@ -16,6 +16,7 @@ int main(int argc, char* argv[]) {
 
   lms_service::AppendPostgresComponents(component_list);
   lms_service::AppendCreateCourseView(component_list);
+  lms_service::AppendGetCoursesView(component_list);
   lms_service::AppendCreateLessonView(component_list);
   lms_service::AppendLoginUser(component_list);
   lms_service::AppendRegisterUser(component_list);

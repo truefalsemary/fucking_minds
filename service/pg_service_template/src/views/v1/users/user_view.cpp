@@ -30,10 +30,6 @@
     std::string HandleRequestThrow(
         const userver::server::http::HttpRequest& request,
         userver::server::request::RequestContext&) const override {
-      lms_service::UserData data;
-      data.name = request.GetArg("name");
-      data.middle_name = request.GetArg("middle_name");
-      data.surname = request.GetArg("surname");
       auto token_id = authentication::GetSessionInfo(pg_cluster_, request);
       // TODO: replace std::optional to std::exception structure
       if (!token_id.has_value()) {
@@ -41,6 +37,11 @@
         response.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
         return {};
       }
+
+      lms_service::UserData data;
+      data.name = request.GetArg("name");
+      data.middle_name = request.GetArg("middle_name");
+      data.surname = request.GetArg("surname");
 
       auto result =
           user_controller::updateUserNameById(data, token_id.value(), pg_cluster_);
