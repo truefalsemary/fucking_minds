@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:beamer/beamer.dart';
+import 'package:flutter/material.dart';
 
 class AppRouter extends InheritedWidget {
   final BeamerDelegate routerDelegate;

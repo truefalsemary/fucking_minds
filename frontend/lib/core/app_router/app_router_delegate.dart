@@ -2,6 +2,7 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lms_front/core/logger/logger.dart';
+import 'package:lms_front/features/auth/domain/auth_cubit.dart';
 import 'package:lms_front/features/auth/presentation/pages/first_auth_page.dart';
 import 'package:lms_front/features/auth/presentation/pages/login_page.dart';
 import 'package:lms_front/features/auth/presentation/pages/register_page.dart';
@@ -47,7 +48,7 @@ class AppRouterDelegate extends BeamerDelegate {
             BeamGuard(
               pathPatterns: ['/auth/*'],
               guardNonMatching: true,
-              check: (context, location) => false,
+              check: (context, location) => context.read<AuthStore>().isAuthenticated(),
               beamToNamed: (origin, target) => '/auth',
             ),
           ],

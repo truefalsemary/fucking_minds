@@ -54,7 +54,6 @@ class _AuthFormState extends State<_AuthForm> {
           AuthButton(
             inputText: 'Зарегистрироваться',
             onPressed: () => (),
-            backgroundColor: ColorPalette.blue,
           ),
         ],
       ),
