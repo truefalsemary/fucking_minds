@@ -20,10 +20,10 @@ const _logTag = '[AppRouterDelegate]';
 class AppRouterDelegate extends BeamerDelegate {
   AppRouterDelegate()
       : super(
-          initialPath: '/auth',
+          initialPath: '/',
           locationBuilder: RoutesLocationBuilder(
             routes: {
-              // '/': (context, state, data) => const _MainPageBuilder(),
+              '/main': (context, state, data) => const _MainPageBuilder(),
               '/auth': (context, state, data) => const FirstAuthPage(),
               '/auth/register': (context, state, data) => const RegisterPage(),
               '/auth/login': (context, state, data) => const LoginPage(),
