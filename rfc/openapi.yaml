@@ -409,6 +409,16 @@ paths:
                     required: true
                     schema:
                         type: string
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                role:
+                                    description: user role
+                                    $ref: '#/components/schemas/user_role'
             security:
                 -   UserTicketAuth: [ ]
             responses:

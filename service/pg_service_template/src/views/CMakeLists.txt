@@ -39,6 +39,10 @@ add_library(views STATIC
     v1/catalogs/materials/get_materials.cpp
     v1/catalogs/materials/material_by_id.hpp
     v1/catalogs/materials/material_by_id.cpp
+
+
+    v1/course_administration/add_user_to_course_view.hpp
+    v1/course_administration/add_user_to_course_view.cpp
 )
 
 target_include_directories(views PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

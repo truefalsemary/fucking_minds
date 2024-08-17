@@ -31,7 +31,7 @@ std::optional<User> updateUserTypeById(
       "UPDATE Users "
       "SET current_user_type = $1 "
       "WHERE user_id = $2 "
-      //"AND EXISTS (SELECT 1 FROM author_check ) "
+      "AND EXISTS (SELECT 1 FROM author_check ) "
       "RETURNING user_id, current_user_type, user_name, user_surname, "
       "user_middle_name",
       parseTypeFromString(type), id, author_request);
