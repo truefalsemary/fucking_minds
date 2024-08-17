@@ -391,47 +391,6 @@ paths:
                     description: invalid input parameters
                 '401':
                     $ref: "#/components/responses/UnauthorizedError"
-    /v1/user/{user_id}/add/to_course/{course_id}:
-        post:
-            description: add user by user_id to course by course_id
-            tags: 
-                - User administration
-            parameters:
-                -   name: user_id
-                    in: path
-                    description: User id
-                    required: true
-                    schema:
-                        type: string
-                -   name: course_id
-                    in: path
-                    description: Course id
-                    required: true
-                    schema:
-                        type: string
-            requestBody:
-                required: true
-                content:
-                    application/json:
-                        schema:
-                            type: object
-                            properties:
-                                role:
-                                    description: user role
-                                    $ref: '#/components/schemas/user_role'
-            security:
-                -   UserTicketAuth: [ ]
-            responses:
-                '200':
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/user'
-                '400':
-                    description: invalid input parameters
-                '401':
-                    $ref: "#/components/responses/UnauthorizedError"
     /v1/course/create:
         post:
             description: creates new course
@@ -818,6 +777,47 @@ paths:
                     $ref: "#/components/responses/UnauthorizedError"
                 '404':
                     description: course is not found
+    /v1/user/{user_id}/add/to_course/{course_id}:
+        post:
+            description: add user by user_id to course by course_id
+            tags: 
+                - Courses administration
+            parameters:
+                -   name: user_id
+                    in: path
+                    description: User id
+                    required: true
+                    schema:
+                        type: string
+                -   name: course_id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                role:
+                                    description: user role
+                                    $ref: '#/components/schemas/user_role'
+            security:
+                -   UserTicketAuth: [ ]
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/user'
+                '400':
+                    description: invalid input parameters
+                '401':
+                    $ref: "#/components/responses/UnauthorizedError"
     /v1/course/{course_id}/add_lesson:
         post:
             description: add lesson to course by identifiers
