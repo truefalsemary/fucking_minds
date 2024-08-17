@@ -35,6 +35,7 @@ int main(int argc, char* argv[]) {
   lms_service::AppendCreateMaterialView(component_list);
   lms_service::AppendGetMaterialsView(component_list);
   lms_service::AppendMaterialByIdView(component_list);
+  lms_service::AppendAddUserToCourseView(component_list);
 
   lms_service::AppendSetInspectorView(component_list);
 

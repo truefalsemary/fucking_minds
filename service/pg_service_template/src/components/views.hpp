@@ -21,3 +21,4 @@
 #include "../views/v1/catalogs/materials/get_materials.hpp"
 #include "../views/v1/catalogs/materials/material_by_id.hpp"
 #include "../views/v1/submissions/submissions_view.hpp"
+#include "../views/v1/course_administration/add_user_to_course_view.hpp"
