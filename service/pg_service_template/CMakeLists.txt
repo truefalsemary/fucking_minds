@@ -23,116 +23,13 @@ endif()
 
 userver_setup_environment()
 
+add_subdirectory(src/utils)
+add_subdirectory(src/models)
+add_subdirectory(src/components)
+add_subdirectory(src/controllers)
+add_subdirectory(src/views)
 
-# Common sources
-add_library(${PROJECT_NAME}_objs OBJECT
-
-    src/utils/utils.hpp
-    src/utils/validation/time.hpp
-    src/utils/validation/time.cpp
-    src/models/enums/user_type.hpp
-    src/models/enums/user_type.cpp
-    src/models/enums/user_role.hpp
-    src/models/enums/user_role.cpp
-    src/models/enums/status_code.hpp
-
-    src/components/postgres_components/postgres_components.hpp
-    src/components/postgres_components/postgres_components.cpp
-
-    src/components/views.hpp
-    src/models/serialization/serialization.hpp
-    src/models/serialization/serialization.cpp
-    src/models/courses/course.cpp
-    src/models/auth/token_model.hpp
-    src/models/auth/token_model.cpp
-    src/models/user/user_session.hpp
-    src/models/user/user_session.cpp
-    src/models/user/user_data.hpp
-    src/models/user/user_data.cpp
-    src/models/user/user.hpp
-    src/models/user/user.cpp
-    src/models/courses/course_data.hpp
-    src/models/courses/course_data.cpp
-    src/models/courses/course.hpp
-    src/models/courses/course.cpp
-    src/controllers/authentication/auth_controller.hpp
-    src/controllers/authentication/auth_controller.cpp
-    src/controllers/catalogs/course_catalog_controller.hpp
-    src/controllers/catalogs/course_catalog_controller.cpp
-    src/views/v1/catalogs/courses/create_course.hpp
-    src/views/v1/catalogs/courses/create_course.cpp
-
-    src/models/lesson/lesson.hpp
-    src/models/lesson/lesson.cpp
-    src/models/lesson/lesson_data.hpp
-    src/models/lesson/lesson_data.cpp
-    src/controllers/catalogs/lesson_catalog_controller.hpp
-    src/controllers/catalogs/lesson_catalog_controller.cpp
-    src/views/v1/catalogs/lessons/create_lesson.hpp
-    src/views/v1/catalogs/lessons/create_lesson.cpp
-
-    src/models/sign/sign_data.hpp
-    src/controllers/authentication/sign_controller.hpp
-    src/controllers/authentication/sign_controller.cpp
-    src/views/v1/authentication/login/login.hpp
-    src/views/v1/authentication/login/login.cpp
-    src/views/v1/authentication/register/register.hpp
-    src/views/v1/authentication/register/register.cpp
-
-    src/views/v1/catalogs/lessons/get_lessons.hpp
-    src/views/v1/catalogs/lessons/get_lessons.cpp
-    src/views/v1/catalogs/lessons/lesson_by_id_view.hpp
-    src/views/v1/catalogs/lessons/lesson_by_id_view.cpp
-
-    src/controllers/catalogs/task_catalog_controller.hpp
-    src/controllers/catalogs/task_catalog_controller.cpp
-
-    src/models/task/task_data.hpp
-    src/models/task/task_data.cpp
-    src/models/task/task.hpp
-    src/models/task/task.cpp
-
-    src/views/v1/catalogs/tasks/create_task.hpp
-    src/views/v1/catalogs/tasks/create_task.cpp
-    src/views/v1/catalogs/tasks/get_tasks.hpp
-    src/views/v1/catalogs/tasks/get_tasks.cpp
-    src/views/v1/catalogs/tasks/task_by_id.hpp
-    src/views/v1/catalogs/tasks/task_by_id.cpp
-
-    src/controllers/users/user_controller.hpp
-    src/controllers/users/user_controller.cpp
-
-    src/views/v1/users/user_view.hpp
-    src/views/v1/users/user_view.cpp
-    src/views/v1/users/user_type_change_view.hpp
-    src/views/v1/users/user_type_change_view.cpp
-
-    src/controllers/catalogs/material_catalog_controller.hpp
-    src/controllers/catalogs/material_catalog_controller.cpp
-
-    src/models/material/material.hpp
-    src/models/material/material.cpp
-    src/models/material/material_data.hpp
-    src/models/material/material_data.cpp
-
-    src/views/v1/catalogs/materials/create_material.hpp
-    src/views/v1/catalogs/materials/create_material.cpp
-    src/views/v1/catalogs/materials/get_materials.hpp
-    src/views/v1/catalogs/materials/get_materials.cpp
-    src/views/v1/catalogs/materials/material_by_id.hpp
-    src/views/v1/catalogs/materials/material_by_id.cpp
-
-    src/models/user_course/user_course.hpp
-    src/models/user_course/user_course_data.hpp
-    src/models/user_course/user_course.cpp
-    src/controllers/course_administration/course_administration_controller.hpp
-    src/controllers/course_administration/course_administration_controller.cpp
-    src/views/v1/users/enroll_in_course_view.hpp
-    src/views/v1/users/enroll_in_course_view.cpp
-    src/views/v1/users/leave_course_view.hpp
-    src/views/v1/users/leave_course_view.cpp
-
-)
+add_library(${PROJECT_NAME}_objs $<TARGET_OBJECTS:utils> $<TARGET_OBJECTS:models> $<TARGET_OBJECTS:controllers> $<TARGET_OBJECTS:views> $<TARGET_OBJECTS:components>)
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver::postgresql)
 
 
