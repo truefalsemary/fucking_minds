@@ -19,7 +19,7 @@ class AuthState {
     return {
       'username': state.username,
       'password': state.password,
-      'status': state.status,
+      'status': state.status.toString(),
     };
   }
 

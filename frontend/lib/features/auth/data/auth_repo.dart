@@ -1,8 +1,18 @@
 import 'dart:async';
+import 'package:json_annotation/json_annotation.dart';
 
 // import 'package:lms_front/core/networking/api_client/api_client.dart';
 
-enum AuthenticationStatus { unknown, authenticated, unauthenticated }
+enum AuthenticationStatus {
+  @JsonValue('unknown')
+  unknown,
+
+  @JsonValue('authenticated')
+  authenticated,
+
+  @JsonValue('unauthenticated')
+  unauthenticated,
+}
 
 class AuthenticationRepository {
   final _controller = StreamController<AuthenticationStatus>();
@@ -19,7 +29,7 @@ class AuthenticationRepository {
 
     await Future.delayed(
       const Duration(milliseconds: 250),
-          () => _controller.add(
+      () => _controller.add(
           _areCredentialsValid(username: username, password: password)
               ? AuthenticationStatus.authenticated
               : AuthenticationStatus.unauthenticated),

@@ -11,9 +11,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  setPathUrlStrategy();
-
   final storage = await HydratedStorage.build(
     storageDirectory: kIsWeb
         ? HydratedStorage.webStorageDirectory
@@ -32,7 +29,12 @@ Future<void> main() async {
   };
 
   runZonedGuarded(
-    () => runApp(App(DiContainer()..init())),
+    () {
+      WidgetsFlutterBinding.ensureInitialized();
+      setPathUrlStrategy();
+
+      runApp(App(DiContainer()..init()));
+    },
     (error, stackTrace) => Log.error(
       error,
       trace: stackTrace,

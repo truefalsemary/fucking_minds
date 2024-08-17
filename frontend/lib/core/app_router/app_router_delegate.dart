@@ -27,7 +27,9 @@ class AppRouterDelegate extends BeamerDelegate {
               '/main': (context, state, data) => const _MainPageBuilder(),
               '/auth': (context, state, data) => const FirstAuthPage(),
               '/auth/register': (context, state, data) => const RegisterPage(),
-              '/auth/login': (context, state, data) => const LoginPage(),
+              '/auth/login': (context, state, data) => LoginPage(
+                    login: (data ?? '') as String,
+                  ),
               '/courses': (context, state, data) => const ListCoursesPage(),
               '/courses/:filter': (context, state, data) =>
                   _FilteredCourseListPageBuilder(state: state),
@@ -48,7 +50,8 @@ class AppRouterDelegate extends BeamerDelegate {
             BeamGuard(
               pathPatterns: ['/auth/*'],
               guardNonMatching: true,
-              check: (context, location) => context.read<AuthStore>().isAuthenticated(),
+              check: (context, location) =>
+                  context.read<AuthStore>().isAuthenticated(),
               beamToNamed: (origin, target) => '/auth',
             ),
           ],
