@@ -42,15 +42,12 @@ class AddUserToCourseView final
       return {};
     }
 
-    Token target_token;
-    target_token.data = request.GetPathArg("user_id");
-    auto target_token_id =
-        authentication::GetUserIdByToken(target_token, pg_cluster_);
+    std::string target_token = request.GetPathArg("user_id");
 
 
-    if (!target_token_id.has_value()) {
+    if (target_token.empty()) {
       auto& response = request.GetHttpResponse();
-      response.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
+      response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
       return {};
     }
 
@@ -71,7 +68,7 @@ class AddUserToCourseView final
       return {};
     }
 
-    user_course.user_id = target_token_id.value();
+    user_course.user_id = target_token;
     user_course.role = parseRoleFromString(role);
 
     user_course.course_id = course_id;

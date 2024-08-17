@@ -45,12 +45,10 @@ class UserTypeChange final : public userver::server::handlers::HttpHandlerBase {
     }
     auto type = request.GetArg("type");
 
-    Token author_token;
-    author_token.data =  request.GetPathArg("id");
-    auto target_token_id =
-        authentication::GetUserIdByToken(author_token, pg_cluster_);
 
-    if (!target_token_id.has_value()) {
+    std::string target_token_id =  request.GetPathArg("id");
+
+    if (target_token_id.empty()) {
       auto& response = request.GetHttpResponse();
       response.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
       return {};
@@ -63,7 +61,7 @@ class UserTypeChange final : public userver::server::handlers::HttpHandlerBase {
       return {};
     }
     auto result = user_controller::updateUserTypeById(
-        type, target_token_id.value(), token_id.value(), pg_cluster_);
+        type, target_token_id, token_id.value(), pg_cluster_);
     if (!result.has_value()) {
       auto& response = request.GetHttpResponse();
       response.SetStatus(userver::server::http::HttpStatus::kForbidden);
