@@ -2,6 +2,9 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lms_front/core/logger/logger.dart';
+import 'package:lms_front/features/auth/presentation/pages/first_auth_page.dart';
+import 'package:lms_front/features/auth/presentation/pages/login_page.dart';
+import 'package:lms_front/features/auth/presentation/pages/register_page.dart';
 import 'package:lms_front/features/courses/edit_course_tabs/course_settings_page.dart';
 import 'package:lms_front/features/courses/list_courses_page.dart';
 import 'package:lms_front/features/courses/single_course/presentation/page/single_course_page.dart';
@@ -17,10 +20,13 @@ const _logTag = '[AppRouterDelegate]';
 class AppRouterDelegate extends BeamerDelegate {
   AppRouterDelegate()
       : super(
-          initialPath: '/',
+          initialPath: '/auth',
           locationBuilder: RoutesLocationBuilder(
             routes: {
-              '/': (context, state, data) => const _MainPageBuilder(),
+              // '/': (context, state, data) => const _MainPageBuilder(),
+              '/auth': (context, state, data) => const FirstAuthPage(),
+              '/auth/register': (context, state, data) => const RegisterPage(),
+              '/auth/login': (context, state, data) => const LoginPage(),
               '/courses': (context, state, data) => const ListCoursesPage(),
               '/courses/:filter': (context, state, data) =>
                   _FilteredCourseListPageBuilder(state: state),
@@ -37,6 +43,12 @@ class AppRouterDelegate extends BeamerDelegate {
               pathPatterns: ['/course/:courseId'],
               check: (context, location) => false,
               beamToNamed: (origin, target) => '/program',
+            ),
+            BeamGuard(
+              pathPatterns: ['/auth/*'],
+              guardNonMatching: true,
+              check: (context, location) => false,
+              beamToNamed: (origin, target) => '/auth',
             ),
           ],
         );
@@ -65,6 +77,7 @@ class _MainPageBuilder extends StatelessWidget {
 
 class _FilteredCourseListPageBuilder extends StatelessWidget {
   final BeamState state;
+
   const _FilteredCourseListPageBuilder({required this.state});
 
   @override
@@ -78,6 +91,7 @@ class _FilteredCourseListPageBuilder extends StatelessWidget {
 
 class _SingleCoursePageBuilder extends StatelessWidget {
   final BeamState state;
+
   const _SingleCoursePageBuilder({required this.state});
 
   @override
@@ -102,6 +116,7 @@ class _SingleCoursePageBuilder extends StatelessWidget {
 
 class _CourseSettingsPageBuilder extends StatelessWidget {
   final BeamState state;
+
   const _CourseSettingsPageBuilder({required this.state});
 
   @override
@@ -131,7 +146,6 @@ class _CourseSettingsPageBuilder extends StatelessWidget {
 //     );
 //   }
 // }
-
 
 // final routerDelegate = BeamerDelegate(
 //   locationBuilder: RoutesLocationBuilder(
