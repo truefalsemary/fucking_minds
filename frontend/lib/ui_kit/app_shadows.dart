@@ -12,10 +12,4 @@ abstract class AppShadows {
     blurRadius: 4,
     offset: Offset(0, 4),
   );
-
-  // static const decoration = BoxDecoration(
-  //   color: Colors.white,
-  //   borderRadius: BorderRadius.all(Radius.circular(20)),
-  //   boxShadow: [AppShadows.card],
-  // );
 }
