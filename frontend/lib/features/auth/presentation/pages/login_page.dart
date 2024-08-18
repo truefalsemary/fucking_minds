@@ -52,42 +52,43 @@ class _LoginFormState extends State<LoginForm> {
     Log.info('login: ${widget.login}');
 
     return Form(
-        key: _formKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'Вход',
-              style: context.appTextTheme.header1,
-            ),
-            const SizedBox(height: heightBetweenElements),
-            TextField(
-              readOnly: true,
-              enabled: false,
-              decoration: InputDecoration(labelText: widget.login),
-            ),
-            const SizedBox(height: heightBetweenElements),
-            TextField(
-              decoration: const InputDecoration(labelText: 'Пароль'),
-              obscureText: true,
-              onChanged: (value) {
-                passwordController.text = value;
-
-                // loginController.selection = TextSelection.fromPosition(
-                //   TextPosition(offset: loginController.text.length),
-                // );
-              },
-            ),
-            const SizedBox(height: 1.5 * heightBetweenElements),
-            AuthButton(
-                inputText: 'Войти',
-                onPressed: () => {
-                      context
-                          .read<AuthStore>()
-                          .login(widget.login, passwordController.text),
-                      context.appRouter.routerDelegate.beamToNamed('/'),
-                    }),
-          ],
-        ));
+      key: _formKey,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'Вход',
+            style: context.appTextTheme.header1,
+          ),
+          const SizedBox(height: heightBetweenElements),
+          TextField(
+            readOnly: true,
+            enabled: false,
+            decoration: InputDecoration(labelText: widget.login),
+          ),
+          const SizedBox(height: heightBetweenElements),
+          TextField(
+            decoration: const InputDecoration(labelText: 'Пароль'),
+            obscureText: true,
+            onChanged: (value) {
+              passwordController.text = value;
+              // loginController.selection = TextSelection.fromPosition(
+              //   TextPosition(offset: loginController.text.length),
+              // );
+            },
+          ),
+          const SizedBox(height: 1.5 * heightBetweenElements),
+          AuthButton(
+            inputText: 'Войти',
+            onPressed: () => {
+              context
+                  .read<AuthStore>()
+                  .login(widget.login, passwordController.text),
+              context.appRouter.routerDelegate.beamToNamed('/'),
+            },
+          ),
+        ],
+      ),
+    );
   }
 }

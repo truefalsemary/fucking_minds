@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:lms_front/features/shared/data/models/course_related/cource/course.dart';
 import 'package:lms_front/features/shared/domain/course/single_course_cubit/single_course_state.dart';
 import 'package:lms_front/features/shared/domain/repositories/course_repository.dart';
 
@@ -18,4 +19,6 @@ class SingleCourseCubit extends Cubit<SingleCourseState> {
       emit(SingleCourseState.loadFailure(e.toString()));
     }
   }
+
+  void set(Course course) => emit(SingleCourseState.loadSuccess(course));
 }

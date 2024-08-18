@@ -22,7 +22,9 @@ mixin _$CourseListSortCategory {
   List<Course> Function(List<Course>) get fn =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CourseListSortCategory
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CourseListSortCategoryCopyWith<CourseListSortCategory> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,6 +53,8 @@ class _$CourseListSortCategoryCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CourseListSortCategory
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -106,6 +110,8 @@ class __$$CourseListSortCategoryImplCopyWithImpl<$Res>
       $Res Function(_$CourseListSortCategoryImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CourseListSortCategory
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -176,7 +182,9 @@ class _$CourseListSortCategoryImpl implements _CourseListSortCategory {
   int get hashCode =>
       Object.hash(runtimeType, displayName, tileColorInt, textColorInt, fn);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CourseListSortCategory
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CourseListSortCategoryImplCopyWith<_$CourseListSortCategoryImpl>
@@ -200,8 +208,11 @@ abstract class _CourseListSortCategory implements CourseListSortCategory {
   int get textColorInt;
   @override
   List<Course> Function(List<Course>) get fn;
+
+  /// Create a copy of CourseListSortCategory
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CourseListSortCategoryImplCopyWith<_$CourseListSortCategoryImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

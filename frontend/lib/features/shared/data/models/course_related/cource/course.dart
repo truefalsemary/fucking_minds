@@ -1,34 +1,26 @@
-import 'package:json_annotation/json_annotation.dart';
+// ignore_for_file: invalid_annotation_target
 
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'course.freezed.dart';
 part 'course.g.dart';
 
-@JsonSerializable()
-class Course {
-  final String id;
-  final String title;
-
-  /// Optional start date of the course
-  @JsonKey(name: 'start_ts', fromJson: DateTime.parse)
-  final DateTime? startDate;
-
-  /// Optional end date of the course
-  @JsonKey(name: 'end_ts', fromJson: DateTime.parse)
-  final DateTime? endDate;
-
-  final String description;
-
-  @JsonKey(name: 'author_id')
-  final String authorId;
-
-  Course({
-    required this.id,
-    required this.title,
-    required this.startDate,
-    required this.endDate,
-    required this.description,
-    required this.authorId,
-  });
+@freezed
+class Course with _$Course {
+  const factory Course({
+    required String id,
+    required String title,
+    required String description,
+    @JsonKey(name: 'author_id') required String authorId,
+    @JsonKey(name: 'start_ts', fromJson: _fromJson, toJson: _toJson)
+    DateTime? startDate,
+    @JsonKey(name: 'end_ts', fromJson: _fromJson, toJson: _toJson)
+    DateTime? endDate,
+  }) = _Course;
 
   factory Course.fromJson(Map<String, dynamic> json) => _$CourseFromJson(json);
-  Map<String, dynamic> toJson() => _$CourseToJson(this);
 }
+
+DateTime? _fromJson(String? date) => date != null ? DateTime.parse(date) : null;
+
+String? _toJson(DateTime? date) => date?.toIso8601String();
