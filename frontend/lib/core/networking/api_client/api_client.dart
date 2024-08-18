@@ -15,73 +15,73 @@ abstract class ApiClient {
   factory ApiClient(Dio dio, {String baseUrl}) = _ApiClient;
 
   // Course catalog
-  @POST('/course/create')
+  @POST('/v1/course/create')
   Future<void> createCourse(@Body() Course course);
 
-  @GET('/courses')
+  @GET('/v1/courses')
   Future<List<Course>> getCourses();
 
-  @GET('/course/{id}')
+  @GET('/v1/course/{id}')
   Future<Course> getCourse(@Path('course_id') String id);
 
-  @DELETE('/course/{id}')
+  @DELETE('/v1/course/{id}')
   Future<void> deleteCourse(@Path('course_id') String id);
 
   // Course administration
-  @PUT('/course/{id}')
+  @PUT('/v1/course/{id}')
   Future<void> updateCourse(
     @Path('course_id') String id,
     @Body() Course course,
   );
 
-  @GET('/course/{id}/students')
+  @GET('/v1/course/{id}/students')
   Future<List<User>> getCourseStudents(@Path('course_id') String id);
 
-  @GET('/course/{id}/teachers')
+  @GET('/v1/course/{id}/teachers')
   Future<List<User>> getCourseTeachers(@Path('course_id') String id);
 
-  @GET('/course/{id}/admins')
+  @GET('/v1/course/{id}/admins')
   Future<List<User>> getCourseAdmins(@Path('course_id') String id);
 
-  @GET('/course/{id}/lessons')
+  @GET('/v1/course/{id}/lessons')
   Future<List<Lesson>> getCourseLessons(@Path('course_id') String id);
 
-  @GET('/course/{id}/lessons_ids')
+  @GET('/v1/course/{id}/lessons_ids')
   Future<List<int>> getCourseLessonsIds(@Path('course_id') String id);
 
-  @GET('/course/{id}/materials')
+  @GET('/v1/course/{id}/materials')
   Future<List<Resource>> getCourseMaterials(@Path('course_id') String id);
 
-  @GET('/course/{id}/tasks')
+  @GET('/v1/course/{id}/tasks')
   Future<List<Task>> getCourseTasks(@Path('course_id') String id);
 
-  @POST('/course/{id}/add_lesson')
+  @POST('/v1/course/{id}/add_lesson')
   Future<void> addCourseLesson(
     @Path('course_id') String id,
     @Body() Lesson lesson,
   );
 
-  @DELETE('/course/{id}/lesson/{lesson_id}')
+  @DELETE('/v1/course/{id}/lesson/{lesson_id}')
   Future<void> deleteCourseLesson(
     @Path('course_id') String id,
     @Path('lesson_id') String lessonId,
   );
 
-  @POST('/course/{id}/lesson/{lesson_id}')
+  @POST('/v1/course/{id}/lesson/{lesson_id}')
   Future<void> addCourseLessonMaterial(
     @Path('course_id') String id,
     @Path('lesson_id') String lessonId,
     @Body() Resource resource,
   );
 
-  @POST('/course/{id}/add_task')
+  @POST('/v1/course/{id}/add_task')
   Future<void> addCourseLessonTask(
     @Path('course_id') String id,
     @Path('lesson_id') String lessonId,
     @Body() Task task,
   );
 
-  @PUT('/course/{id}/change_task')
+  @PUT('/v1/course/{id}/change_task')
   Future<void> changeCourseLessonTask(
     @Path('course_id') String id,
     @Path('lesson_id') String lessonId,
@@ -89,7 +89,7 @@ abstract class ApiClient {
   );
 
   @DELETE(
-    '/course/{id}/lesson/{lesson_id}/task/{task_id}/student/{student_id}/inspector',
+    '/v1/course/{id}/lesson/{lesson_id}/task/{task_id}/student/{student_id}/inspector',
   )
   Future<void> deleteCourseLessonTaskStudentInspector(
     @Path('course_id') String id,
@@ -99,76 +99,76 @@ abstract class ApiClient {
   );
 
   // Lesson catalog
-  @POST('/lesson/create')
+  @POST('/v1/lesson/create')
   Future<void> createLesson(
     @Body() Lesson lesson,
   );
 
-  @GET('/lessons')
+  @GET('/v1/lessons')
   Future<List<Lesson>> getLessons();
 
-  @GET('/lesson/{id}')
+  @GET('/v1/lesson/{id}')
   Future<Lesson> getLesson(@Path('lesson_id') String id);
 
-  @DELETE('/lesson/{id}')
+  @DELETE('/v1/lesson/{id}')
   Future<void> deleteLesson(@Path('lesson_id') String id);
 
-  @PUT('/lesson/{id}')
+  @PUT('/v1/lesson/{id}')
   Future<void> updateLesson(
     @Path('lesson_id') String id,
     @Body() Lesson lesson,
   );
 
-  @GET('/lesson/{id}/materials')
+  @GET('/v1/lesson/{id}/materials')
   Future<List<Resource>> getLessonMaterials(@Path('lesson_id') String id);
 
-  @GET('/lesson/{id}/tasks')
+  @GET('/v1/lesson/{id}/tasks')
   Future<List<Task>> getLessonTasks(@Path('lesson_id') String id);
 
   // Materials (resources) catalog
-  @POST('/material/create')
+  @POST('/v1/material/create')
   Future<void> createMaterial(
     @Body() Resource resource,
   );
 
-  @GET('/materials')
+  @GET('/v1/materials')
   Future<List<Resource>> getMaterials();
 
-  @GET('/material/{id}')
+  @GET('/v1/material/{id}')
   Future<Resource> getMaterial(@Path('resource_id') String id);
 
-  @DELETE('/material/{id}')
+  @DELETE('/v1/material/{id}')
   Future<void> deleteMaterial(@Path('resource_id') String id);
 
-  @PUT('/material/{id}')
+  @PUT('/v1/material/{id}')
   Future<void> updateMaterial(
     @Path('resource_id') String id,
     @Body() Resource resource,
   );
 
   // Tasks catalog
-  @POST('/task/create')
+  @POST('/v1/task/create')
   Future<void> createTask(
     @Body() Task task,
   );
 
-  @GET('/tasks')
+  @GET('/v1/tasks')
   Future<List<Task>> getTasks(@Path('task_id') String id);
 
-  @GET('/task/{id}')
+  @GET('/v1/task/{id}')
   Future<Task> getTask(@Path('task_id') String id);
 
-  @DELETE('/task/{id}')
+  @DELETE('/v1/task/{id}')
   Future<void> deleteTask(@Path('task_id') String id);
 
-  @PUT('/task/{id}')
+  @PUT('/v1/task/{id}')
   Future<void> updateTask(
     @Path('task_id') String id,
     @Body() Task task,
   );
 
   // Submissions
-  @POST('/course/{course_id}/set_inspectors')
+  @POST('/v1/course/{course_id}/set_inspectors')
   Future<void> setCourseInspectors(
     @Path('course_id') String courseId,
     @Path('lesson_id') String lessonId,
@@ -176,7 +176,7 @@ abstract class ApiClient {
   );
 
   @POST(
-    '/course/{course_id}/lesson/{lesson_id}/task/{task_id}/student/{student_id}/inspector',
+    '/v1/course/{course_id}/lesson/{lesson_id}/task/{task_id}/student/{student_id}/inspector',
   )
   Future<void> setCourseInspector(
     @Path('course_id') String courseId,
@@ -186,7 +186,7 @@ abstract class ApiClient {
     @Path('teacher_id') String teacherId,
   );
 
-  @POST('/course/{course_id}/send_solution')
+  @POST('/v1/course/{course_id}/send_solution')
   Future<void> sendSolution(
     @Body() Lesson lesson,
     @Path('course_id') String courseId,
