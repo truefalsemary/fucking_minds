@@ -133,20 +133,19 @@ std::optional<LessonCourse> add_lesson_to_course(
         }
 
         std::vector<Task> get_tasks(
-        const std::string& course_id,
-        userver::storages::postgres::ClusterPtr pg_cluster)
-        {
-      auto result = pg_cluster->Execute(
-          userver::storages::postgres::ClusterHostType::kMaster,
-            "SELECT l.* "
-            "FROM Lessons l "
-            "JOIN Course_Lesson cl ON l.lesson_id = cl.lesson_id "
-            "WHERE cl.course_id = $1; ",
-            course_id);
-        
+            const std::string& course_id,
+            userver::storages::postgres::ClusterPtr pg_cluster) {
+          auto result = pg_cluster->Execute(
+              userver::storages::postgres::ClusterHostType::kMaster,
+              "SELECT t.* "
+              "FROM Tasks t "
+              "JOIN Lessons_Tasks l ON t.task_id = l.task_id "
+              "JOIN Course_Lesson cl ON l.lesson_id = cl.lesson_id "
+              "WHERE cl.course_id = $1; ",
+              course_id);
 
-        return result.AsContainer<std::vector<Task>>(
-            userver::storages::postgres::kRowTag);
+          return result.AsContainer<std::vector<Task>>(
+              userver::storages::postgres::kRowTag);
         }
 
         std::vector<Material> get_materials(
@@ -154,8 +153,9 @@ std::optional<LessonCourse> add_lesson_to_course(
             userver::storages::postgres::ClusterPtr pg_cluster) {
           auto result = pg_cluster->Execute(
               userver::storages::postgres::ClusterHostType::kMaster,
-              "SELECT l.* "
-              "FROM Lessons l "
+              "SELECT m.* "
+              "FROM Materials m "
+              "JOIN Lesson_Material l ON m.material_id = l.material_id "
               "JOIN Course_Lesson cl ON l.lesson_id = cl.lesson_id "
               "WHERE cl.course_id = $1; ",
               course_id);

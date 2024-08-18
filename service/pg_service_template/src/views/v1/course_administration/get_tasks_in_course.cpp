@@ -40,15 +40,15 @@ class GetTasksInCourseView final
       return {};
     }
 
-    std::string course_id = request.GetPathArg("id");
+    std::string lesson_id = request.GetPathArg("id");
 
-    if (course_id.empty()) {
+    if (lesson_id.empty()) {
       auto& response = request.GetHttpResponse();
       response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
       return {};
     }
 
-    auto result = course_administration::get_tasks(course_id, pg_cluster_);
+    auto result = course_administration::get_tasks(lesson_id, pg_cluster_);
 
     return ToString(
         userver::formats::json::ValueBuilder{result}.ExtractValue());
