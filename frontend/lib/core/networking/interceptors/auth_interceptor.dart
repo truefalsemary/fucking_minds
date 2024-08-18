@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-const authHeader = 'X-Ya-User-Authorization';
+const authHeader = 'X-Ya-User-Ticket';
 
 class AuthInterceptor extends Interceptor {
   final String token;
