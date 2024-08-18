@@ -100,20 +100,10 @@ components_manager:
             method: GET,PUT,DELETE
             task_processor: main-task-processor
 
-        # handler-v1-course-get-students:
-        #     path: /v1/course/{id}/students
-        #     method: GET
-        #     task_processor: main-task-processor
-
-        # handler-v1-course-get-teachers:
-        #     path: /v1/course/{id}/teachers
-        #     method: GET
-        #     task_processor: main-task-processor
-
-        # handler-v1-course-get-admins:
-        #     path: /v1/course/{id}/admins
-        #     method: GET
-        #     task_processor: main-task-processor
+        handler-v1-course-get-users:
+            path: /v1/course/{id}/users
+            method: GET
+            task_processor: main-task-processor
 
         # handler-v1-course-get-lessons:
         #     path: /v1/course/{id}/lessons

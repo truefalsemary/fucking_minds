@@ -55,5 +55,38 @@ std::optional<UserCourse> add_user_to_course(
   return result.AsOptionalSingleRow<UserCourse>(
       userver::storages::postgres::kRowTag);
     }
+
+    std::vector<User> get_users_by_id_and_role(
+        const UserRole& user_role, const std::string& course_id,
+        const std::string& author_request,
+        userver::storages::postgres::ClusterPtr pg_cluster) 
+        {
+      auto result = pg_cluster->Execute(
+          userver::storages::postgres::ClusterHostType::kMaster,
+          "WITH author AS ("
+          "SELECT user_role "
+          "FROM User_Course "
+          "WHERE user_id = $3 "
+          "), "
+          "role_check AS ( "
+          "SELECT ($1 <= user_role) AS is_lower "
+          "FROM author "
+          ") "
+          "SELECT * "
+          "FROM Users "
+          "WHERE user_id IN ( "
+          "SELECT user_id "
+          "FROM User_Course "
+          "WHERE user_role = $1 AND course_id = $2 "
+          ") "
+          "AND EXISTS ( "
+          "SELECT 1 "
+          "FROM role_check "
+          "WHERE is_lower = TRUE ); ",
+          user_role, course_id, author_request);
+
+      return result.AsContainer<std::vector<User>>(
+          userver::storages::postgres::kRowTag);
+    }
 }  // namespace course_administration
 }  // namespace lms_service

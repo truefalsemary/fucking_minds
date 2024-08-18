@@ -22,3 +22,4 @@
 #include "../views/v1/catalogs/materials/material_by_id.hpp"
 #include "../views/v1/submissions/submissions_view.hpp"
 #include "../views/v1/course_administration/add_user_to_course_view.hpp"
+#include "../views/v1/course_administration/get_user_by_id_and_role.hpp"
