@@ -81,11 +81,15 @@ class _TaskModalContentState extends State<TaskModalContent> {
               ),
               const SizedBox(height: heightBetweenFields),
               DatePickerInputField(
+                startDate: DateTime.now(),
+                endDate: DateTime.now().add(const Duration(days: 365 * 1000)),
                 title: 'Дедлайн для студента',
                 titleStyle: context.appTextTheme.body3,
               ),
               const SizedBox(height: heightBetweenFields),
               DatePickerInputField(
+                startDate: DateTime.now(),
+                endDate: DateTime.now().add(const Duration(days: 365 * 1000)),
                 title: 'Дедлайн для проверяющего',
                 titleStyle: context.appTextTheme.body3,
               ),

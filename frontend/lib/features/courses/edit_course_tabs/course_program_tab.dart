@@ -5,7 +5,6 @@ import 'package:lms_front/features/courses/edit_course_tabs/task_modal_content.d
 import 'package:lms_front/ui_kit/app_icons.dart';
 import 'package:lms_front/ui_kit/app_shadows.dart';
 import 'package:lms_front/ui_kit/colors/color_palette.dart';
-import 'package:lms_front/ui_kit/components/text_input_field/text_input_field.dart';
 import 'package:lms_front/ui_kit/typography/app_text_theme.dart';
 
 class CourseProgramTab extends StatelessWidget {
