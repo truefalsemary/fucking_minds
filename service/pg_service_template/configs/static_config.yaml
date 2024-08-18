@@ -89,9 +89,19 @@ components_manager:
             path: /v1/user/{user_id}/add/to_course/{course_id}
             method: POST
             task_processor: main-task-processor
+        
+        handler-v1-user-by-email-add-to-course-by-id:
+            path: /v1/user/{email}/add/by/email/to_course/{course_id}
+            method: POST
+            task_processor: main-task-processor
 
         handler-v1-get-courses:
             path: /v1/courses
+            method: GET
+            task_processor: main-task-processor
+
+        handler-v1-get-my-courses:
+            path: /v1/courses/my
             method: GET
             task_processor: main-task-processor
 

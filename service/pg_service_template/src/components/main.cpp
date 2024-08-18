@@ -44,5 +44,8 @@ int main(int argc, char* argv[]) {
   lms_service::AppendGetMaterialsInCourseView(component_list);
   lms_service::AppendGetTasksInCourseView(component_list);
 
+  lms_service::AppendAddUserByEmailToCourseView(component_list);
+  lms_service::AppendGetMyCoursesView(component_list);
+
   return userver::utils::DaemonMain(argc, argv, component_list);
 }

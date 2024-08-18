@@ -58,6 +58,12 @@ add_library(views STATIC
     v1/course_administration/get_tasks_in_course.hpp
     v1/course_administration/get_tasks_in_course.cpp
 
+    v1/course_administration/get_my_courses_view.hpp
+    v1/course_administration/get_my_courses_view.cpp
+    v1/course_administration/add_user_by_email_to_course_view.hpp
+    v1/course_administration/add_user_by_email_to_course_view.cpp
+
+
 )
 
 target_include_directories(views PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

@@ -27,3 +27,5 @@
 #include "../views/v1/course_administration/get_lessons_in_course.hpp"
 #include "../views/v1/course_administration/get_materials_in_course.hpp"
 #include "../views/v1/course_administration/get_tasks_in_course.hpp"
+#include "../views/v1/course_administration/add_user_by_email_to_course_view.hpp"
+#include "../views/v1/course_administration/get_my_courses_view.hpp"
