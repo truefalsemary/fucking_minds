@@ -207,6 +207,8 @@ abstract class _$$CourseCreatedImplCopyWith<$Res> {
       __$$CourseCreatedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Course newCourse});
+
+  $CourseCopyWith<$Res> get newCourse;
 }
 
 /// @nodoc
@@ -228,6 +230,14 @@ class __$$CourseCreatedImplCopyWithImpl<$Res>
           : newCourse // ignore: cast_nullable_to_non_nullable
               as Course,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CourseCopyWith<$Res> get newCourse {
+    return $CourseCopyWith<$Res>(_value.newCourse, (value) {
+      return _then(_value.copyWith(newCourse: value));
+    });
   }
 }
 
@@ -353,6 +363,8 @@ abstract class _$$CourseUpdatedImplCopyWith<$Res> {
       __$$CourseUpdatedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Course updatedCourse});
+
+  $CourseCopyWith<$Res> get updatedCourse;
 }
 
 /// @nodoc
@@ -374,6 +386,14 @@ class __$$CourseUpdatedImplCopyWithImpl<$Res>
           : updatedCourse // ignore: cast_nullable_to_non_nullable
               as Course,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CourseCopyWith<$Res> get updatedCourse {
+    return $CourseCopyWith<$Res>(_value.updatedCourse, (value) {
+      return _then(_value.copyWith(updatedCourse: value));
+    });
   }
 }
 

@@ -18,9 +18,14 @@ generate:
 	make l10n
 	make build_models
 
+
+
 # Start fixing and building everything
 all:
 	make deps
 	make fix
 	make build_models
 	make l10n
+
+run_insecure_web:
+	flutter run -d chrome --web-browser-flag "--disable-web-security"  

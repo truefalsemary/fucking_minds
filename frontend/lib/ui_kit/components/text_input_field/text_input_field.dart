@@ -6,12 +6,13 @@ import 'package:lms_front/ui_kit/typography/app_text_theme.dart';
 class TextInputField extends StatelessWidget {
   final String title;
   final String hint;
-
+  final TextEditingController? controller;
   final int? minLines;
 
   const TextInputField({
     required this.title,
     required this.hint,
+    required this.controller,
     this.minLines,
     super.key,
   });
@@ -32,6 +33,7 @@ class TextInputField extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         TextField(
+          controller: controller,
           decoration: InputDecoration(
             enabledBorder: context.textInputFieldTheme.border,
             border: context.textInputFieldTheme.border,

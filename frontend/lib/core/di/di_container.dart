@@ -16,7 +16,7 @@ class DiContainer {
   void init() {
     //инициализация data providers и других классов
 
-    const token = '';
+    const token = '71452484-9379-4534-baef-a8e4c5c4a7de';
     final dio = Dio();
     dio.interceptors.add(AuthInterceptor(token));
     httpClient = ApiClient(dio);
