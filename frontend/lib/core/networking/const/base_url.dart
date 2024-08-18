@@ -1,1 +1,2 @@
-const String baseUrl = 'http://glitchy-service.ru/api';
+const String baseUrl =
+    'https://cors-anywhere.herokuapp.com/http://glitchy-service.ru/api';

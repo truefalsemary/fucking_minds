@@ -8,8 +8,8 @@ import 'package:lms_front/ui_kit/colors/color_palette.dart';
 import 'package:lms_front/ui_kit/components/text_input_field/text_input_field.dart';
 import 'package:lms_front/ui_kit/typography/app_text_theme.dart';
 
-class ProgramTab extends StatelessWidget {
-  const ProgramTab({super.key});
+class CourseProgramTab extends StatelessWidget {
+  const CourseProgramTab({super.key});
 
   static const _defaultSpacer = SizedBox(height: 44);
 
@@ -25,10 +25,9 @@ class ProgramTab extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _ProgramHeader(),
-            SizedBox(height: 52),
-            _LessonNameTextField(),
-            _defaultSpacer,
-            _LessonDescriptionTextField(),
+            // _LessonNameTextField(),
+            // _defaultSpacer,
+            // _LessonDescriptionTextField(),
             _defaultSpacer,
             _LessonMaterialsSection(),
             _defaultSpacer,
@@ -126,30 +125,30 @@ class _LessonMaterialsSection extends StatelessWidget {
   }
 }
 
-class _LessonDescriptionTextField extends StatelessWidget {
-  const _LessonDescriptionTextField();
+// class _LessonDescriptionTextField extends StatelessWidget {
+//   const _LessonDescriptionTextField();
 
-  @override
-  Widget build(BuildContext context) {
-    return const TextInputField(
-      title: 'Описание урока',
-      hint: 'Введите текст',
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return const TextInputField(
+//       title: 'Описание урока',
+//       hint: 'Введите текст',
+//     );
+//   }
+// }
 
-class _LessonNameTextField extends StatelessWidget {
-  const _LessonNameTextField();
+// class _LessonNameTextField extends StatelessWidget {
+//   const _LessonNameTextField();
 
-  @override
-  Widget build(BuildContext context) {
-    return const TextInputField(
-      title: 'Название урока',
-      hint: 'Введите текст',
-      minLines: 1,
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return const TextInputField(
+//       title: 'Название урока',
+//       hint: 'Введите текст',
+//       minLines: 1,
+//     );
+//   }
+// }
 
 class _ProgramHeader extends StatelessWidget {
   const _ProgramHeader();

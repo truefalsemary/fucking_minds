@@ -13,7 +13,8 @@ class _ApiClient implements ApiClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://glitchy-service.ru/api';
+    baseUrl ??=
+        'https://cors-anywhere.herokuapp.com/http://glitchy-service.ru/api';
   }
 
   final Dio _dio;

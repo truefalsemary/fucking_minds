@@ -75,7 +75,9 @@ class _AuthFormState extends State<_AuthForm> {
           const SizedBox(height: heightBetweenElements),
           AuthButton(
             inputText: 'Зарегистрироваться',
-            onPressed: () => {context.appRouter.go('/auth/register')},
+            onPressed: () => {
+              context.appRouter.routerDelegate.beamToNamed('/auth/register')
+            },
           ),
         ],
       ),
