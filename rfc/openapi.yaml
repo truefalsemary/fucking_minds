@@ -214,9 +214,23 @@ components:
                 - user_id
                 - course_id
                 - user_role
+        lesson_course:
+            type: object
+            properties:
+                lesson_id:
+                    description: lesson id
+                    type: string
+                course_id:
+                    description: course id
+                    type: string
+            required:
+                - lesson_id
+                - course_id
     responses:
         UnauthorizedError:
             description: X-Ya-User-Ticket key is missing or invalid
+        ForbiddenError:
+            description: You have not enough permisssions
     securitySchemes:
         UserTicketAuth:
             type: apiKey
@@ -391,6 +405,49 @@ paths:
                     description: invalid input parameters
                 '401':
                     $ref: "#/components/responses/UnauthorizedError"
+    /v1/user/{user_id}/add/to_course/{course_id}:
+        post:
+            description: add user by user_id to course by course_id
+            tags: 
+                - User administration
+            parameters:
+                -   name: user_id
+                    in: path
+                    description: User id
+                    required: true
+                    schema:
+                        type: string
+                -   name: course_id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                role:
+                                    description: user role
+                                    $ref: '#/components/schemas/user_role'
+            security:
+                -   UserTicketAuth: [ ]
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/user'
+                '400':
+                    description: invalid input parameters
+                '401':
+                    $ref: "#/components/responses/UnauthorizedError"
+                '403':
+                    $ref: "#/components/responses/ForbiddenError"
     /v1/course/create:
         post:
             description: creates new course
@@ -726,47 +783,6 @@ paths:
                     $ref: "#/components/responses/UnauthorizedError"
                 '404':
                     description: course is not found
-    /v1/user/{user_id}/add/to_course/{course_id}:
-        post:
-            description: add user by user_id to course by course_id
-            tags: 
-                - Courses administration
-            parameters:
-                -   name: user_id
-                    in: path
-                    description: User id
-                    required: true
-                    schema:
-                        type: string
-                -   name: course_id
-                    in: path
-                    description: Course id
-                    required: true
-                    schema:
-                        type: string
-            requestBody:
-                required: true
-                content:
-                    application/json:
-                        schema:
-                            type: object
-                            properties:
-                                role:
-                                    description: user role
-                                    $ref: '#/components/schemas/user_role'
-            security:
-                -   UserTicketAuth: [ ]
-            responses:
-                '200':
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/user_course'
-                '400':
-                    description: invalid input parameters
-                '401':
-                    $ref: "#/components/responses/UnauthorizedError"
     /v1/course/{course_id}/add_lesson:
         post:
             description: add lesson to course by identifiers
@@ -796,8 +812,14 @@ paths:
             responses:
                 '200':
                     description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/lesson_course'
                 '401':
                     $ref: "#/components/responses/UnauthorizedError"
+                '403':
+                    $ref: "#/components/responses/ForbiddenError"
                 '404':
                     description: course or lesson is not found
     /v1/course/{course_id}/lesson/{lesson_id}:

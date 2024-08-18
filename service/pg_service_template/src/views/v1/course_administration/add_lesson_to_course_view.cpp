@@ -11,18 +11,18 @@
 #include "../../../controllers/course_administration/course_administration_controller.hpp"
 #include "../../../models/auth/token_model.hpp"
 #include "../../../models/serialization/serialization.hpp"
-#include "../../../models/user_course/user_course.hpp"
-#include "../../../models/user_course/user_course_data.hpp"
+#include "../../../models/lesson_course/lesson_course.hpp"
+#include "../../../models/lesson_course/lesson_course_data.hpp"
 
 namespace lms_service {
 namespace {
-class AddUserToCourseView final
+class AddLessonToCourseView final
     : public userver::server::handlers::HttpHandlerBase {
  public:
   static constexpr std::string_view kName =
-      "handler-v1-user-by-id-add-to-course-by-id";
+      "handler-v1-course-add-lesson";
 
-  AddUserToCourseView(
+  AddLessonToCourseView(
       const userver::components::ComponentConfig& config,
       const userver::components::ComponentContext& component_context)
       : HttpHandlerBase(config, component_context),
@@ -44,39 +44,23 @@ class AddUserToCourseView final
       return {};
     }
 
-    auto user_id = request.GetPathArg("user_id");
-
-
-    if (user_id.empty()) {
-      auto& response = request.GetHttpResponse();
-      response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
-      return {};
-    }
-
-    auto role = request.GetArg("role");
+    auto lesson_id = request.GetArg("lesson_id");
     auto course_id = request.GetPathArg("course_id");
 
-    if (course_id.empty()) {
+    LessonCourseData lesson_course;
+
+    lesson_course.course_id = course_id;
+    lesson_course.lesson_id = lesson_id;
+    lesson_course.author_id = token_id.value();
+  
+    if (lesson_course.empty()) {
       auto& response = request.GetHttpResponse();
       response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
       return {};
     }
 
-    if (role.empty()) {
-      auto& response = request.GetHttpResponse();
-      response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
-      return {};
-    }
-
-    UserCourse user_course;
-
-    user_course.user_id = user_id;
-    user_course.role = parseRoleFromString(role);
-
-    user_course.course_id = course_id;
-
-    auto result = course_administration::add_user_to_course(
-       user_course, token_id.value(), pg_cluster_);
+    auto result = course_administration::add_lesson_to_course(
+       lesson_course, pg_cluster_);
     if (!result.has_value()) {
       auto& response = request.GetHttpResponse();
       response.SetStatus(userver::server::http::HttpStatus::kForbidden);
@@ -91,9 +75,9 @@ class AddUserToCourseView final
 
 }  // namespace
 
-void AppendAddUserToCourseView(
+void AppendAddLessonToCourseView(
     userver::components::ComponentList& component_list) {
-  component_list.Append<AddUserToCourseView>();
+  component_list.Append<AddLessonToCourseView>();
 }
 
 }  // namespace lms_service

@@ -1,5 +1,4 @@
 add_library(utils STATIC
-    utils.hpp
     validation/time.hpp
     validation/time.cpp
 )
