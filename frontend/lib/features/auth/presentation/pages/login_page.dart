@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lms_front/core/app_router/app_router.dart';
+import 'package:lms_front/core/logger/logger.dart';
 import 'package:lms_front/features/auth/domain/auth_cubit.dart';
 import 'package:lms_front/features/auth/presentation/widgets/auth_button.dart';
 import 'package:lms_front/features/auth/presentation/widgets/form_wrapper.dart';
@@ -48,6 +49,8 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
+    Log.info('login: ${widget.login}');
+
     return Form(
         key: _formKey,
         child: Column(

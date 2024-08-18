@@ -25,7 +25,6 @@ class AuthStore extends HydratedCubit<AuthState> {
     );
     emit(state.copyWith(status: AuthenticationStatus.authenticated));
     Log.info('status: ${state.status}');
-    // print(state);
   }
 
   @override

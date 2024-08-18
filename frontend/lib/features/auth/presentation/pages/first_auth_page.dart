@@ -68,7 +68,7 @@ class _AuthFormState extends State<_AuthForm> {
           AuthButton(
             inputText: 'Продолжить',
             onPressed: () => {
-              context.appRouter.go('/auth/login', loginController.text),
+              context.appRouter.go('/auth/login/${loginController.text}', loginController.text),
             },
             backgroundColor: ColorPalette.green,
           ),

@@ -9,22 +9,23 @@ class AuthLocation extends BeamLocation<BeamState> {
   List<Pattern> get pathPatterns => [
         '/auth',
         '/auth/register',
-        '/auth/login',
+        '/auth/login/:login',
       ];
 
   @override
   List<BeamPage> buildPages(BuildContext context, BeamState state) {
-    final path = state.uri.path;
+    final path = state.uri.pathSegments;
 
-    if (path == '/auth') {
+    if (path.contains('auth') && path.contains('login')) {
+      final loginData = state.pathParameters['login'] ?? '';
       return [
-        const BeamPage(
-          key: ValueKey('FirstAuth'),
-          title: 'Authentication',
-          child: FirstAuthPage(),
+        BeamPage(
+          key: const ValueKey('Login'),
+          title: 'Login',
+          child: LoginPage(login: loginData),
         ),
       ];
-    } else if (path == '/auth/register') {
+    } else if (path.contains('auth') && path.contains('register')) {
       return [
         const BeamPage(
           key: ValueKey('Register'),
@@ -32,13 +33,12 @@ class AuthLocation extends BeamLocation<BeamState> {
           child: RegisterPage(),
         ),
       ];
-    } else if (path == '/auth/login') {
-      final loginData = state.queryParameters['login'] ?? '';
+    } else if (path.contains('auth')) {
       return [
-        BeamPage(
-          key: const ValueKey('Login'),
-          title: 'Login',
-          child: LoginPage(login: loginData),
+        const BeamPage(
+          key: ValueKey('FirstAuth'),
+          title: 'Authentication',
+          child: FirstAuthPage(),
         ),
       ];
     } else {
