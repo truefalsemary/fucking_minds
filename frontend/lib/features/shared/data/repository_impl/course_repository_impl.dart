@@ -1,5 +1,4 @@
 import 'package:lms_front/core/networking/api_client/api_client.dart';
-import 'package:lms_front/core/networking/mock.dart';
 import 'package:lms_front/features/shared/data/models/course_related/cource/course.dart';
 import 'package:lms_front/features/shared/domain/repositories/course_repository.dart';
 
@@ -15,14 +14,12 @@ class CourseRepositoryImpl implements CourseRepository {
 
   @override
   Future<List<Course>> readAll() async {
-    // return apiClient.getCourses();
-    return Mock.mockCourses;
+    return apiClient.getCourses();
   }
 
   @override
   Future<Course> read(String id) async {
-    // return apiClient.getCourse(id);
-    return Mock.mockCourses.firstWhere((e) => e.id == id);
+    return apiClient.getCourse(id);
   }
 
   @override
