@@ -36,6 +36,7 @@ int main(int argc, char* argv[]) {
   lms_service::AppendGetMaterialsView(component_list);
   lms_service::AppendMaterialByIdView(component_list);
   lms_service::AppendAddUserToCourseView(component_list);
+  lms_service::AppendAddLessonToCourseView(component_list);
 
   return userver::utils::DaemonMain(argc, argv, component_list);
 }

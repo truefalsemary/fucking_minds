@@ -39,6 +39,10 @@ add_library(models STATIC
     user_course/user_course.hpp
     user_course/user_course.cpp
 
+    lesson_course/lesson_course_data.hpp
+    lesson_course/lesson_course.hpp
+    lesson_course/lesson_course.cpp
+
     material/material.hpp
     material/material.cpp
     material/material_data.hpp

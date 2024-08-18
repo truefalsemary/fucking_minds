@@ -214,9 +214,23 @@ components:
                 - user_id
                 - course_id
                 - user_role
+        lesson_course:
+            type: object
+            properties:
+                lesson_id:
+                    description: lesson id
+                    type: string
+                course_id:
+                    description: course id
+                    type: string
+            required:
+                - lesson_id
+                - course_id
     responses:
         UnauthorizedError:
             description: X-Ya-User-Ticket key is missing or invalid
+        ForbiddenError:
+            description: You have not enough permisssions
     securitySchemes:
         UserTicketAuth:
             type: apiKey
@@ -432,6 +446,8 @@ paths:
                     description: invalid input parameters
                 '401':
                     $ref: "#/components/responses/UnauthorizedError"
+                '403':
+                    $ref: "#/components/responses/ForbiddenError"
     /v1/course/create:
         post:
             description: creates new course
@@ -847,8 +863,14 @@ paths:
             responses:
                 '200':
                     description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/lesson_course'
                 '401':
                     $ref: "#/components/responses/UnauthorizedError"
+                '403':
+                    $ref: "#/components/responses/ForbiddenError"
                 '404':
                     description: course or lesson is not found
     /v1/course/{course_id}/lesson/{lesson_id}:

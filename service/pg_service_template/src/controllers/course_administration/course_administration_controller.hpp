@@ -4,6 +4,8 @@
 #include "../../models/user_course/user_course.hpp"
 #include "../../models/user_course/user_course_data.hpp"
 #include "../../models/enums/user_role.hpp"
+#include "../../models/lesson_course/lesson_course.hpp"
+#include "../../models/lesson_course/lesson_course_data.hpp"
 
 namespace lms_service {
 namespace course_administration {
@@ -18,6 +20,10 @@ std::optional<UserCourse> leave_course(
 std::optional<UserCourse> add_user_to_course(
     const UserCourse& user_data,
     const std::string& author_request,
+        userver::storages::postgres::ClusterPtr pg_cluster);
+
+std::optional<LessonCourse> add_lesson_to_course(
+    const LessonCourseData& lesson_course_data,
         userver::storages::postgres::ClusterPtr pg_cluster);
 }  // namespace course_administration_controller
 }  // namespace lms_service

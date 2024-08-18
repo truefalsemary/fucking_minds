@@ -55,5 +55,31 @@ std::optional<UserCourse> add_user_to_course(
   return result.AsOptionalSingleRow<UserCourse>(
       userver::storages::postgres::kRowTag);
     }
+
+std::optional<LessonCourse> add_lesson_to_course(
+    const LessonCourseData& lesson_course_data,
+        userver::storages::postgres::ClusterPtr pg_cluster) {
+    auto result = pg_cluster->Execute(
+        userver::storages::postgres::ClusterHostType::kMaster,
+        "WITH author AS ("
+        "  SELECT user_role "
+        "  FROM User_Course "
+        "  WHERE user_id = $1"
+        "), "
+        "role_check AS ("
+        "  SELECT (user_role = 'admin') AS is_admin "
+        "  FROM author "
+        ") "
+        "INSERT INTO Course_Lesson "
+        "(course_id, lesson_id) "
+        "SELECT $2, $3 "
+        "WHERE EXISTS (SELECT 1 FROM role_check WHERE is_admin = TRUE) "
+        "ON CONFLICT DO NOTHING "
+        "RETURNING *",
+        lesson_course_data.author_id, lesson_course_data.course_id, lesson_course_data.lesson_id);
+
+      return result.AsOptionalSingleRow<LessonCourse>(
+      userver::storages::postgres::kRowTag);
+    }
 }  // namespace course_administration
 }  // namespace lms_service

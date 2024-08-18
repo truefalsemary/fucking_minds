@@ -45,6 +45,8 @@ add_library(views STATIC
 
     v1/course_administration/add_user_to_course_view.hpp
     v1/course_administration/add_user_to_course_view.cpp
+    v1/course_administration/add_lesson_to_course_view.hpp
+    v1/course_administration/add_lesson_to_course_view.cpp
 )
 
 target_include_directories(views PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
