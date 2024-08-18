@@ -5,7 +5,6 @@ abstract class ColorPalette {
   static const backgroundColor = Color(0xffFFFBF5);
   static const blue = Color(0xFF86C1F7);
   static const green = Color(0xFF98DCBA);
-  static const red = Colors.red;
 
   // Foreground colors
   static const yellow = Color(0xffffcc00);

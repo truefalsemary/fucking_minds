@@ -12,9 +12,6 @@ final ThemeData lightTheme = ThemeData(
     backgroundColor: ColorPalette.backgroundColor,
   ),
   inputDecorationTheme: const InputDecorationTheme().copyWith(
-    fillColor: Colors.white,
-    focusColor: Colors.white,
-    hoverColor: Colors.white,
     disabledBorder: const OutlineInputBorder(
       borderSide: BorderSide(
         width: 0.2,
@@ -26,11 +23,6 @@ final ThemeData lightTheme = ThemeData(
       ),
     ),
     enabledBorder: const OutlineInputBorder(
-      borderSide: BorderSide(
-        width: 0.2,
-      ),
-    ),
-    focusedBorder: const OutlineInputBorder(
       borderSide: BorderSide(
         width: 0.2,
       ),

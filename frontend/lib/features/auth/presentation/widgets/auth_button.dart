@@ -9,16 +9,12 @@ class AuthButton extends StatelessWidget {
     this.onPressed,
     this.foregroundColor = Colors.white,
     this.backgroundColor = ColorPalette.blue,
-    this.minimumSize = const Size.fromHeight(50),
-    this.hasMinumumSize = true,
   });
 
   final String inputText;
   final Function()? onPressed;
   final Color? foregroundColor;
   final Color? backgroundColor;
-  final Size? minimumSize;
-  final bool hasMinumumSize;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +25,7 @@ class AuthButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
-        minimumSize: hasMinumumSize ? minimumSize : null,
+        minimumSize: const Size.fromHeight(50),
       ),
       onPressed: onPressed,
       child: Text(
