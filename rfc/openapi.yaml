@@ -409,11 +409,54 @@ paths:
         post:
             description: add user by user_id to course by course_id
             tags: 
-                - User administration
+                - Courses administration
             parameters:
                 -   name: user_id
                     in: path
                     description: User id
+                    required: true
+                    schema:
+                        type: string
+                -   name: course_id
+                    in: path
+                    description: Course id
+                    required: true
+                    schema:
+                        type: string
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                role:
+                                    description: user role
+                                    $ref: '#/components/schemas/user_role'
+            security:
+                -   UserTicketAuth: [ ]
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/user'
+                '400':
+                    description: invalid input parameters
+                '401':
+                    $ref: "#/components/responses/UnauthorizedError"
+                '403':
+                    $ref: "#/components/responses/ForbiddenError"
+    /v1/user/{email}/add/by/email/to_course/{course_id}:
+        post:
+            description: add user by email to course by course_id
+            tags: 
+                - Courses administration
+            parameters:
+                -   name: email
+                    in: path
+                    description: User email
                     required: true
                     schema:
                         type: string
@@ -510,7 +553,28 @@ paths:
                                         items:
                                             $ref: '#/components/schemas/course'
                 '401':
-                    $ref: "#/components/responses/UnauthorizedError"                                            
+                    $ref: "#/components/responses/UnauthorizedError"       
+    /v1/courses/my:
+        get:
+            description: list user's submitted courses
+            tags: 
+                - Courses administration
+            security:
+                -   UserTicketAuth: [ ]
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    items:
+                                        type: array
+                                        items:
+                                            $ref: '#/components/schemas/user_course'
+                '401':
+                    $ref: "#/components/responses/UnauthorizedError"                                                              
     /v1/course/{id}:
         get:
             description: get course by its identifier
