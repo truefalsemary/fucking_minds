@@ -620,9 +620,9 @@ paths:
                     $ref: "#/components/responses/UnauthorizedError"
                 '404':
                     description: course is not found
-    /v1/course/{id}/students:
+    /v1/course/{id}/users:
         get:
-            description: get students of course by its identifier
+            description: get users of course by its identifier and role
             tags: 
                 - Courses administration
             parameters:
@@ -634,6 +634,15 @@ paths:
                         type: string
             security:
                 -   UserTicketAuth: [ ]
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                role:
+                                    $ref: '#/components/schemas/user_role'
             responses:
                 '200':
                     description: OK
@@ -645,67 +654,7 @@ paths:
                                     items:
                                         type: array
                                         items:
-                                            $ref: '#/components/schemas/student'
-                '401':
-                    $ref: "#/components/responses/UnauthorizedError"
-                '404':
-                    description: course is not found
-    /v1/course/{id}/teachers:
-        get:
-            description: get teachers of course by its identifier
-            tags: 
-                - Courses administration
-            parameters:
-                -   name: id
-                    in: path
-                    description: Course id
-                    required: true
-                    schema:
-                        type: string
-            security:
-                -   UserTicketAuth: [ ]
-            responses:
-                '200':
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                type: object
-                                properties:
-                                    items:
-                                        type: array
-                                        items:
-                                            $ref: '#/components/schemas/teacher'
-                '401':
-                    $ref: "#/components/responses/UnauthorizedError"
-                '404':
-                    description: course is not found
-    /v1/course/{id}/admins:
-        get:
-            description: get admins of course by its identifier
-            tags: 
-                - Courses administration
-            parameters:
-                -   name: id
-                    in: path
-                    description: Course id
-                    required: true
-                    schema:
-                        type: string
-            security:
-                -   UserTicketAuth: [ ]
-            responses:
-                '200':
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                type: object
-                                properties:
-                                    items:
-                                        type: array
-                                        items:
-                                            $ref: '#/components/schemas/admin'
+                                            $ref: '#/components/schemas/user'
                 '401':
                     $ref: "#/components/responses/UnauthorizedError"
                 '404':

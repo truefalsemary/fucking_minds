@@ -12,6 +12,7 @@ add_library(models STATIC
     enums/user_role.hpp
     enums/user_role.cpp
     enums/status_code.hpp
+    enums/status_code.cpp
 
     lesson/lesson_data.hpp
     lesson/lesson_data.cpp
@@ -47,6 +48,11 @@ add_library(models STATIC
     material/material.cpp
     material/material_data.hpp
     material/material_data.cpp
+
+    inspection/inspection_data.hpp
+    inspection/inspection_data.cpp
+    inspection/inspection.hpp
+    inspection/inspection.cpp
 )
 
 target_include_directories(models PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
