@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lms_front/ui_kit/app_shadows.dart';
 
 class FormWrapper extends StatelessWidget {
   const FormWrapper({
@@ -16,13 +17,7 @@ class FormWrapper extends StatelessWidget {
         decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(20)),
-          boxShadow: [
-            BoxShadow(
-              color: Color(0x3f000000),
-              blurRadius: 4,
-              offset: Offset(0, 4),
-            ),
-          ],
+          boxShadow: [AppShadows.card],
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
