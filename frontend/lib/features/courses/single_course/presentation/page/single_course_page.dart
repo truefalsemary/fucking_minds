@@ -11,6 +11,7 @@ import 'package:lms_front/features/shared/domain/course/single_course_cubit/sing
 import 'package:lms_front/features/shared/presentation/user_profile_button.dart';
 import 'package:lms_front/ui_kit/components/tabs/tab_content_wrapper.dart';
 import 'package:lms_front/ui_kit/components/tabs/tab_wrapper.dart';
+import 'package:lms_front/ui_kit/typography/app_text_theme.dart';
 
 class SingleCoursePage extends StatefulWidget {
   final String courseId;
@@ -88,7 +89,10 @@ class _SingleCoursePageState extends State<SingleCoursePage>
                         initial: () => const Center(child: Text('Starting...')),
                         loadInProgress: () =>
                             const Center(child: CircularProgressIndicator()),
-                        loadSuccess: (course) => Text('Курс ${course.title}'),
+                        loadSuccess: (course) => Text(
+                          'Курс ${course.title}',
+                          style: context.appTextTheme.display2,
+                        ),
                         loadFailure: (message) => Center(child: Text(message)),
                       );
                     },

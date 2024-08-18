@@ -29,6 +29,7 @@ dependencies:
   beamer: ^1.6.1
   hydrated_bloc: ^9.1.5
   path_provider: ^2.1.4
+  custom_sliding_segmented_control: ^1.8.3
 
 dev_dependencies:
   flutter_test:

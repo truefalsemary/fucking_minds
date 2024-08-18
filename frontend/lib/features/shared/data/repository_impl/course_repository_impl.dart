@@ -15,12 +15,14 @@ class CourseRepositoryImpl implements CourseRepository {
 
   @override
   Future<List<Course>> readAll() async {
-    return apiClient.getCourses();
+    // return apiClient.getCourses();
+    return Mock.mockCourses;
   }
 
   @override
   Future<Course> read(String id) async {
-    return apiClient.getCourse(id);
+    return Mock.mockCourses.firstWhere((e) => e.id == id);
+    // return apiClient.getCourse(id);
   }
 
   @override
