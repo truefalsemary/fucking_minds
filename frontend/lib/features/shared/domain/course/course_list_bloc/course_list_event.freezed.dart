@@ -84,9 +84,6 @@ class _$CourseListEventCopyWithImpl<$Res, $Val extends CourseListEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  /// Create a copy of CourseListEvent
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -103,9 +100,6 @@ class __$$CourseListFetchedImplCopyWithImpl<$Res>
   __$$CourseListFetchedImplCopyWithImpl(_$CourseListFetchedImpl _value,
       $Res Function(_$CourseListFetchedImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of CourseListEvent
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -225,8 +219,6 @@ class __$$CourseCreatedImplCopyWithImpl<$Res>
       _$CourseCreatedImpl _value, $Res Function(_$CourseCreatedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CourseListEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -240,8 +232,6 @@ class __$$CourseCreatedImplCopyWithImpl<$Res>
     ));
   }
 
-  /// Create a copy of CourseListEvent
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CourseCopyWith<$Res> get newCourse {
@@ -276,9 +266,7 @@ class _$CourseCreatedImpl implements CourseCreated {
   @override
   int get hashCode => Object.hash(runtimeType, newCourse);
 
-  /// Create a copy of CourseListEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CourseCreatedImplCopyWith<_$CourseCreatedImpl> get copyWith =>
@@ -363,10 +351,7 @@ abstract class CourseCreated implements CourseListEvent {
   const factory CourseCreated(final Course newCourse) = _$CourseCreatedImpl;
 
   Course get newCourse;
-
-  /// Create a copy of CourseListEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CourseCreatedImplCopyWith<_$CourseCreatedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -390,8 +375,6 @@ class __$$CourseUpdatedImplCopyWithImpl<$Res>
       _$CourseUpdatedImpl _value, $Res Function(_$CourseUpdatedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CourseListEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -405,8 +388,6 @@ class __$$CourseUpdatedImplCopyWithImpl<$Res>
     ));
   }
 
-  /// Create a copy of CourseListEvent
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CourseCopyWith<$Res> get updatedCourse {
@@ -441,9 +422,7 @@ class _$CourseUpdatedImpl implements CourseUpdated {
   @override
   int get hashCode => Object.hash(runtimeType, updatedCourse);
 
-  /// Create a copy of CourseListEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CourseUpdatedImplCopyWith<_$CourseUpdatedImpl> get copyWith =>
@@ -528,10 +507,7 @@ abstract class CourseUpdated implements CourseListEvent {
   const factory CourseUpdated(final Course updatedCourse) = _$CourseUpdatedImpl;
 
   Course get updatedCourse;
-
-  /// Create a copy of CourseListEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CourseUpdatedImplCopyWith<_$CourseUpdatedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -553,8 +529,6 @@ class __$$CourseDeletedImplCopyWithImpl<$Res>
       _$CourseDeletedImpl _value, $Res Function(_$CourseDeletedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CourseListEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -594,9 +568,7 @@ class _$CourseDeletedImpl implements CourseDeleted {
   @override
   int get hashCode => Object.hash(runtimeType, courseId);
 
-  /// Create a copy of CourseListEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CourseDeletedImplCopyWith<_$CourseDeletedImpl> get copyWith =>
@@ -681,10 +653,7 @@ abstract class CourseDeleted implements CourseListEvent {
   const factory CourseDeleted(final String courseId) = _$CourseDeletedImpl;
 
   String get courseId;
-
-  /// Create a copy of CourseListEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CourseDeletedImplCopyWith<_$CourseDeletedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

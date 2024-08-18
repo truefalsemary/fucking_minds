@@ -6,7 +6,7 @@ import 'package:lms_front/ui_kit/typography/app_text_theme.dart';
 class TextInputField extends StatelessWidget {
   final String title;
   final String hint;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final int? minLines;
 
   const TextInputField({

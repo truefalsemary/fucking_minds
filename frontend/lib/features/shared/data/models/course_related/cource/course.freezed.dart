@@ -30,12 +30,8 @@ mixin _$Course {
   @JsonKey(name: 'end_ts', fromJson: _fromJson, toJson: _toJson)
   DateTime? get endDate => throw _privateConstructorUsedError;
 
-  /// Serializes this Course to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Course
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $CourseCopyWith<Course> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -65,8 +61,6 @@ class _$CourseCopyWithImpl<$Res, $Val extends Course>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Course
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -132,8 +126,6 @@ class __$$CourseImplCopyWithImpl<$Res>
       _$CourseImpl _value, $Res Function(_$CourseImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Course
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -226,14 +218,12 @@ class _$CourseImpl implements _Course {
             (identical(other.endDate, endDate) || other.endDate == endDate));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, id, title, description, authorId, startDate, endDate);
 
-  /// Create a copy of Course
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CourseImplCopyWith<_$CourseImpl> get copyWith =>
@@ -275,11 +265,8 @@ abstract class _Course implements Course {
   @override
   @JsonKey(name: 'end_ts', fromJson: _fromJson, toJson: _toJson)
   DateTime? get endDate;
-
-  /// Create a copy of Course
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CourseImplCopyWith<_$CourseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
