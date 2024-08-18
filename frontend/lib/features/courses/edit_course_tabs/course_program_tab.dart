@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lms_front/features/courses/edit_course_tabs/resource_modal_content.dart';
 import 'package:lms_front/ui_kit/app_icons.dart';
+import 'package:lms_front/ui_kit/app_shadows.dart';
+import 'package:lms_front/ui_kit/colors/color_palette.dart';
 import 'package:lms_front/ui_kit/components/text_input_field/text_input_field.dart';
 import 'package:lms_front/ui_kit/typography/app_text_theme.dart';
 
@@ -48,7 +51,7 @@ class _LessonTasksSection extends StatelessWidget {
           style: context.appTextTheme.header1,
         ),
         const SizedBox(height: 24),
-        AppIcons.circlePlus,
+        IconButton(onPressed: () => (), icon: AppIcons.circlePlus),
       ],
     );
   }
@@ -67,8 +70,32 @@ class _LessonMaterialsSection extends StatelessWidget {
           style: context.appTextTheme.header1,
         ),
         const SizedBox(height: 24),
-        AppIcons.circlePlus,
+        _createResourceButton(context),
       ],
+    );
+  }
+
+  IconButton _createResourceButton(BuildContext context) {
+    return IconButton(
+      onPressed: () => showDialog(
+          context: context,
+          builder: (context) {
+            return const Center(
+              child: SizedBox(
+                width: 300,
+                height: 180,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: ColorPalette.backgroundColor,
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    boxShadow: [AppShadows.card],
+                  ),
+                  child: ResourceModalContent(),
+                ),
+              ),
+            );
+          }),
+      icon: AppIcons.circlePlus,
     );
   }
 }
