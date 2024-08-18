@@ -1,3 +1,4 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,13 +26,7 @@ class LessonsTabView extends StatelessWidget {
             initial: () => const Center(child: Text('Starting...')),
             loadInProgress: () =>
                 const Center(child: CircularProgressIndicator()),
-            loadSuccess: (lessons) => Navigator(
-              onGenerateRoute: (settings) {
-                return MaterialPageRoute(
-                  builder: (context) => LessonsListView(lessons: lessons),
-                );
-              },
-            ),
+            loadSuccess: (lessons) => LessonsListView(lessons: lessons),
             loadFailure: (message) => Center(child: Text(message.toString())),
             operationFailure: (error) => Text(error.toString()),
           );
@@ -78,7 +73,8 @@ class _LessonTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoButton(
       padding: EdgeInsets.zero,
-      onPressed: () {},
+      onPressed: () => Beamer.of(context)
+          .beamToNamed('/course/course_1/lessons/${lesson.id}'),
       child: Hero(
         tag: 'lesson_${lesson.id}',
         child: Container(
@@ -116,72 +112,3 @@ class _LessonTile extends StatelessWidget {
     );
   }
 }
-
-// Будет нужен для перехода на страницу с уроками внутри TabView
-// class LessonDetailPage extends StatelessWidget {
-//   final String lessonId;
-
-//   const LessonDetailPage({required this.lessonId, super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.all(30),
-//       child: Scaffold(
-//         appBar: AppBar(
-//           title: Text(lessonId),
-//           leading: IconButton(
-//             icon: const Icon(Icons.arrow_back),
-//             onPressed: () => Navigator.of(context).pop(),
-//           ),
-//         ),
-//         body: Container(
-//           padding: const EdgeInsets.all(20),
-//           decoration: BoxDecoration(
-//             borderRadius: BorderRadius.circular(20),
-//             border: Border.all(),
-//           ),
-//           // child: Column(
-//           //   crossAxisAlignment: CrossAxisAlignment.start,
-//           //   children: [
-//           //     const SizedBox(
-//           //         height: 50), // Top padding to align with the tile
-//           //     Text(
-//           //       lesson.title,
-//           //       style: context.appTextTheme.header1,
-//           //     ),
-//           //     const SizedBox(height: 20),
-//           //     Text(
-//           //       lesson.description,
-//           //       style: context.appTextTheme.body3,
-//           //     ),
-//           //     const SizedBox(height: 30),
-//           //     Wrap(
-//           //       spacing: 8,
-//           //       runSpacing: 8,
-//           //       children: lesson.tags
-//           //           .map(
-//           //             (tag) => Container(
-//           //               padding: const EdgeInsets.symmetric(
-//           //                 vertical: 3,
-//           //                 horizontal: 8,
-//           //               ),
-//           //               decoration: BoxDecoration(
-//           //                 color: Colors.black,
-//           //                 borderRadius: BorderRadius.circular(3),
-//           //               ),
-//           //               child: Text(tag),
-//           //             ),
-//           //           )
-//           //           .toList(),
-//           //     ),
-//           //     const Spacer(),
-//           //     Text('Автор: ${lesson.authorId}'),
-//           //     const SizedBox(height: 30),
-//           //   ],
-//           // ),
-//         ),
-//       ),
-//     );
-//   }
-// }

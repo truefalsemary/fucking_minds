@@ -1,3 +1,4 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:lms_front/features/courses/edit_course_tabs/course_program_tab.dart';
 import 'package:lms_front/ui_kit/typography/app_text_theme.dart';
@@ -27,6 +28,16 @@ class CourseSettingsPage extends StatelessWidget {
               return <Widget>[
                 SliverAppBar(
                   centerTitle: false,
+                  leading: BackButton(
+                    onPressed: () {
+                      final beamer = Beamer.of(context);
+                      if (beamer.canBeamBack) {
+                        beamer.beamBack();
+                      } else {
+                        beamer.beamToNamed('/course/$courseId/lessons');
+                      }
+                    },
+                  ),
                   title: Padding(
                     padding: const EdgeInsets.only(left: 25),
                     child: Text(
@@ -36,7 +47,6 @@ class CourseSettingsPage extends StatelessWidget {
                   ),
                   pinned: true,
                   floating: true,
-                  // TODO(any): сделать адаптивные таббары, чтобы при сужении экрана, таббары переходили на вторую строку
                   bottom: const TabBar(
                     enableFeedback: false,
                     isScrollable: true,

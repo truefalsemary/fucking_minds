@@ -32,7 +32,7 @@ class RepositoryScope extends StatelessWidget {
         ),
       ],
       child: AppRouter(
-        router: _diContainer.routerDelegate.router,
+        routerDelegate: _diContainer.routerDelegate,
         child: child,
       ),
     );
