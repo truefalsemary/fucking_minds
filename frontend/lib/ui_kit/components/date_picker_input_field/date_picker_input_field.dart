@@ -7,32 +7,43 @@ import 'package:lms_front/ui_kit/components/date_picker_input_field/date_picker_
 import 'package:lms_front/ui_kit/typography/app_text_theme.dart';
 
 class DatePickerInputField extends StatelessWidget {
-  const DatePickerInputField({super.key});
+  const DatePickerInputField({
+    super.key,
+    this.title = 'Даты курса',
+    this.titleStyle,
+  });
+
+  final String title;
+  final TextStyle? titleStyle;
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return  Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _DatePickerHeader(),
-        SizedBox(height: 20),
-        _DatePickerButton(),
+        _DatePickerHeader(
+          titleWidget: Text(
+            'Даты курса',
+            style: titleStyle ?? context.appTextTheme.header1,
+          ),
+        ),
+        const SizedBox(height: 20),
+        const _DatePickerButton(),
       ],
     );
   }
 }
 
 class _DatePickerHeader extends StatelessWidget {
-  const _DatePickerHeader();
+  const _DatePickerHeader({required this.titleWidget});
+
+  final Widget titleWidget;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(
-          'Даты курса',
-          style: context.appTextTheme.header1,
-        ),
+        titleWidget,
         const SizedBox(width: 4),
         AppIcons.editPencil,
       ],
@@ -50,6 +61,7 @@ class _DatePickerButton extends StatefulWidget {
 class _DatePickerButtonState extends State<_DatePickerButton> {
   DateTime? startCourseDate;
   DateTime? endCourseDate;
+
   bool get _isDateSelected => startCourseDate != null && endCourseDate != null;
 
   @override

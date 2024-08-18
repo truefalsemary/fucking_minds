@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lms_front/features/courses/edit_course_tabs/resource_modal_content.dart';
+import 'package:lms_front/features/courses/edit_course_tabs/task_modal_content.dart';
 import 'package:lms_front/ui_kit/app_icons.dart';
 import 'package:lms_front/ui_kit/app_shadows.dart';
 import 'package:lms_front/ui_kit/colors/color_palette.dart';
@@ -51,10 +53,34 @@ class _LessonTasksSection extends StatelessWidget {
           style: context.appTextTheme.header1,
         ),
         const SizedBox(height: 24),
-        IconButton(onPressed: () => (), icon: AppIcons.circlePlus),
+        _createTaskButton(context),
       ],
     );
   }
+
+  IconButton _createTaskButton(BuildContext context) => IconButton(
+        icon: AppIcons.circlePlus,
+        onPressed: () => showDialog(
+            context: context,
+            builder: (context) {
+              return const Center(
+                child: SizedBox(
+                  width: 700,
+                  height: 630,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: ColorPalette.backgroundColor,
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      boxShadow: [AppShadows.card],
+                    ),
+                    child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 30),
+                        child: TaskModalContent()),
+                  ),
+                ),
+              );
+            }),
+      );
 }
 
 class _LessonMaterialsSection extends StatelessWidget {
