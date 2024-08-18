@@ -5,7 +5,7 @@
 /// - 'assignments': Represents the assignments tab.
 /// - 'rating': Represents the rating tab.
 final List<String> currentUserTabs = [
-  'program',
+  'lessons',
   'assignments',
   'rating',
 ];

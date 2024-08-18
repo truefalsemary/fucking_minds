@@ -11,6 +11,23 @@ final ThemeData lightTheme = ThemeData(
   appBarTheme: const AppBarTheme(
     backgroundColor: ColorPalette.backgroundColor,
   ),
+  inputDecorationTheme: const InputDecorationTheme().copyWith(
+    disabledBorder: const OutlineInputBorder(
+      borderSide: BorderSide(
+        width: 0.2,
+      ),
+    ),
+    border: const OutlineInputBorder(
+      borderSide: BorderSide(
+        width: 0.2,
+      ),
+    ),
+    enabledBorder: const OutlineInputBorder(
+      borderSide: BorderSide(
+        width: 0.2,
+      ),
+    ),
+  ),
   tabBarTheme: TabBarTheme(
     tabAlignment: TabAlignment.start,
     labelPadding: EdgeInsets.zero,

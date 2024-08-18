@@ -84,9 +84,6 @@ class _$LessonListEventCopyWithImpl<$Res, $Val extends LessonListEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  /// Create a copy of LessonListEvent
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -103,9 +100,6 @@ class __$$LessonListFetchedImplCopyWithImpl<$Res>
   __$$LessonListFetchedImplCopyWithImpl(_$LessonListFetchedImpl _value,
       $Res Function(_$LessonListFetchedImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of LessonListEvent
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -223,8 +217,6 @@ class __$$LessonCreatedImplCopyWithImpl<$Res>
       _$LessonCreatedImpl _value, $Res Function(_$LessonCreatedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of LessonListEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -264,9 +256,7 @@ class _$LessonCreatedImpl implements LessonCreated {
   @override
   int get hashCode => Object.hash(runtimeType, newLesson);
 
-  /// Create a copy of LessonListEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LessonCreatedImplCopyWith<_$LessonCreatedImpl> get copyWith =>
@@ -351,10 +341,7 @@ abstract class LessonCreated implements LessonListEvent {
   const factory LessonCreated(final Lesson newLesson) = _$LessonCreatedImpl;
 
   Lesson get newLesson;
-
-  /// Create a copy of LessonListEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$LessonCreatedImplCopyWith<_$LessonCreatedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -376,8 +363,6 @@ class __$$LessonUpdatedImplCopyWithImpl<$Res>
       _$LessonUpdatedImpl _value, $Res Function(_$LessonUpdatedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of LessonListEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -417,9 +402,7 @@ class _$LessonUpdatedImpl implements LessonUpdated {
   @override
   int get hashCode => Object.hash(runtimeType, updatedLesson);
 
-  /// Create a copy of LessonListEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LessonUpdatedImplCopyWith<_$LessonUpdatedImpl> get copyWith =>
@@ -504,10 +487,7 @@ abstract class LessonUpdated implements LessonListEvent {
   const factory LessonUpdated(final Lesson updatedLesson) = _$LessonUpdatedImpl;
 
   Lesson get updatedLesson;
-
-  /// Create a copy of LessonListEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$LessonUpdatedImplCopyWith<_$LessonUpdatedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -529,8 +509,6 @@ class __$$LessonDeletedImplCopyWithImpl<$Res>
       _$LessonDeletedImpl _value, $Res Function(_$LessonDeletedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of LessonListEvent
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -570,9 +548,7 @@ class _$LessonDeletedImpl implements LessonDeleted {
   @override
   int get hashCode => Object.hash(runtimeType, lessonId);
 
-  /// Create a copy of LessonListEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LessonDeletedImplCopyWith<_$LessonDeletedImpl> get copyWith =>
@@ -657,10 +633,7 @@ abstract class LessonDeleted implements LessonListEvent {
   const factory LessonDeleted(final String lessonId) = _$LessonDeletedImpl;
 
   String get lessonId;
-
-  /// Create a copy of LessonListEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$LessonDeletedImplCopyWith<_$LessonDeletedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

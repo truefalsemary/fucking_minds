@@ -1,8 +1,9 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lms_front/core/app_router/app_router.dart';
+import 'package:lms_front/core/app_router/locations/lessons_location.dart';
 import 'package:lms_front/features/courses/single_course/domain/current_user_tabs.dart';
-import 'package:lms_front/features/courses/single_course/presentation/tab_views/lessons_tab_view.dart';
 import 'package:lms_front/features/courses/single_course/presentation/tab_views/rating_tab_view.dart';
 import 'package:lms_front/features/courses/single_course/presentation/tab_views/tasks_tab_view.dart';
 import 'package:lms_front/features/shared/domain/course/single_course_cubit/single_course_cubit.dart';
@@ -13,11 +14,11 @@ import 'package:lms_front/ui_kit/components/tabs/tab_wrapper.dart';
 
 class SingleCoursePage extends StatefulWidget {
   final String courseId;
-  final String tabName;
+  final String initialTabName;
 
   const SingleCoursePage({
     required this.courseId,
-    required this.tabName,
+    required this.initialTabName,
     super.key,
   });
 
@@ -28,26 +29,33 @@ class SingleCoursePage extends StatefulWidget {
 class _SingleCoursePageState extends State<SingleCoursePage>
     with TickerProviderStateMixin {
   late final TabController _controller;
+  final _beamerKey = GlobalKey<BeamerState>();
 
   @override
   void initState() {
-    final initialIndex = currentUserTabs.indexOf(widget.tabName);
     super.initState();
+    final initialIndex = currentUserTabs.indexOf(widget.initialTabName);
     _controller = TabController(
-      animationDuration: Duration.zero,
       length: currentUserTabs.length,
       vsync: this,
       initialIndex: initialIndex == -1 ? 0 : initialIndex,
     );
-  }
 
-  @override
-  void didUpdateWidget(SingleCoursePage oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    final newIndex = currentUserTabs.indexOf(widget.tabName);
-    if (newIndex != -1) {
-      _controller.index = newIndex;
-    }
+    // Update the TabBar index based on the initialTabName
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        final pathSegments =
+            (Beamer.of(context).currentBeamLocation.state as BeamState)
+                .uri
+                .pathSegments;
+        final tabName =
+            pathSegments.length > 2 ? pathSegments[2] : widget.initialTabName;
+        final tabIndex = currentUserTabs.indexOf(tabName);
+        if (tabIndex != -1) {
+          _controller.index = tabIndex;
+        }
+      },
+    );
   }
 
   @override
@@ -66,6 +74,12 @@ class _SingleCoursePageState extends State<SingleCoursePage>
             return <Widget>[
               SliverAppBar(
                 centerTitle: false,
+                leading: BackButton(
+                  onPressed: () {
+                    // Beamer.of(context).beamBack();
+                    context.appRouter.routerDelegate.beamToNamed('/');
+                  },
+                ),
                 title: Padding(
                   padding: const EdgeInsets.only(left: 25),
                   child: BlocBuilder<SingleCourseCubit, SingleCourseState>(
@@ -88,8 +102,11 @@ class _SingleCoursePageState extends State<SingleCoursePage>
                 floating: true,
                 bottom: TabBar(
                   controller: _controller,
-                  onTap: (index) => context.appRouter.goToCoursePageSpecificTab(
-                      widget.courseId, currentUserTabs[index]),
+                  onTap: (index) {
+                    final tabName = currentUserTabs[index];
+                    Beamer.of(context)
+                        .beamToNamed('/course/${widget.courseId}/$tabName');
+                  },
                   enableFeedback: false,
                   isScrollable: true,
                   tabs: currentUserTabs
@@ -103,16 +120,19 @@ class _SingleCoursePageState extends State<SingleCoursePage>
             controller: _controller,
             physics: const NeverScrollableScrollPhysics(),
             clipBehavior: Clip.none,
-            children: const [
+            children: [
               TabContentWrapper(
-                child: LessonsTabView(),
+                child: Beamer(
+                  key: _beamerKey,
+                  routerDelegate: BeamerDelegate(
+                    locationBuilder: BeamerLocationBuilder(
+                      beamLocations: [LessonsLocation()],
+                    ),
+                  ),
+                ),
               ),
-              TabContentWrapper(
-                child: TasksTabView(),
-              ),
-              TabContentWrapper(
-                child: RatingTabView(),
-              ),
+              const TabContentWrapper(child: TasksTabView()),
+              const TabContentWrapper(child: RatingTabView()),
             ],
           ),
         ),
@@ -128,7 +148,8 @@ class _CourseSettingsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: () => context.appRouter.goToCourseSettings(courseId),
+      onPressed: () => context.appRouter.routerDelegate
+          .beamToNamed('/course/$courseId/settings'),
       icon: const Icon(Icons.edit, color: Colors.black, size: 30),
     );
   }

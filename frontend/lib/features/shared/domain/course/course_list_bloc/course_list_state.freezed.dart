@@ -90,9 +90,6 @@ class _$CourseListStateCopyWithImpl<$Res, $Val extends CourseListState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  /// Create a copy of CourseListState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -109,9 +106,6 @@ class __$$CourseListInitialImplCopyWithImpl<$Res>
   __$$CourseListInitialImplCopyWithImpl(_$CourseListInitialImpl _value,
       $Res Function(_$CourseListInitialImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of CourseListState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -234,9 +228,6 @@ class __$$CourseListLoadInProgressImplCopyWithImpl<$Res>
       _$CourseListLoadInProgressImpl _value,
       $Res Function(_$CourseListLoadInProgressImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of CourseListState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -362,8 +353,6 @@ class __$$CourseListLoadSuccessImplCopyWithImpl<$Res>
       $Res Function(_$CourseListLoadSuccessImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CourseListState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -409,9 +398,7 @@ class _$CourseListLoadSuccessImpl implements CourseListLoadSuccess {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_courses));
 
-  /// Create a copy of CourseListState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CourseListLoadSuccessImplCopyWith<_$CourseListLoadSuccessImpl>
@@ -504,10 +491,7 @@ abstract class CourseListLoadSuccess implements CourseListState {
       _$CourseListLoadSuccessImpl;
 
   List<Course> get courses;
-
-  /// Create a copy of CourseListState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CourseListLoadSuccessImplCopyWith<_$CourseListLoadSuccessImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -530,8 +514,6 @@ class __$$CourseListLoadFailureImplCopyWithImpl<$Res>
       $Res Function(_$CourseListLoadFailureImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CourseListState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -568,9 +550,7 @@ class _$CourseListLoadFailureImpl implements CourseListLoadFailure {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
 
-  /// Create a copy of CourseListState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CourseListLoadFailureImplCopyWith<_$CourseListLoadFailureImpl>
@@ -663,10 +643,7 @@ abstract class CourseListLoadFailure implements CourseListState {
       _$CourseListLoadFailureImpl;
 
   Object get error;
-
-  /// Create a copy of CourseListState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CourseListLoadFailureImplCopyWith<_$CourseListLoadFailureImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -690,8 +667,6 @@ class __$$CourseOperationFailureImplCopyWithImpl<$Res>
       $Res Function(_$CourseOperationFailureImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CourseListState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -728,9 +703,7 @@ class _$CourseOperationFailureImpl implements CourseOperationFailure {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
 
-  /// Create a copy of CourseListState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$CourseOperationFailureImplCopyWith<_$CourseOperationFailureImpl>
@@ -823,10 +796,7 @@ abstract class CourseOperationFailure implements CourseListState {
       _$CourseOperationFailureImpl;
 
   Object get error;
-
-  /// Create a copy of CourseListState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$CourseOperationFailureImplCopyWith<_$CourseOperationFailureImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
