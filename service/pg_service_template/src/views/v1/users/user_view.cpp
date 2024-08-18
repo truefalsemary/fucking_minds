@@ -37,7 +37,7 @@
         response.SetStatus(userver::server::http::HttpStatus::kUnauthorized);
         return {};
       }
-
+      
       lms_service::UserData data;
       data.name = request.GetArg("name");
       data.middle_name = request.GetArg("middle_name");

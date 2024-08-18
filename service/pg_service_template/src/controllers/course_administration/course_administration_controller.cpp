@@ -80,6 +80,7 @@ std::optional<LessonCourse> add_lesson_to_course(
 
       return result.AsOptionalSingleRow<LessonCourse>(
       userver::storages::postgres::kRowTag);
+        }
 
     std::vector<User> get_users_by_id_and_role(
         const UserRole& user_role, const std::string& course_id,

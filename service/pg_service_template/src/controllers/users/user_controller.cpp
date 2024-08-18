@@ -10,8 +10,8 @@ std::optional<User> updateUserNameById(
       "UPDATE Users "
       " SET user_name = $1, user_surname = $2, user_middle_name = $3 "
       "WHERE user_id = $4 "
-      "RETURNING (user_id, current_user_type, user_name, user_surname, "
-      "user_middle_name) ",
+      "RETURNING user_id, current_user_type, user_name, user_surname, "
+      "user_middle_name ",
       user_data.name, user_data.surname, user_data.middle_name, id);
 
   return result.AsOptionalSingleRow<User>(userver::storages::postgres::kRowTag);
