@@ -116,52 +116,99 @@ std::optional<LessonCourse> add_lesson_to_course(
     }
 
     std::vector<Lesson> get_lessons(
+    const std::string& course_id,
+    userver::storages::postgres::ClusterPtr pg_cluster)
+    {
+    auto result = pg_cluster->Execute(
+        userver::storages::postgres::ClusterHostType::kMaster,
+        "SELECT l.* "
+        "FROM Lessons l "
+        "JOIN Course_Lesson cl ON l.lesson_id = cl.lesson_id "
+        "WHERE cl.course_id = $1; ",
+        course_id);
+    
+
+    return result.AsContainer<std::vector<Lesson>>(
+        userver::storages::postgres::kRowTag);
+    }
+
+    std::vector<Task> get_tasks(
         const std::string& course_id,
-        userver::storages::postgres::ClusterPtr pg_cluster)
-        {
-      auto result = pg_cluster->Execute(
-          userver::storages::postgres::ClusterHostType::kMaster,
-            "SELECT l.* "
-            "FROM Lessons l "
+        userver::storages::postgres::ClusterPtr pg_cluster) {
+        auto result = pg_cluster->Execute(
+            userver::storages::postgres::ClusterHostType::kMaster,
+            "SELECT t.* "
+            "FROM Tasks t "
+            "JOIN Lesson_Task l ON t.task_id = l.task_id "
             "JOIN Course_Lesson cl ON l.lesson_id = cl.lesson_id "
             "WHERE cl.course_id = $1; ",
             course_id);
-        
 
-        return result.AsContainer<std::vector<Lesson>>(
+        return result.AsContainer<std::vector<Task>>(
             userver::storages::postgres::kRowTag);
+    }
+
+    std::vector<Material> get_materials(
+        const std::string& course_id,
+        userver::storages::postgres::ClusterPtr pg_cluster) {
+        auto result = pg_cluster->Execute(
+            userver::storages::postgres::ClusterHostType::kMaster,
+            "SELECT m.* "
+            "FROM Materials m "
+            "JOIN Lesson_Material l ON m.material_id = l.material_id "
+            "JOIN Course_Lesson cl ON l.lesson_id = cl.lesson_id "
+            "WHERE cl.course_id = $1; ",
+            course_id);
+
+        return result.AsContainer<std::vector<Material>>(
+            userver::storages::postgres::kRowTag);
+    }
+
+    std::vector<UserCourse> get_my_courses(
+        const std::string& user_id, userver::storages::postgres::ClusterPtr pg_cluster)
+        {
+      auto result = pg_cluster->Execute(
+          userver::storages::postgres::ClusterHostType::kMaster,
+          "SELECT * FROM User_Course "
+          "WHERE user_id = $1 "
+          ,user_id );
+
+      return result.AsContainer<std::vector<UserCourse>>(
+          userver::storages::postgres::kRowTag);
         }
 
-        std::vector<Task> get_tasks(
-            const std::string& course_id,
+        std::optional<UserCourse> add_user_by_email_to_course(
+            const UserRole& user_role, const std::string& email,
+            const std::string& course_id, const std::string& author_request_id,
             userver::storages::postgres::ClusterPtr pg_cluster) {
           auto result = pg_cluster->Execute(
               userver::storages::postgres::ClusterHostType::kMaster,
-              "SELECT t.* "
-              "FROM Tasks t "
-              "JOIN Lesson_Task l ON t.task_id = l.task_id "
-              "JOIN Course_Lesson cl ON l.lesson_id = cl.lesson_id "
-              "WHERE cl.course_id = $1; ",
-              course_id);
+              "SELECT user_id FROM Users "
+              "WHERE user_email = $1",
+              email);
 
-          return result.AsContainer<std::vector<Task>>(
-              userver::storages::postgres::kRowTag);
+          std::optional<std::string> user_id =
+              result.AsOptionalSingleRow<std::string>();
+          UserCourse user_course;
+          user_course.course_id = course_id;
+          user_course.role = user_role;
+          if (user_id.has_value()) 
+            user_course.user_id = user_id.value();
+          else
+          {
+            auto result = pg_cluster->Execute(
+                userver::storages::postgres::ClusterHostType::kMaster,
+                "INSERT INTO Users(current_user_type, user_email, user_password) "
+                "VALUES($1, $2, $3) "
+                "RETURNING user_id ",
+                UserType::kAnonymous, email, "1");
+            std::optional<std::string> user_id =
+                result.AsOptionalSingleRow<std::string>();
+            user_course.user_id = user_id.value();
+          }
+          
+          return add_user_to_course(user_course, author_request_id, pg_cluster);
         }
 
-        std::vector<Material> get_materials(
-            const std::string& course_id,
-            userver::storages::postgres::ClusterPtr pg_cluster) {
-          auto result = pg_cluster->Execute(
-              userver::storages::postgres::ClusterHostType::kMaster,
-              "SELECT m.* "
-              "FROM Materials m "
-              "JOIN Lesson_Material l ON m.material_id = l.material_id "
-              "JOIN Course_Lesson cl ON l.lesson_id = cl.lesson_id "
-              "WHERE cl.course_id = $1; ",
-              course_id);
-
-          return result.AsContainer<std::vector<Material>>(
-              userver::storages::postgres::kRowTag);
-        }
 }  // namespace course_administration
 }  // namespace lms_service

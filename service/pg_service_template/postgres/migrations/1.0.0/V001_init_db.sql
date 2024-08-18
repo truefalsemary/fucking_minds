@@ -6,7 +6,6 @@ CREATE TYPE UserType AS ENUM ('anonymous', 'general', 'super');
 CREATE TYPE StatusCode AS ENUM (
     'not_sent',    
     'submitted',  
-    'in_review',   
     'reviewed',   
     'completed'   
 );

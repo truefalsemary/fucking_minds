@@ -46,5 +46,14 @@ std::vector<Task> get_tasks(
 
 std::vector<Material> get_materials(const std::string& course_id,
                 userver::storages::postgres::ClusterPtr pg_cluster);
+
+std::vector<UserCourse> get_my_courses(
+    const std::string& user_id,
+    userver::storages::postgres::ClusterPtr pg_cluster);
+
+std::optional<UserCourse> add_user_by_email_to_course(
+            const UserRole& user_role, const std::string& email,
+            const std::string& course_id, const std::string& author_request_id,
+            userver::storages::postgres::ClusterPtr pg_cluster);
 }  // namespace course_administration_controller
 }  // namespace lms_service

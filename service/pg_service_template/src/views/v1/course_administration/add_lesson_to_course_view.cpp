@@ -1,4 +1,4 @@
-#include "add_user_to_course_view.hpp"
+#include "add_lesson_to_course_view.hpp"
 
 #include <fmt/format.h>
 
