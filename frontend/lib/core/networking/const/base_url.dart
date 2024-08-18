@@ -1,1 +1,1 @@
-const String baseUrl = 'http://glitchy-service.ru/api/v1';
+const String baseUrl = 'http://glitchy-service.ru/api';
