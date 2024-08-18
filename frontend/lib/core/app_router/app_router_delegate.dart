@@ -21,12 +21,12 @@ class AppRouterDelegate extends BeamerDelegate {
           guards: [
             BeamGuard(
               pathPatterns: ['/course/:courseId'],
-              check: (context, location) => false,
+              check: (context, location) => true,
               beamToNamed: (origin, target) => '/program',
             ),
             BeamGuard(
               pathPatterns: ['/auth/*'],
-              guardNonMatching: true,
+              guardNonMatching: false,
               check: (context, location) =>
                   context.read<AuthStore>().isAuthenticated(),
               beamToNamed: (origin, target) => '/auth',
