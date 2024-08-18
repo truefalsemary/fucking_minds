@@ -114,5 +114,54 @@ std::optional<LessonCourse> add_lesson_to_course(
       return result.AsContainer<std::vector<User>>(
           userver::storages::postgres::kRowTag);
     }
+
+    std::vector<Lesson> get_lessons(
+        const std::string& course_id,
+        userver::storages::postgres::ClusterPtr pg_cluster)
+        {
+      auto result = pg_cluster->Execute(
+          userver::storages::postgres::ClusterHostType::kMaster,
+            "SELECT l.* "
+            "FROM Lessons l "
+            "JOIN Course_Lesson cl ON l.lesson_id = cl.lesson_id "
+            "WHERE cl.course_id = $1; ",
+            course_id);
+        
+
+        return result.AsContainer<std::vector<Lesson>>(
+            userver::storages::postgres::kRowTag);
+        }
+
+        std::vector<Task> get_tasks(
+        const std::string& course_id,
+        userver::storages::postgres::ClusterPtr pg_cluster)
+        {
+      auto result = pg_cluster->Execute(
+          userver::storages::postgres::ClusterHostType::kMaster,
+            "SELECT l.* "
+            "FROM Lessons l "
+            "JOIN Course_Lesson cl ON l.lesson_id = cl.lesson_id "
+            "WHERE cl.course_id = $1; ",
+            course_id);
+        
+
+        return result.AsContainer<std::vector<Task>>(
+            userver::storages::postgres::kRowTag);
+        }
+
+        std::vector<Material> get_materials(
+            const std::string& course_id,
+            userver::storages::postgres::ClusterPtr pg_cluster) {
+          auto result = pg_cluster->Execute(
+              userver::storages::postgres::ClusterHostType::kMaster,
+              "SELECT l.* "
+              "FROM Lessons l "
+              "JOIN Course_Lesson cl ON l.lesson_id = cl.lesson_id "
+              "WHERE cl.course_id = $1; ",
+              course_id);
+
+          return result.AsContainer<std::vector<Material>>(
+              userver::storages::postgres::kRowTag);
+        }
 }  // namespace course_administration
 }  // namespace lms_service

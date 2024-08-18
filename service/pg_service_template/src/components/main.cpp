@@ -40,6 +40,9 @@ int main(int argc, char* argv[]) {
 
   lms_service::AppendSetInspectorView(component_list);
   lms_service::AppendGetUserByIdAndRoleView(component_list);
+  lms_service::AppendGetLessonsInCourseView(component_list);
+  lms_service::AppendGetMaterialsInCourseView(component_list);
+  lms_service::AppendGetTasksInCourseView(component_list);
 
   return userver::utils::DaemonMain(argc, argv, component_list);
 }

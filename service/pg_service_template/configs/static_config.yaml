@@ -105,25 +105,25 @@ components_manager:
             method: GET
             task_processor: main-task-processor
 
-        # handler-v1-course-get-lessons:
-        #     path: /v1/course/{id}/lessons
-        #     method: GET
-        #     task_processor: main-task-processor
+        handler-v1-course-get-lessons:
+            path: /v1/course/{id}/lessons
+            method: GET
+            task_processor: main-task-processor
         
         # handler-v1-course-get-lessons-ids:
         #     path: /v1/course/{id}/lessons_ids
         #     method: GET
         #     task_processor: main-task-processor    
 
-        # handler-v1-course-get-materials:
-        #     path: /v1/course/{id}/materials
-        #     method: GET
-        #     task_processor: main-task-processor    
+        handler-v1-course-get-materials:
+            path: /v1/course/{id}/materials
+            method: GET
+            task_processor: main-task-processor    
 
-        # handler-v1-course-get-tasks:
-        #     path: /v1/course/{id}/tasks
-        #     method: GET
-        #     task_processor: main-task-processor
+        handler-v1-course-get-tasks:
+            path: /v1/course/{id}/tasks
+            method: GET
+            task_processor: main-task-processor
 
         handler-v1-course-add-lesson:
             path: /v1/course/{course_id}/add_lesson

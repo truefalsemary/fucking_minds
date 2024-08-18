@@ -24,3 +24,6 @@
 #include "../views/v1/course_administration/add_user_to_course_view.hpp"
 #include "../views/v1/course_administration/add_lesson_to_course_view.hpp"
 #include "../views/v1/course_administration/get_user_by_id_and_role.hpp"
+#include "../views/v1/course_administration/get_lessons_in_course.hpp"
+#include "../views/v1/course_administration/get_materials_in_course.hpp"
+#include "../views/v1/course_administration/get_tasks_in_course.hpp"
