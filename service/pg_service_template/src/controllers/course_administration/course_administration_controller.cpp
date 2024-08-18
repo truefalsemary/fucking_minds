@@ -16,7 +16,7 @@ std::optional<UserCourse> enroll_in_course(const UserCourseData& course_data,
       userver::storages::postgres::kRowTag);
 }
 
-std::optional<UserCourse> leave_course(
+std::vector<UserCourse> leave_course(
     const UserCourseData& user_data, userver::storages::postgres::ClusterPtr pg_cluster_) {
   auto result = pg_cluster_->Execute(
       userver::storages::postgres::ClusterHostType::kMaster,
@@ -24,7 +24,7 @@ std::optional<UserCourse> leave_course(
       "WHERE user_id =$1 AND course_id = $2 "
       "RETURNING * ",
       user_data.user_id, user_data.course_id);
-  return result.AsOptionalSingleRow<UserCourse>(
+  return result.AsContainer<std::vector<UserCourse>>(
       userver::storages::postgres::kRowTag);
 }
 
@@ -139,7 +139,7 @@ std::optional<LessonCourse> add_lesson_to_course(
               userver::storages::postgres::ClusterHostType::kMaster,
               "SELECT t.* "
               "FROM Tasks t "
-              "JOIN Lessons_Tasks l ON t.task_id = l.task_id "
+              "JOIN Lesson_Task l ON t.task_id = l.task_id "
               "JOIN Course_Lesson cl ON l.lesson_id = cl.lesson_id "
               "WHERE cl.course_id = $1; ",
               course_id);

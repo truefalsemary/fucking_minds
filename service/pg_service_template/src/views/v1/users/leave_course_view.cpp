@@ -43,13 +43,8 @@ class LeaveCourseView final
     data.course_id = request.GetPathArg("id");
     if (!data.empty()) {
       auto result = course_administration::leave_course(data, pg_cluster_);
-      if (!result.has_value()) {
-        auto& response = request.GetHttpResponse();
-        response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
-        return {};
-      }
       return ToString(
-          userver::formats::json::ValueBuilder{result.value()}.ExtractValue());
+          userver::formats::json::ValueBuilder{result}.ExtractValue());
     }
     auto& response = request.GetHttpResponse();
     response.SetStatus(userver::server::http::HttpStatus::kBadRequest);
