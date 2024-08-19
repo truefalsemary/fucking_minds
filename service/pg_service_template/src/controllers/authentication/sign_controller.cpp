@@ -45,7 +45,9 @@ std::optional<Token> register_user(
   auto result = pg_cluster_->Execute(
       userver::storages::postgres::ClusterHostType::kMaster,
       "INSERT INTO Users(user_email, user_password) VALUES($1, $2) "
-      "ON CONFLICT DO NOTHING "
+      "ON CONFLICT (user_email) DO UPDATE SET "
+      "current_user_type = 'general' "
+      "WHERE Users.current_user_type = 'anonymous' AND Users.user_password = $2 "
       "RETURNING user_id",
       sign_data.email, sign_data.password);
 
